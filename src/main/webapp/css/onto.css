@@ -1,0 +1,38 @@
+/* 
+    Created on : 18-jun-2015, 9:52:30
+    Author     : david
+*/
+
+.brand-logo{
+    margin-left: 15px !important;
+}
+
+a {
+    cursor:pointer;
+}
+
+.container {
+    width: 90% !important;
+}
+
+#boton{
+    margin-top: 20px !important;
+}
+
+.antecedent {
+    height: 200px;
+}
+
+tr > td {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+}
+
+.row-hover {
+   background-color: #f2f2f2;
+}
+
+.highcharts-container {
+    margin: auto;
+}
+
