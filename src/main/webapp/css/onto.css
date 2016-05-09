@@ -1,6 +1,6 @@
 /* 
-    Created on : 18-jun-2015, 9:52:30
-    Author     : david
+    Created on : 09-may-2016
+    Author     : dchaves
 */
 
 .brand-logo{
@@ -13,6 +13,10 @@ a {
 
 .container {
     width: 90% !important;
+}
+
+body{
+    background-color:#c6e0e8;
 }
 
 #boton{
