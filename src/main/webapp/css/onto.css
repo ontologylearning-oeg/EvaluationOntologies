@@ -23,6 +23,17 @@ body{
     margin-top: 20px !important;
 }
 
+.cardsText{
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.cardTitles{
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .antecedent {
     height: 200px;
 }
