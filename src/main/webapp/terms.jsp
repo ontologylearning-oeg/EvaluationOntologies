@@ -2,9 +2,11 @@
     Created on : 09-may-2016
     Author     : dchaves
 -->
+<%@ page isELIgnored="false" %>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <div id="contenido" class="container section">
-
         <div class="col s12 center-align"><h1>Evaluate terms</h1></div>
         <div class="col s12 ">
             <div class="card-panel blue lighten-1">
