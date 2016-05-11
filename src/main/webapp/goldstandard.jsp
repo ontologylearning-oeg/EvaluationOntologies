@@ -3,8 +3,7 @@
     Author     : dchaves
 -->
 
-<%@ page isELIgnored="false" %>
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+
 
 
 <div id="contenido" class="container section">

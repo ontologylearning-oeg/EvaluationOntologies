@@ -1,8 +1,11 @@
-<!DOCTYPE html>
 <!--
     Created on : 09-may-2016
     Author     : dchaves
 -->
+<%@ page isELIgnored="false" %>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <html>
 <head>
     <title>DrOntoEval</title>
@@ -21,7 +24,7 @@
 <body>
 <nav>   
     <div class="nav-wrapper indigo">
-        <a href="index.html" class="brand-logo">DrOntoEval</a>
+        <a href="index.jsp" class="brand-logo">DrOntoEval</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a onclick="changePage('goldstandard.jsp');">Gold Standard</a></li>
             <li><a onclick="changePage('terms.jsp');">Evaluate Terms</a></li>

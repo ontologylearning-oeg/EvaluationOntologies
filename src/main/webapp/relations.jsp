@@ -3,8 +3,6 @@
     Author     : dchaves
 -->
 
-<%@ page isELIgnored="false" %>
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 
 <script src="js/pie.js"></script>
 
