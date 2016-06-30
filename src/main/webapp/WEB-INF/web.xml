@@ -4,4 +4,21 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>LoadOntology</servlet-name>
+    <servlet-class>com.ontoeval.controller.LoadOntology</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoadGoldStandard</servlet-name>
+    <servlet-class>com.ontoeval.controller.LoadGoldStandard</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadGoldStandard</servlet-name>
+    <url-pattern>/LoadGoldStandard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoadOntology</servlet-name>
+    <url-pattern>/LoadOntology</url-pattern>
+  </servlet-mapping>
+
 </web-app>

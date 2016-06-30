@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * Created by dachafra on 11/05/16.
  */
+
 public class Measure {
     private HashMap<String,Double> measures;
     private GoldStandardVO gs;
