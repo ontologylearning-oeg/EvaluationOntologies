@@ -54,11 +54,11 @@
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
                 <span class="card-title">Create a Lexical GS</span>
-                <div class="cardsText">It is simply, answer a question about the pertinence of a term from
+                <div class="cardsText">It is simply, answer questions about the pertinence of terms from
                     a domain</div>
             </div>
             <div class="card-action">
-                <a onclick="changePage('terms.jsp')">Eval terms</a>
+                <a onclick="changePage('terms.jsp')">Lexical GS</a>
             </div>
         </div>
     </div>
@@ -68,10 +68,10 @@
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">Create a Taxonomic GS</span>
-                    <div class="cardsText">Answer a question about the relations between terms</div>
+                    <div class="cardsText">Answer questions about the relations between terms</div>
                 </div>
                 <div class="card-action">
-                    <a onclick="changePage('goldstandard.jsp')">Begin to create a GS</a>
+                    <a onclick="changePage('goldstandard.jsp')">Taxonomic GS</a>
                 </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     <div class="cardsText">See the results of the evaluation</div>
                 </div>
                 <div class="card-action">
-                    <a onclick="changePage('relations.jsp')">Eval relations</a>
+                    <a onclick="changePage('relations.jsp')">Results</a>
                 </div>
             </div>
         </div>
@@ -94,6 +94,31 @@
 <script>
     $(".button-collapse").sideNav({closeOnClick: true});
     function changePage(a) {
+            var term=[];
+            var termhood=[];
+            $.get("http://localhost:8084/DrOntoEval/terms.txt", function(data) {
+            var lines = data.split('\n');
+
+            for(var t=0; t<lines.length;t++){
+                    var d=lines[t].split(';');
+                    term.push(d[0]);
+                    termhood.push(d[1]);
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                timeout: 50000,
+                url: "./LoadOntology",
+                data: {"term":term,"termhood":termhood},
+                cache: false,
+                success: function (data) {
+                    Materialize.toast('File has being uploaded!', 2000, 'rounded');
+                },
+                error: function (){
+                    Materialize.toast('Error!', 2000, 'rounded');
+                }
+            });
            $("#contenido").load(a);
     }
 </script>

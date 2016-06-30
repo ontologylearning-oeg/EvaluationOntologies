@@ -8,8 +8,7 @@ import java.util.HashMap;
 
 public class Measure {
     private HashMap<String,Double> measures;
-    private GoldStandardVO gs;
-    private OntologyVO ont;
+    private ModelVO gs;
 
     public HashMap<String, Double> getMeasures() {
         return measures;

@@ -6,29 +6,30 @@ import java.util.ArrayList;
  * Created by dachafra on 11/05/16.
  */
 
-public class GoldStandardVO {
+public class ModelVO {
 
     private String name;
-    private ArrayList<String> terms;
+    private String type;
+    private ArrayList<TermVO> terms;
     private ArrayList<String> relations;
     //private ArrayList<Double> evalExperts;
 
 
-    public GoldStandardVO(String name, ArrayList<String> terms, ArrayList<String> relations) {
+    public ModelVO(String name, ArrayList<TermVO> terms, ArrayList<String> relations) {
         this.name = name+"GS";
         this.terms = terms;
         this.relations = relations;
     }
 
-    public GoldStandardVO(String name) {
+    public ModelVO(String name) {
         this.name = name+"GS";
-        this.terms = new ArrayList<String>();
+        this.terms = new ArrayList<TermVO>();
         this.relations = new ArrayList<String>();
     }
 
-    public GoldStandardVO() {
+    public ModelVO() {
         this.name = "ExampleGS";
-        this.terms = new ArrayList<String>();
+        this.terms = new ArrayList<TermVO>();
         this.relations = new ArrayList<String>();
     }
 
@@ -40,11 +41,11 @@ public class GoldStandardVO {
         this.name = name;
     }
 
-    public ArrayList<String> getTerms() {
+    public ArrayList<TermVO> getTerms() {
         return terms;
     }
 
-    public void setTerms(ArrayList<String> terms) {
+    public void setTerms(ArrayList<TermVO> terms) {
         this.terms = terms;
     }
 
