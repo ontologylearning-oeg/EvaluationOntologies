@@ -8,60 +8,35 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 
-@DatabaseTable(tableName = "Term")
-public class TermVO{
+@DatabaseTable(tableName = "Terms")
+public class TermVO extends OntologyVO{
 
-    @DatabaseField(columnName="noun",canBeNull=false, unique = true)
+    @DatabaseField(columnName="term",canBeNull=false, unique = true)
     private String word;
-    @DatabaseField(columnName="Termhood",canBeNull=false)
-    private Double termhood;
-    @DatabaseField(columnName = "Yes")
-    private Integer yes;
-    @DatabaseField(columnName = "No")
-    private Integer no;
+    @DatabaseField(columnName="isRelevant")
+    private boolean isRelevant;
 
-
-    public TermVO(String word, Double termhood, Integer no, Integer yes) {
+    public TermVO(String word, String ontology) {
+        super(ontology);
         this.word = word;
-        this.termhood = termhood;
-        this.no = no;
-        this.yes = yes;
+        this.isRelevant=false;
     }
 
-    public TermVO(String word, Double termhood) {
-        this.word = word;
-        this.termhood = termhood;
+    public TermVO(){
+        super("example");
+        this.word="example";
+        this.isRelevant=false;
     }
 
     public String getWord() {
         return word;
     }
 
-    public Double getTermhood() {
-        return termhood;
-    }
-
-    public Integer getYes() {
-        return yes;
-    }
-
-    public Integer getNo() {
-        return no;
-    }
-
     public void setWord(String word) {
         this.word = word;
     }
 
-    public void setTermhood(Double termhood) {
-        this.termhood = termhood;
-    }
+    public boolean isRelevant() { return isRelevant; }
 
-    public void setYes(Integer yes) {
-        this.yes = yes;
-    }
-
-    public void setNo(Integer no) {
-        this.no = no;
-    }
+    public void setRelevant(boolean relevant) { isRelevant = relevant; }
 }

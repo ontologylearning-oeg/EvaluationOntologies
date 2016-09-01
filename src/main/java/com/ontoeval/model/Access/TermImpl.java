@@ -6,7 +6,6 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.ontoeval.model.ModelVO;
 import com.ontoeval.model.TermVO;
 
 import java.io.IOException;
@@ -54,12 +53,5 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         return true;
     }
 
-    public ArrayList<TermVO> buscarTerms(ModelVO m){
-        try {
-            return (ArrayList<TermVO>)termDAO.queryForAll();
-        } catch (SQLException ex) {
-            System.out.println("Error en buscarFicheros "+ex.getMessage());
-            return null;
-        }
-    }
+
 }

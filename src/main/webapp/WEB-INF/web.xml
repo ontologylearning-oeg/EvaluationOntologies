@@ -3,22 +3,23 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+
+  <display-name>Evaluation of Ontology Learning</display-name>
   <servlet>
-    <servlet-name>LoadOntology</servlet-name>
-    <servlet-class>com.ontoeval.controller.LoadOntology</servlet-class>
+    <servlet-name>LoadFile</servlet-name>
+    <servlet-class>com.ontoeval.controller.LoadFile</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>LoadGoldStandard</servlet-name>
-    <servlet-class>com.ontoeval.controller.LoadGoldStandard</servlet-class>
-  </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.ontoeval.controller.Login</servlet-class>
+    </servlet>
   <servlet-mapping>
-    <servlet-name>LoadGoldStandard</servlet-name>
-    <url-pattern>/LoadGoldStandard</url-pattern>
+    <servlet-name>LoadFile</servlet-name>
+    <url-pattern>/LoadFile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>LoadOntology</servlet-name>
-    <url-pattern>/LoadOntology</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
 
 </web-app>

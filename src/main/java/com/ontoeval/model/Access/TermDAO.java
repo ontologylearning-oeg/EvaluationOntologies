@@ -1,6 +1,5 @@
 package com.ontoeval.model.Access;
 
-import com.ontoeval.model.ModelVO;
 import com.ontoeval.model.TermVO;
 
 import java.util.ArrayList;
@@ -13,8 +12,6 @@ public interface TermDAO {
     public boolean InsertTerm(TermVO t);
 
     public boolean InsertTerms(ArrayList<TermVO> terms);
-
-    public ArrayList<TermVO> buscarTerms(ModelVO m);
 
 
 }

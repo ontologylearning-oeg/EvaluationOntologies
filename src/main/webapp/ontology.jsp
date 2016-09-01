@@ -12,11 +12,7 @@
                 <h5>The available collections of terms are:</h5>
                 <ul class="collection">
                     <li class="collection-item"><div>Ontology+terms<a class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                    <li class="collection-item"><div>Ontology+terms<a class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                    <li class="collection-item"><div>Ontology+terms<a class="secondary-content"><i class="material-icons">send</i></a></div></li>
-                    <li class="collection-item"><div>Ontology+terms<a class="secondary-content"><i class="material-icons">send</i></a></div></li>
                 </ul>
             </div>
         </div>
-
 </div>

@@ -1,33 +1,25 @@
 package com.ontoeval.model;
 
-import java.util.ArrayList;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.StringTokenizer;
 
 /**
- * Created by dachafra on 11/05/16.
+ * Created by dchavesf on 1/09/16.
  */
+@DatabaseTable(tableName = "Ontologies")
 public class OntologyVO {
-
+    @DatabaseField(columnName="noun",canBeNull=false, unique = true)
     private String name;
-    private ArrayList<String> terms;
-    private ArrayList<String> relations;
-
-
-    public OntologyVO(String name, ArrayList<String> terms, ArrayList<String> relations) {
-        this.name = name;
-        this.terms = terms;
-        this.relations = relations;
-    }
 
     public OntologyVO(String name) {
-        this.name = name;
-        this.terms = new ArrayList<String>();
-        this.relations = new ArrayList<String>();
+        StringTokenizer tokenizer = new StringTokenizer(name,".");
+        this.name = tokenizer.nextToken();
     }
 
     public OntologyVO() {
-        this.name = "Example";
-        this.terms = new ArrayList<String>();
-        this.relations = new ArrayList<String>();
+        this.name = "example";
     }
 
     public String getName() {
@@ -36,21 +28,5 @@ public class OntologyVO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ArrayList<String> getTerms() {
-        return terms;
-    }
-
-    public void setTerms(ArrayList<String> terms) {
-        this.terms = terms;
-    }
-
-    public ArrayList<String> getRelations() {
-        return relations;
-    }
-
-    public void setRelations(ArrayList<String> relations) {
-        this.relations = relations;
     }
 }

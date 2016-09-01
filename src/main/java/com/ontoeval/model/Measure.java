@@ -1,50 +1,81 @@
 package com.ontoeval.model;
 
-import java.util.HashMap;
-
 /**
- * Created by dachafra on 11/05/16.
+ * Created by dchavesf on 1/09/16.
  */
+public class Measure extends OntologyVO {
+    private double recall;
+    private double precision;
+    private double fmeasure;
+    private double trecall;
+    private double tprecision;
+    private double tfmeasure;
 
-public class Measure {
-    private HashMap<String,Double> measures;
-    private ModelVO gs;
-
-    public HashMap<String, Double> getMeasures() {
-        return measures;
+    public Measure(String name, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {
+        super(name);
+        this.recall = recall;
+        this.precision = precision;
+        this.fmeasure = fmeasure;
+        this.trecall = trecall;
+        this.tprecision = tprecision;
+        this.tfmeasure = tfmeasure;
     }
 
-    public void setMeasures(HashMap<String, Double> measures) {
-        this.measures = measures;
+    public Measure() {
+        super("example");
+        this.recall = 0.0;
+        this.precision = 0.0;
+        this.fmeasure = 0.0;
+        this.trecall = 0.0;
+        this.tprecision = 0.0;
+        this.tfmeasure = 0.0;
     }
 
-    public double TaxonomicRecall(){
-        return 0.0;
+    public double getRecall() {
+        return recall;
     }
 
-    public double TaxonomicPrecision(){
-        return 0.0;
+    public void setRecall(double recall) {
+        this.recall = recall;
     }
 
-    public double TaxonomicF(){
-        return 0.0;
+    public double getPrecision() {
+        return precision;
     }
 
-    public double TaxonomicF2(){
-        return 0.0;
+    public void setPrecision(double precision) {
+        this.precision = precision;
     }
 
-    public double LexicalPrecision(){
-        return 0.0;
+    public double getFmeasure() {
+        return fmeasure;
     }
 
-    public double LexicalRecall(){
-        return 0.0;
+    public void setFmeasure(double fmeasure) {
+        this.fmeasure = fmeasure;
     }
 
+    public double getTrecall() {
+        return trecall;
+    }
 
+    public void setTrecall(double trecall) {
+        this.trecall = trecall;
+    }
 
+    public double getTprecision() {
+        return tprecision;
+    }
 
+    public void setTprecision(double tprecision) {
+        this.tprecision = tprecision;
+    }
 
+    public double getTfmeasure() {
+        return tfmeasure;
+    }
 
+    public void setTfmeasure(double tfmeasure) {
+        this.tfmeasure = tfmeasure;
+    }
 }
