@@ -10,16 +10,20 @@ import java.util.StringTokenizer;
  */
 @DatabaseTable(tableName = "Ontologies")
 public class OntologyVO {
-    @DatabaseField(columnName="noun",canBeNull=false, unique = true)
+    @DatabaseField(columnName="Ontology",canBeNull=false)
     private String name;
+    @DatabaseField(columnName="Domain", canBeNull = false)
+    private String domain;
 
-    public OntologyVO(String name) {
+    public OntologyVO(String name, String domain) {
         StringTokenizer tokenizer = new StringTokenizer(name,".");
         this.name = tokenizer.nextToken();
+        this.domain=domain;
     }
 
     public OntologyVO() {
         this.name = "example";
+        this.domain = "example";
     }
 
     public String getName() {
@@ -29,4 +33,8 @@ public class OntologyVO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getDomain() { return domain; }
+
+    public void setDomain(String domain) { this.domain = domain; }
 }

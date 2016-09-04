@@ -10,6 +10,7 @@ import com.ontoeval.model.OntologyVO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by dchavesf on 1/09/16.
@@ -37,10 +38,28 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
                 return false;
             }
         } catch (SQLException ex) {
-            System.out.println("Error en importar ontologia "+ex.getMessage());
+            System.out.println("Error en OntologyImpl, insert "+ex.getMessage());
             return false;
         }
         return true;
-
     }
+
+    public ArrayList<OntologyVO> recuperarOntologias(){
+        try{
+            return (ArrayList<OntologyVO>) ontoDAO.queryForAll();
+        }catch (SQLException e){
+            System.out.println("Error en OntologyImpl, recuperar"+ e.getMessage());
+            return null;
+        }
+    }
+
+    public OntologyVO recuperarOntologias(String name){
+        try{
+            return ontoDAO.queryForEq("Ontology",name).get(0);
+        }catch (SQLException e){
+            System.out.println("Error en OntologyImpl, recuperar"+ e.getMessage());
+            return null;
+        }
+    }
+
 }

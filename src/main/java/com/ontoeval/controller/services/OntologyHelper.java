@@ -5,6 +5,7 @@ import com.ontoeval.model.OntologyVO;
 import com.ontoeval.model.RelationVO;
 import com.ontoeval.model.TermVO;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,28 +28,64 @@ public class OntologyHelper {
         relations = new RelationImpl(RelationImpl.CrearConexion());
     }
 
-    public boolean insertOntology(String text, String filename) throws  SQLException{
-        if(!terms.InsertTerms(loadTerms(text,filename)) ||
-            !relations.insertRelations(loadRelations(text,filename)) ||
-            !ontology.insertOntology(new OntologyVO(filename)))
+    public boolean loadOntologies() throws  SQLException{
+        ServletContext context = request.getSession().getServletContext();
+        ArrayList<OntologyVO> onts = ontology.recuperarOntologias();
+        if(onts==null){
             throw  new SQLException("Error en OntologyHelper");
-        else
+        }
+        else{
+            context.setAttribute("ontos",onts);
             return true;
+        }
+
+    }
+    /**Aqui se debe comprobar como está la evaluación para dejar o no lo de la relaciones**/
+    public boolean loadFeatures(String name) throws SQLException{
+        ServletContext context = request.getSession().getServletContext();
+        ArrayList<TermVO> t = terms.loadTerms(name);
+        if(t!=null){
+            context.setAttribute("terms",t);
+            context.setAttribute("ontology",ontology.recuperarOntologias(name));
+            return true;
+        }
+        else{
+            throw new SQLException("Error en LoadFeatures/OntologyHelper");
+        }
     }
 
-    private ArrayList<TermVO> loadTerms(String text, String filename){
+    public boolean insertOntology(String text, String filename) throws  SQLException{
+        String domain = loadDomain(text);
+        if(!ontology.insertOntology(new OntologyVO(filename, domain)) ||
+                !terms.InsertTerms(loadTerms(text,filename, domain)) ||
+            !relations.insertRelations(loadRelations(text,filename, domain)))
+            throw  new SQLException("Error en insertOntology/OntologyHelper");
+        else{
+             return true;
+        }
+    }
+
+    private String loadDomain(String text){
+        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
+        tokenizer = new StringTokenizer(tokenizer.nextToken(),":");
+        tokenizer.nextToken();
+        return tokenizer.nextToken();
+    }
+
+    private ArrayList<TermVO> loadTerms(String text, String filename, String domain){
         ArrayList<TermVO> terms = new ArrayList<TermVO>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
+        tokenizer.nextToken();
         String term = tokenizer.nextToken();
         while(!term.equals("Taxonomic Relations")){
-            TermVO aux = new TermVO(term,filename);
+            TermVO aux = new TermVO(term,filename, domain);
             terms.add(aux);
             term = tokenizer.nextToken();
         }
         return terms;
     }
 
-    private ArrayList<RelationVO> loadRelations(String text, String filename){
+    private ArrayList<RelationVO> loadRelations(String text, String filename, String domain){
         ArrayList<RelationVO> relations = new ArrayList<RelationVO>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         String term = tokenizer.nextToken();
@@ -60,7 +97,7 @@ public class OntologyHelper {
             String term1 = tokenizer1.nextToken();
             tokenizer1.nextToken();tokenizer1.nextToken();tokenizer1.nextToken();
             String term2 = tokenizer1.nextToken();
-            RelationVO relation = new RelationVO(filename,term1,term2);
+            RelationVO relation = new RelationVO(filename,term1,term2,domain);
             relations.add(relation);
         }
         return relations;

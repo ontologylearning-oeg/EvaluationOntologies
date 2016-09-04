@@ -50,7 +50,17 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
                 return false;
             }
         }
+
         return true;
+    }
+
+    public ArrayList<TermVO> loadTerms(String ontology){
+        try{
+            return (ArrayList<TermVO>)termDAO.queryForEq("Ontology",ontology);
+        }catch (SQLException e){
+            System.out.println("Error en loadTerms/TermImpl "+e.getMessage());
+            return null;
+        }
     }
 
 

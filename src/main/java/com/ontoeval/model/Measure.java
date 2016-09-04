@@ -11,8 +11,8 @@ public class Measure extends OntologyVO {
     private double tprecision;
     private double tfmeasure;
 
-    public Measure(String name, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {
-        super(name);
+    public Measure(String name, String domain, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {
+        super(name,domain);
         this.recall = recall;
         this.precision = precision;
         this.fmeasure = fmeasure;
@@ -22,7 +22,7 @@ public class Measure extends OntologyVO {
     }
 
     public Measure() {
-        super("example");
+        super("example","example");
         this.recall = 0.0;
         this.precision = 0.0;
         this.fmeasure = 0.0;

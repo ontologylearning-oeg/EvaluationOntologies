@@ -1,22 +1,29 @@
 package com.ontoeval.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by dchavesf on 1/09/16.
  */
+@DatabaseTable(tableName = "Relations")
 public class RelationVO extends OntologyVO{
+    @DatabaseField(columnName="term1",canBeNull=false)
     private String term1;
+    @DatabaseField(columnName="term2",canBeNull=false)
     private String term2;
+    @DatabaseField(columnName="isGS")
     private boolean isGS;
 
-    public RelationVO(String name, String term1, String term2) {
-        super(name);
+    public RelationVO(String name, String term1, String term2, String domain) {
+        super(name,domain);
         this.term1 = term1;
         this.term2 = term2;
         this.isGS = false;
     }
 
     public RelationVO() {
-        super("example");
+        super("example", "domain");
         this.term1 = "example1";
         this.term2 = "example2";
         this.isGS = false;

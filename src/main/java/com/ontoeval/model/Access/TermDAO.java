@@ -13,5 +13,7 @@ public interface TermDAO {
 
     public boolean InsertTerms(ArrayList<TermVO> terms);
 
+    public ArrayList<TermVO> loadTerms(String ontology);
+
 
 }

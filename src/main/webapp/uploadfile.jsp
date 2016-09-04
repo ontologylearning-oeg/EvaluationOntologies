@@ -13,7 +13,7 @@
         <div class="file-field input-field col s8 offset-s2">
             <div class="btn">
                 <span>File</span>
-                <input type="file">
+                <input type="file" name="file" id="file" multiple>
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">

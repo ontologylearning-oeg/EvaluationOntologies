@@ -1,6 +1,6 @@
 package com.ontoeval.controller;
 
-import com.ontoeval.controller.services.UserHelper;
+import com.ontoeval.controller.services.OntologyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,20 +12,13 @@ import java.sql.SQLException;
 /**
  * Created by dchavesf on 1/09/16.
  */
-public class Login extends HttpServlet {
+public class LoadOntology extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
-        if(email==null){
-            request.getSession().getServletContext().removeAttribute("user");
-        }
-        else{
-            try {
-                UserHelper helper = new UserHelper(request);
-                helper.insertUser(email,pass);
-            }catch (SQLException e){
-                System.out.println("Error en Servlet Login"+e.getMessage());
-            }
+        try{
+            OntologyHelper helper = new OntologyHelper(request);
+            helper.loadOntologies();
+        }catch (SQLException e){
+            System.out.println("Error en LoadOntology "+e.getMessage());
         }
     }
 

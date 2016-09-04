@@ -24,7 +24,10 @@ public class UserHelper {
         UserVO user = new UserVO(email, pass);
         if(!users.insertUser(user))
             throw new SQLException("Error en UserHerlper");
-        else
+        else{
+            request.getSession().getServletContext().setAttribute("user",user);
             return true;
+        }
+
     }
 }

@@ -16,14 +16,14 @@ public class TermVO extends OntologyVO{
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;
 
-    public TermVO(String word, String ontology) {
-        super(ontology);
+    public TermVO(String word, String ontology, String domain) {
+        super(ontology, domain);
         this.word = word;
         this.isRelevant=false;
     }
 
     public TermVO(){
-        super("example");
+        super("example", "example");
         this.word="example";
         this.isRelevant=false;
     }

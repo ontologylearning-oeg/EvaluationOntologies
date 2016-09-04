@@ -13,13 +13,29 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>com.ontoeval.controller.Login</servlet-class>
     </servlet>
-  <servlet-mapping>
+    <servlet>
+        <servlet-name>LoadOntology</servlet-name>
+        <servlet-class>com.ontoeval.controller.LoadOntology</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadFeatures</servlet-name>
+        <servlet-class>com.ontoeval.controller.LoadFeatures</servlet-class>
+    </servlet>
+    <servlet-mapping>
     <servlet-name>LoadFile</servlet-name>
     <url-pattern>/LoadFile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoadOntology</servlet-name>
+    <url-pattern>/LoadOntology</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoadFeatures</servlet-name>
+    <url-pattern>/LoadFeatures</url-pattern>
   </servlet-mapping>
 
 </web-app>
