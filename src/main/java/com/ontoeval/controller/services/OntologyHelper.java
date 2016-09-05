@@ -1,9 +1,7 @@
 package com.ontoeval.controller.services;
 
+import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
-import com.ontoeval.model.OntologyVO;
-import com.ontoeval.model.RelationVO;
-import com.ontoeval.model.TermVO;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +16,16 @@ import java.util.StringTokenizer;
 public class OntologyHelper {
     private final HttpServletRequest request;
     private final OntologyDAO ontology;
-    private final TermDAO terms;
-    private final RelationDAO relations;
+    private final LexicalHelper lexical;
+    private final ResultsHelper results;
+    private final TaxonomicHelper taxonomic;
 
     public OntologyHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
+        lexical = new LexicalHelper(request);
+        taxonomic = new TaxonomicHelper(request);
+        results = new ResultsHelper(request);
         ontology = new OntologyImpl(OntologyImpl.CrearConexion());
-        terms = new TermImpl(TermImpl.CrearConexion());
-        relations = new RelationImpl(RelationImpl.CrearConexion());
     }
 
     public boolean loadOntologies() throws  SQLException{
@@ -40,66 +40,47 @@ public class OntologyHelper {
         }
 
     }
-    /**Aqui se debe comprobar como está la evaluación para dejar o no lo de la relaciones**/
-    public boolean loadFeatures(String name) throws SQLException{
+
+    public String loadFeatures(String name) throws  IOException{
         ServletContext context = request.getSession().getServletContext();
-        ArrayList<TermVO> t = terms.loadTerms(name);
-        if(t!=null){
-            context.setAttribute("terms",t);
-            context.setAttribute("ontology",ontology.recuperarOntologias(name));
-            return true;
+        UserVO user = (UserVO) context.getAttribute("user");
+        OntologyVO o = ontology.recuperarOntologias(name);
+        context.setAttribute("ontology",o);
+        String page=lexical.comprobarLexical(o,user);
+        if(page==null) {
+            taxonomic.createGSRelations(lexical.recuperarRelevants(o),o);
+            page=taxonomic.comprobarTaxonomic(name,user);
+            if(page==null){
+                //resultsload
+                return "./eval/resultados.jsp";
+            }
+            else {
+                return page;
+            }
         }
         else{
-            throw new SQLException("Error en LoadFeatures/OntologyHelper");
+            return page;
         }
+
     }
+
 
     public boolean insertOntology(String text, String filename) throws  SQLException{
         String domain = loadDomain(text);
         if(!ontology.insertOntology(new OntologyVO(filename, domain)) ||
-                !terms.InsertTerms(loadTerms(text,filename, domain)) ||
-            !relations.insertRelations(loadRelations(text,filename, domain)))
+                !lexical.loadTerms(text,filename,domain) ||
+                    !taxonomic.loadRelations(text,filename, domain))
             throw  new SQLException("Error en insertOntology/OntologyHelper");
         else{
              return true;
         }
     }
-
     private String loadDomain(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        tokenizer = new StringTokenizer(tokenizer.nextToken(),":");
+        tokenizer = new StringTokenizer(tokenizer.nextToken(),";");
         tokenizer.nextToken();
         return tokenizer.nextToken();
     }
 
-    private ArrayList<TermVO> loadTerms(String text, String filename, String domain){
-        ArrayList<TermVO> terms = new ArrayList<TermVO>();
-        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        tokenizer.nextToken();
-        String term = tokenizer.nextToken();
-        while(!term.equals("Taxonomic Relations")){
-            TermVO aux = new TermVO(term,filename, domain);
-            terms.add(aux);
-            term = tokenizer.nextToken();
-        }
-        return terms;
-    }
 
-    private ArrayList<RelationVO> loadRelations(String text, String filename, String domain){
-        ArrayList<RelationVO> relations = new ArrayList<RelationVO>();
-        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        String term = tokenizer.nextToken();
-        while(!term.equals("Taxonomic Relations")){
-            term = tokenizer.nextToken();
-        }
-        while(tokenizer.hasMoreTokens()){
-            StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken()," ");
-            String term1 = tokenizer1.nextToken();
-            tokenizer1.nextToken();tokenizer1.nextToken();tokenizer1.nextToken();
-            String term2 = tokenizer1.nextToken();
-            RelationVO relation = new RelationVO(filename,term1,term2,domain);
-            relations.add(relation);
-        }
-        return relations;
-    }
 }

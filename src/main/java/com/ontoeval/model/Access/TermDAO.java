@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public interface TermDAO {
 
-    public boolean InsertTerm(TermVO t);
-
-    public boolean InsertTerms(ArrayList<TermVO> terms);
-
-    public ArrayList<TermVO> loadTerms(String ontology);
+    boolean InsertTerm(TermVO t);
+    boolean InsertTerms(ArrayList<TermVO> terms);
+    ArrayList<TermVO> loadTerms(String ontology);
+    boolean updateTerms(ArrayList<TermVO> terms);
+    ArrayList<TermVO> loadRelevant(String ontology);
 
 
 }

@@ -14,12 +14,15 @@ public class RelationVO extends OntologyVO{
     private String term2;
     @DatabaseField(columnName="isGS")
     private boolean isGS;
+    @DatabaseField(columnName="isRandom")
+    private boolean isRandom;
 
-    public RelationVO(String name, String term1, String term2, String domain) {
+    public RelationVO(String name, String term1, String term2, String domain, boolean isRandom) {
         super(name,domain);
         this.term1 = term1;
         this.term2 = term2;
         this.isGS = false;
+        this.isRandom= isRandom;
     }
 
     public RelationVO() {
@@ -27,6 +30,7 @@ public class RelationVO extends OntologyVO{
         this.term1 = "example1";
         this.term2 = "example2";
         this.isGS = false;
+        this.isRandom = false;
     }
 
     public String getTerm1() {
@@ -52,4 +56,8 @@ public class RelationVO extends OntologyVO{
     public void setGS(boolean GS) {
         isGS = GS;
     }
+
+    public boolean isRandom() { return isRandom; }
+
+    public void setRandom(boolean random) { isRandom = random; }
 }

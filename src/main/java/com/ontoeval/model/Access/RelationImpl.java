@@ -11,6 +11,7 @@ import com.ontoeval.model.RelationVO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by dchavesf on 1/09/16.
@@ -50,4 +51,44 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         }
         return true;
     }
+
+    public boolean getRandomRelations() {
+        try{
+            if(relationDAO.queryForEq("isRandom",true).size()==0){
+                return true;
+            }
+            else
+                return false;
+        }catch (SQLException e){
+            System.out.println("Error en getRandomRelations/RelationImpl "+e.getMessage());
+            return false;
+        }
+    }
+
+    public ArrayList<RelationVO> getRandomRelations(String ontology) {
+        HashMap<String, Object> m = new HashMap<String, Object>();
+        m.put("Ontology",ontology);
+        m.put("isRandom", true);
+        try{
+            return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
+        }catch (SQLException e){
+            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            return null;
+        }
+    }
+
+    public ArrayList<RelationVO> getRandomRelations(String ontology, String user) {
+        HashMap<String, Object> m = new HashMap<String, Object>();
+        m.put("Ontology",ontology);
+        m.put("isRandom", true);
+        m.put("User", user);
+        try{
+            return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
+        }catch (SQLException e){
+            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            return null;
+        }
+    }
+
+
 }

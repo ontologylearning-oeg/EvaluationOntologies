@@ -9,53 +9,20 @@
 <%@ page isELIgnored="false" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="js/loadOntology.js"></script>
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
-        <h1>Select the evaluation you want to do</h1>
+        <h1>Choose an ontology</h1>
     </div>
-    <div class="row">
-    <div class="card col s3 offset-s1">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/eval.png">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Lexical Layer<i class="material-icons right">more_vert</i></span>
-            <p><a onclick="">Go to the lexical evaluation of <c:out value="${applicationScope.ontology.name}"/></a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Lexical Layer<i class="material-icons right">close</i></span>
-            <p>Resumen de lo que se hace aquí</p>
+    <div class="col s12 ">
+        <div class="card-panel blue lighten-1">
+            <h5>The available ontologies are:</h5>
+            <ul class="collection">
+                <c:forEach var="ontology" items="${applicationScope.ontos}">
+                    <li class="collection-item"><div>${ontology.name} (Domain of ${ontology.domain})<a onclick="loadOntology(<c:out value="${applicationScope.ontology.name}"/>);" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+                </c:forEach>
+            </ul>
         </div>
     </div>
-    <div class="card col s3 offset-s1">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/eval.png">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Taxonomic Layer<i class="material-icons right">more_vert</i></span>
-            <p><a onclick="">Go to evaluation of <c:out value="${applicationScope.ontology.name}"/></a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Taxonomic Layer<i class="material-icons right">close</i></span>
-            <p>Resumen de lo que se hace aquí</p>
-        </div>
-    </div>
-
-    <div class="card col s3 offset-s1">
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/eval.png">
-        </div>
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Results<i class="material-icons right">more_vert</i></span>
-            <p><a onclick="">Go to evaluation of <c:out value="${applicationScope.ontology.name}"/></a></p>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Results<i class="material-icons right">close</i></span>
-            <p>Resumen de lo que se hace aquí</p>
-        </div>
-    </div>
-
-    </div>
-
 </div>

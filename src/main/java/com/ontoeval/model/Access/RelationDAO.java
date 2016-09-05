@@ -9,6 +9,9 @@ import java.util.ArrayList;
  */
 public interface RelationDAO {
 
-    public boolean insertRelation(RelationVO r);
-    public boolean insertRelations(ArrayList<RelationVO> rs);
+    boolean insertRelation(RelationVO r);
+    boolean insertRelations(ArrayList<RelationVO> rs);
+    boolean getRandomRelations();
+    ArrayList<RelationVO> getRandomRelations(String ontology);
+    ArrayList<RelationVO> getRandomRelations(String ontology, String user);
 }

@@ -11,12 +11,12 @@ function loadOntology(name) {
         data: {"name":name},
         cache: false,
         success: function (data) {
-            $("#contenido").load("./eval/index.jsp");
+            $("#contenido").load(data);
         },
         error: function (){
             swal({
                 title: "Oops...",
-                text: "",
+                text: "There is a problem with the server",
                 type: "error",
                 confirmButtonColor: "#2bbbad",
                 confirmButtonText: "OK" });

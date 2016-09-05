@@ -2,12 +2,13 @@ package com.ontoeval.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.ontoeval.controller.services.OntologyHelper;
 
 /**
  * Created by dchavesf on 2/09/16.
  */
-@DatabaseTable(tableName = "TermEvaluation")
-public class TermEvaluationVO {
+@DatabaseTable(tableName = "LexicalEvaluation")
+public class TermEvaluationVO extends OntologyVO{
 
     @DatabaseField(columnName="Term",canBeNull=false, uniqueCombo = true)
     private String term;
@@ -16,7 +17,8 @@ public class TermEvaluationVO {
     @DatabaseField(columnName="Relevant")
     private boolean relevant;
 
-    public TermEvaluationVO(String term, String user) {
+    public TermEvaluationVO(String ontology, String domain,String term, String user) {
+        super(ontology,domain);
         this.term = term;
         this.user = user;
         this.relevant = false;

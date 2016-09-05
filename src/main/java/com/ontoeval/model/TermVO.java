@@ -15,17 +15,26 @@ public class TermVO extends OntologyVO{
     private String word;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;
+    @DatabaseField(columnName = "isControl")
+    private boolean isControl;
 
-    public TermVO(String word, String ontology, String domain) {
+    public TermVO(String word, String ontology, String domain, String control) {
         super(ontology, domain);
         this.word = word;
         this.isRelevant=false;
+        if(control.equals("yes")){
+            this.isControl=true;
+        }
+        else{
+            this.isControl=false;
+        }
     }
 
     public TermVO(){
         super("example", "example");
         this.word="example";
         this.isRelevant=false;
+        this.isControl=false;
     }
 
     public String getWord() {
@@ -39,4 +48,8 @@ public class TermVO extends OntologyVO{
     public boolean isRelevant() { return isRelevant; }
 
     public void setRelevant(boolean relevant) { isRelevant = relevant; }
+
+    public boolean isControl() {return isControl;}
+
+    public void setControl(boolean control) { isControl = control; }
 }

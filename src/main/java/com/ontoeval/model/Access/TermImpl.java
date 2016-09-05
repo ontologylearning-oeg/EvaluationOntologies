@@ -11,6 +11,7 @@ import com.ontoeval.model.TermVO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by dachafra on 30/06/16.
@@ -34,7 +35,7 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
 
     public boolean InsertTerm(TermVO t){
         try{
-            if(termDAO.create(t)==0){
+            if(termDAO.create(t)==0) {
                 return false;
             }
         } catch (SQLException ex) {
@@ -59,6 +60,33 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
             return (ArrayList<TermVO>)termDAO.queryForEq("Ontology",ontology);
         }catch (SQLException e){
             System.out.println("Error en loadTerms/TermImpl "+e.getMessage());
+            return null;
+        }
+    }
+
+    public boolean updateTerms(ArrayList<TermVO> terms) {
+        try{
+            for(TermVO term : terms){
+                if(termDAO.update(term)== 0){
+                    return false;
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Error en updateTerms/TermImpl "+e.getMessage());
+        }
+
+        return true;
+    }
+
+    public ArrayList<TermVO> loadRelevant(String ontology) {
+        HashMap<String, Object> m = new HashMap<String, Object>();
+        boolean relevant=true;
+        m.put("Ontology",ontology);
+        m.put("isRelevant", relevant);
+        try{
+            return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
+        }catch (SQLException e){
+            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
             return null;
         }
     }

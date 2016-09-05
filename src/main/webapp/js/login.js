@@ -67,8 +67,8 @@ function  changeToLogin(flag) {
         $("#nav-mobile").append('<li id="logout"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#slide-out").append('<li id="logoutaux"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#enlace").removeAttr('href');
-        $("#enlace").attr('onClick', 'changePage("ontology.jsp");');
-        $("#contenido").load("ontology.jsp");
+        $("#enlace").attr('onClick', 'changePage("instructions.jsp");');
+        $("#contenido").load("instructions.jsp");
     }
     else if (flag=="off"){
          $.ajax({
