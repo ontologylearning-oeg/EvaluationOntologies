@@ -31,8 +31,8 @@ public class LexicalHelper {
         ArrayList<TermVO> t = terms.loadTerms(ontology.getName());
         ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(ontology.getName(),user.getEmail());
         ArrayList<TermEvaluationVO> teval = evalTerms.evaluatedTerms(ontology.getName());
-        if(t.size()!=teval.size()) { //si no se ha  completado la evaluacion lexica
-            if ((t.size() / 5) != tevalu.size()) { //aun le falta al usuario terminos por evaluar
+        if(t.size()!=(teval.size()*5)) { //si no se ha  completado la evaluacion lexica
+            if (t.size() != tevalu.size()) { //aun le falta al usuario terminos por evaluar
                 for (TermVO aux : t) {
                     for (TermEvaluationVO auxeval : tevalu) {
                         if (aux.getWord().equals(auxeval.getTerm())) {
@@ -57,8 +57,11 @@ public class LexicalHelper {
         return terms.loadRelevant(o.getName());
     }
 
+    public ArrayList<TermVO> recuperar(String o){
+        return terms.loadTerms(o);
+    }
+
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){
-        //setter relavant o no relevant
         ArrayList<TermEvaluationVO> tevalaux = new ArrayList<TermEvaluationVO>();
         while(teval.size()!=0){
             TermEvaluationVO aux = teval.get(0);
@@ -69,12 +72,14 @@ public class LexicalHelper {
                 }
             }
             teval.remove(0);
-            boolean relevant = countForRelavant(tevalaux);
-            for(TermVO taux: t){
-                if(taux.getWord().equals(tevalaux.get(0).getTerm())){
-                    taux.setRelevant(relevant);
+            if(countForRelavant(tevalaux)){
+                for(TermVO taux: t){
+                    if(taux.getWord().equals(tevalaux.get(0).getTerm())){
+                        taux.setRelevant(true);
+                    }
                 }
             }
+            tevalaux = new ArrayList<TermEvaluationVO>();
         }
         terms.updateTerms(t);
     }

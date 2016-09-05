@@ -49,10 +49,12 @@ public class OntologyHelper {
         String page=lexical.comprobarLexical(o,user);
         if(page==null) {
             taxonomic.createGSRelations(lexical.recuperarRelevants(o),o);
-            page=taxonomic.comprobarTaxonomic(name,user);
+            page=taxonomic.comprobarTaxonomic(o,user);
             if(page==null){
-                //resultsload
-                return "./eval/resultados.jsp";
+                results.setTerms(lexical.recuperar(o.getName()));
+                results.setRelations(taxonomic.recuperar(o.getName()));
+                results.calcularResultados();
+                return "./eval/results.jsp";
             }
             else {
                 return page;

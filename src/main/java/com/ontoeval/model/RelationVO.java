@@ -25,6 +25,14 @@ public class RelationVO extends OntologyVO{
         this.isRandom= isRandom;
     }
 
+    public RelationVO(String name, String term1, String term2, String domain, boolean isGS, boolean isRandom) {
+        super(name,domain);
+        this.term1 = term1;
+        this.term2 = term2;
+        this.isGS = isGS;
+        this.isRandom= isRandom;
+    }
+
     public RelationVO() {
         super("example", "domain");
         this.term1 = "example1";

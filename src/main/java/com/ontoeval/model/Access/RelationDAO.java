@@ -11,7 +11,9 @@ public interface RelationDAO {
 
     boolean insertRelation(RelationVO r);
     boolean insertRelations(ArrayList<RelationVO> rs);
-    boolean getRandomRelations();
+    boolean checkRandomRelations();
     ArrayList<RelationVO> getRandomRelations(String ontology);
-    ArrayList<RelationVO> getRandomRelations(String ontology, String user);
+    ArrayList<RelationVO> getNormalRelations(String ontology);
+    boolean updateRelations(ArrayList<RelationVO> r);
+
 }

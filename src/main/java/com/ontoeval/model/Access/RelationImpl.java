@@ -52,7 +52,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         return true;
     }
 
-    public boolean getRandomRelations() {
+    public boolean checkRandomRelations() {
         try{
             if(relationDAO.queryForEq("isRandom",true).size()==0){
                 return true;
@@ -77,17 +77,30 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         }
     }
 
-    public ArrayList<RelationVO> getRandomRelations(String ontology, String user) {
+    public ArrayList<RelationVO> getNormalRelations(String ontology) {
         HashMap<String, Object> m = new HashMap<String, Object>();
         m.put("Ontology",ontology);
-        m.put("isRandom", true);
-        m.put("User", user);
+        m.put("isRandom", false);
         try{
             return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
             System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
             return null;
         }
+    }
+
+    public boolean updateRelations(ArrayList<RelationVO> r) {
+        try{
+            for(RelationVO relation : r){
+                if(relationDAO.update(relation) == 0){
+                    return false;
+                }
+            }
+        }catch (SQLException e){
+            System.out.println("Error en updateRelations/TermEvaluationImpl "+e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 
