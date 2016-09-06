@@ -10,12 +10,13 @@ import com.ontoeval.model.UserVO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by dchavesf on 1/09/16.
  */
 public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
     private final Dao<UserVO, Integer> userDAO;
 
 
@@ -31,7 +32,6 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
     }
 
     public boolean insertUser(UserVO u){
-
         try{
             if(userDAO.create(u)==0){
                 return false;
@@ -41,5 +41,21 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
             return false;
         }
         return true;
+    }
+
+    public boolean checkUser(UserVO u) {
+        ArrayList<UserVO> arrayu = new ArrayList<UserVO>();
+        try {
+            arrayu = (ArrayList<UserVO>) userDAO.queryForEq("email", u.getEmail());
+        }catch (SQLException e){
+            System.out.println("Error en importar usuario "+e.getMessage());
+            return false;
+        }
+        if(arrayu.size()==0){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

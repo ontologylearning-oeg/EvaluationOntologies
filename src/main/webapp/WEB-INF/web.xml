@@ -21,6 +21,10 @@
         <servlet-name>LoadFeatures</servlet-name>
         <servlet-class>com.ontoeval.controller.LoadFeatures</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EvaluatedTerms</servlet-name>
+        <servlet-class>com.ontoeval.controller.EvaluatedTerms</servlet-class>
+    </servlet>
     <servlet-mapping>
     <servlet-name>LoadFile</servlet-name>
     <url-pattern>/LoadFile</url-pattern>
@@ -37,5 +41,9 @@
     <servlet-name>LoadFeatures</servlet-name>
     <url-pattern>/LoadFeatures</url-pattern>
   </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EvaluatedTerms</servlet-name>
+        <url-pattern>/EvaluatedTerms</url-pattern>
+    </servlet-mapping>
 
 </web-app>

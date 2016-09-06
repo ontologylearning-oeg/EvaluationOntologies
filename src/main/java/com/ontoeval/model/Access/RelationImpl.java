@@ -17,7 +17,7 @@ import java.util.HashMap;
  * Created by dchavesf on 1/09/16.
  */
 public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements RelationDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
     private final Dao<RelationVO, Integer> relationDAO;
 
 

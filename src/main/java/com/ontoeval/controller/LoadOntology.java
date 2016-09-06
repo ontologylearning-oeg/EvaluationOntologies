@@ -14,11 +14,15 @@ import java.sql.SQLException;
  */
 public class LoadOntology extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean flag=true;
         try{
             OntologyHelper helper = new OntologyHelper(request);
-            helper.loadOntologies();
+            flag=helper.loadOntologies();
         }catch (SQLException e){
             System.out.println("Error en LoadOntology "+e.getMessage());
+        }
+        if(flag==false){
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

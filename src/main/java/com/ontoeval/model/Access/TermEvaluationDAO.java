@@ -9,7 +9,8 @@ import java.util.ArrayList;
  */
 public interface TermEvaluationDAO {
 
-    public ArrayList<TermEvaluationVO> evaluatedTermsUser(String ontology, String user);
-    public ArrayList<TermEvaluationVO> evaluatedTerms(String ontology);
+    ArrayList<TermEvaluationVO> evaluatedTermsUser(String ontology, String user);
+    ArrayList<TermEvaluationVO> evaluatedTerms(String ontology);
+    boolean insertTerms(ArrayList<TermEvaluationVO> t);
 
 }

@@ -7,6 +7,7 @@ import com.ontoeval.model.Access.TermEvaluationImpl;
 import com.ontoeval.model.Access.TermImpl;
 
 import javax.management.openmbean.ArrayType;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,30 +28,82 @@ public class LexicalHelper {
         evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
     }
 
+    public String saveTerms(String text){
+        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
+        ServletContext context = request.getSession().getServletContext();
+        UserVO user = (UserVO) context.getAttribute("user");
+        OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
+        ArrayList<TermEvaluationVO> terms = new ArrayList<TermEvaluationVO>();
+        while(tokenizer.hasMoreTokens()){
+            StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
+            String term = tokenizer1.nextToken();
+            String aux = tokenizer1.nextToken();
+            boolean eval;
+            if(aux.equals("yes")){
+                eval = true;
+            }
+            else
+                eval=false;
+            TermEvaluationVO t = new TermEvaluationVO(ontology.getName(),ontology.getDomain(),term,user.getEmail(),eval);
+            terms.add(t);
+        }
+        evalTerms.insertTerms(terms);
+        ArrayList<TermVO> t = (ArrayList<TermVO>)request.getSession().getServletContext().getAttribute("terms");
+        for(TermEvaluationVO taux: terms){
+            for (int i=0; i<t.size();i++){
+                if(taux.getTerm().equals(t.get(i).getWord())){
+                    t.remove(i);
+                    break;
+                }
+            }
+        }
+        if(termsForEval(t))
+            return "./eval/lexical.jsp";
+        else
+            return null;
+    }
+
     public String comprobarLexical(OntologyVO ontology, UserVO user){
         ArrayList<TermVO> t = terms.loadTerms(ontology.getName());
         ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(ontology.getName(),user.getEmail());
         ArrayList<TermEvaluationVO> teval = evalTerms.evaluatedTerms(ontology.getName());
         if(t.size()!=(teval.size()*5)) { //si no se ha  completado la evaluacion lexica
             if (t.size() != tevalu.size()) { //aun le falta al usuario terminos por evaluar
-                for (TermVO aux : t) {
-                    for (TermEvaluationVO auxeval : tevalu) {
-                        if (aux.getWord().equals(auxeval.getTerm())) {
-                            t.remove(aux);
+                for(TermEvaluationVO taux: tevalu){
+                    for (int i=0; i<t.size();i++){
+                        if(taux.getTerm().equals(t.get(i).getWord())){
+                            t.remove(i);
+                            break;
                         }
                     }
                 }
-                request.getSession().getServletContext().setAttribute("terms", t);
-                return "./eval/lexical.jsp";
+                if(termsForEval(t))
+                    return "./eval/lexical.jsp";
+                else
+                    return null;
             }
             else{
-                return "./eval/index.jsp";
+                return null;
             }
         }
         else{
             rellenarTermsBD(t,teval);
-            return null;
+            return "relations";
         }
+    }
+
+    private boolean termsForEval(ArrayList<TermVO> t){
+        ArrayList<TermVO> tforeval = new ArrayList<TermVO>(); int i=0;
+        if(t.size()>0) {
+            while (i < 9 || i < t.size()) {
+                tforeval.add(t.get(i));
+                i++;
+            }
+            request.getSession().getServletContext().setAttribute("termsUser", tforeval);
+            request.getSession().getServletContext().setAttribute("terms", t);
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<TermVO> recuperarRelevants(OntologyVO o){

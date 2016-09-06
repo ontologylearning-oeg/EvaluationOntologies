@@ -17,7 +17,7 @@ import java.util.HashMap;
  * Created by dachafra on 30/06/16.
  */
 public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
     private final Dao<TermVO, Integer> termDAO;
 
 

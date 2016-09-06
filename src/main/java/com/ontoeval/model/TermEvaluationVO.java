@@ -17,11 +17,11 @@ public class TermEvaluationVO extends OntologyVO{
     @DatabaseField(columnName="Relevant")
     private boolean relevant;
 
-    public TermEvaluationVO(String ontology, String domain,String term, String user) {
+    public TermEvaluationVO(String ontology, String domain,String term, String user, boolean isRelvant) {
         super(ontology,domain);
         this.term = term;
         this.user = user;
-        this.relevant = false;
+        this.relevant = isRelvant;
     }
 
     public TermEvaluationVO() {

@@ -81,11 +81,11 @@ public class TaxonomicHelper {
                 return "./eval/taxonomic.jsp";
             }
             else
-                return "./eval/index.jsp";
+                return null;
         }
         else {
             rellenarBD(ontology,relations.getNormalRelations(ontology.getName()),randomEval);
-            return null;
+            return "results";
         }
     }
 

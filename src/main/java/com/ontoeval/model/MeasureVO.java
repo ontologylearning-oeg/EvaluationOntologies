@@ -1,14 +1,24 @@
 package com.ontoeval.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by dchavesf on 1/09/16.
  */
+@DatabaseTable(tableName = "Measure")
 public class MeasureVO extends OntologyVO {
+    @DatabaseField(columnName="Recall")
     private double recall;
+    @DatabaseField(columnName="Precision")
     private double precision;
+    @DatabaseField(columnName="F-Measure")
     private double fmeasure;
+    @DatabaseField(columnName="TR")
     private double trecall;
+    @DatabaseField(columnName="TP")
     private double tprecision;
+    @DatabaseField(columnName="TF")
     private double tfmeasure;
 
     public MeasureVO(String name, String domain, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {

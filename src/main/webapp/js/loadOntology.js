@@ -16,7 +16,7 @@ function loadOntology(name) {
         error: function (){
             swal({
                 title: "Oops...",
-                text: "There is a problem with the server",
+                text: "Maybe you can not do anything at this moment",
                 type: "error",
                 confirmButtonColor: "#2bbbad",
                 confirmButtonText: "OK" });

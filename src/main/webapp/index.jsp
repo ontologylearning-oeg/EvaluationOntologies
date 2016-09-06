@@ -59,8 +59,13 @@
                 </div>
             </div>
         </form>
-        <div class="col s2 offset-s5 center-align">
-            <a class="waves-effect waves-light btn" onclick="login();">LOGIN</a>
+        <div class="row center-align">
+            <div class="col s2 offset-s3">
+                <a class="waves-effect waves-light btn" onclick="login();">Login</a>
+            </div>
+            <div class="col s2 offset-s2">
+                <a class="waves-effect waves-light btn" onclick="login('true');">Sign up</a>
+            </div>
         </div>
     </div>
 </div>

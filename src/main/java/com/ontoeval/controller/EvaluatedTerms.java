@@ -1,6 +1,6 @@
 package com.ontoeval.controller;
 
-import com.ontoeval.controller.services.OntologyHelper;
+import com.ontoeval.controller.services.LexicalHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,29 +10,30 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by dchavesf on 2/09/16.
+ * Created by dchavesf on 6/09/16.
  */
-public class LoadFeatures extends HttpServlet {
+public class EvaluatedTerms extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String page=null;
+        String text = request.getParameter("text");
+        String page =null;
         try{
-           OntologyHelper helper = new OntologyHelper(request);
-           page=helper.loadFeatures(name);
+            LexicalHelper helper = new LexicalHelper(request);
+            page = helper.saveTerms(text);
         }catch (SQLException e){
-            System.out.println("Error en LoadFeatures "+e.getMessage());
+            System.out.println("Error en EvaluatedTerms "+e.getMessage());
         }
         if(page==null){
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("./eval/index.jsp");
         }
         else {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(page);
         }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

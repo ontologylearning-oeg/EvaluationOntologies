@@ -28,8 +28,6 @@ public class ResultsHelper {
         measure = new MeasureImpl(MeasureImpl.CrearConexion());
     }
 
-
-
     public void setTerms(ArrayList<TermVO> terms) {
         this.terms = terms;
     }
@@ -75,8 +73,12 @@ public class ResultsHelper {
         }
         ArrayList<String> termsgold=constructHierachy(goldstandard,gshiterms);
         ArrayList<String> termsl=constructHierachy(learned,lhiterms);
-
-
+        Double tp = taxonomicPrecision(termsgold, termsl, gshiterms, lhiterms);
+        m.setTprecision(tp);
+        Double tr = taxonomicPrecision(termsl,termsgold, lhiterms, gshiterms);
+        m.setTrecall(tr);
+        Double tf = (2*tp*tr)/(tp+tr);
+        m.setTfmeasure((2*m.getRecall()*tf)/(tf+m.getRecall()));
     }
 
     private ArrayList<String> constructHierachy(ArrayList<RelationVO> relation, HashMap<String, ArrayList<String>> terms){
@@ -118,7 +120,49 @@ public class ResultsHelper {
 
     }
 
+    private Double taxonomicPrecision(ArrayList<String> gs, ArrayList<String> learned, HashMap<String, ArrayList<String>> gsterms, HashMap<String, ArrayList<String>> lterms){
+        ArrayList<String> commonTerms = new ArrayList<String>();
+        ArrayList<String> subsuperLearned;
+        ArrayList<String> subsuperGS; Integer n=0; Double tp=0.0;
+        ArrayList<Double> tplocal = new ArrayList<Double>();
 
+        for(String aux: gs){
+            if(learned.contains(aux)){
+                commonTerms.add(aux);
+            }
+        }
+
+
+        for (String aux : commonTerms){
+            subsuperGS = gsterms.get(aux);
+            subsuperLearned = lterms.get(aux);
+            for(String auxGS: subsuperGS){
+                if(!learned.contains(auxGS)){
+                    subsuperGS.remove(auxGS);
+                }
+            }
+            for(String auxL: subsuperLearned){
+                if(!gs.contains(auxL)){
+                    subsuperLearned.remove(auxL);
+                }
+            }
+
+            for(String auxGS: subsuperGS){
+                if(subsuperLearned.contains(auxGS)){
+                    n++;
+                }
+            }
+
+            tplocal.add((double)(n/subsuperLearned.size()));
+            n=0;
+        }
+        for(Double tpaux : tplocal){
+            tp+=tpaux;
+        }
+
+        return tp/commonTerms.size();
+
+    }
 
 
 

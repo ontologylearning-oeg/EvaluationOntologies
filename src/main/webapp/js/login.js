@@ -8,7 +8,11 @@ function changePage(a) {
     $("#contenido").load(a);
 }
 
-function login() {
+function signup() {
+
+}
+
+function login(signup) {
     var email = $("#icon_prefix").val();
     var pass = $("#icon_password").val();
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -26,7 +30,7 @@ function login() {
         type: "POST",
         timeout: 50000,
         url: "/Login",
-        data: {"email":email,"pass":pass},
+        data: {"email":email,"pass":pass,"signup":signup},
         cache: false,
         success: function (data) {
             $.ajax({
@@ -50,7 +54,7 @@ function login() {
         error: function (){
             swal({
                 title: "Oops...",
-                text: "The user already exists",
+                text: "You are not sign up or the user already exits",
                 type: "error",
                 confirmButtonColor: "#2bbbad",
                 confirmButtonText: "OK" });

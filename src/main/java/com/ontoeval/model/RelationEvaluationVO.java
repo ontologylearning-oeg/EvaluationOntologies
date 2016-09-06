@@ -25,6 +25,14 @@ public class RelationEvaluationVO extends OntologyVO {
         this.isRelevant = isRelevant;
     }
 
+    public RelationEvaluationVO(){
+        super("exmaple","example");
+        this.term1="term1";
+        this.term2="term2";
+        this.user=null;
+        this.isRelevant=false;
+    }
+
     public String getTerm1() { return term1; }
 
     public void setTerm1(String term1) {

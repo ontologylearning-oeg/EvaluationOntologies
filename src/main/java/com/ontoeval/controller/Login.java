@@ -16,16 +16,21 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
+        String signup = request.getParameter("signup");
+        boolean flag=true;
         if(email==null){
             request.getSession().getServletContext().removeAttribute("user");
         }
         else{
             try {
                 UserHelper helper = new UserHelper(request);
-                helper.insertUser(email,pass);
+                flag=helper.insertUser(email,pass,signup);
             }catch (SQLException e){
                 System.out.println("Error en Servlet Login"+e.getMessage());
             }
+        }
+        if(flag==false){
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 

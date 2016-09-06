@@ -20,14 +20,28 @@ public class UserHelper {
         users = new UserImpl(UserImpl.CrearConexion());
     }
 
-    public boolean insertUser(String email, String pass) throws  SQLException{
+    public boolean insertUser(String email, String pass, String signup){
         UserVO user = new UserVO(email, pass);
-        if(!users.insertUser(user))
-            throw new SQLException("Error en UserHerlper");
-        else{
-            request.getSession().getServletContext().setAttribute("user",user);
-            return true;
+        if(signup!=null){
+            if(!users.insertUser(user)) {
+                return false;
+            }
+            else{
+                request.getSession().getServletContext().setAttribute("user",user);
+                return true;
+            }
         }
+        else{
+            if(!users.checkUser(user)){
+                return false;
+            }
+            else{
+                request.getSession().getServletContext().setAttribute("user",user);
+                return true;
+            }
+
+        }
+
 
     }
 }

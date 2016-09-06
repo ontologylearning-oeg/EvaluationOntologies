@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * Created by dchavesf on 5/09/16.
  */
 public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements MeasureDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
     private final Dao<MeasureVO, Integer> measureDAO;
 
 

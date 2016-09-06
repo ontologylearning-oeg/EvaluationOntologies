@@ -28,11 +28,11 @@ public class OntologyHelper {
         ontology = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
-    public boolean loadOntologies() throws  SQLException{
+    public boolean loadOntologies(){
         ServletContext context = request.getSession().getServletContext();
         ArrayList<OntologyVO> onts = ontology.recuperarOntologias();
-        if(onts==null){
-            throw  new SQLException("Error en OntologyHelper");
+        if(onts==null || onts.size()==0){
+            return false;
         }
         else{
             context.setAttribute("ontos",onts);
@@ -41,16 +41,16 @@ public class OntologyHelper {
 
     }
 
-    public String loadFeatures(String name) throws  IOException{
+    public String loadFeatures(String name){
         ServletContext context = request.getSession().getServletContext();
         UserVO user = (UserVO) context.getAttribute("user");
         OntologyVO o = ontology.recuperarOntologias(name);
         context.setAttribute("ontology",o);
         String page=lexical.comprobarLexical(o,user);
-        if(page==null) {
+        if(page.equals("relations")) {
             taxonomic.createGSRelations(lexical.recuperarRelevants(o),o);
             page=taxonomic.comprobarTaxonomic(o,user);
-            if(page==null){
+            if(page.equals("results")){
                 results.setTerms(lexical.recuperar(o.getName()));
                 results.setRelations(taxonomic.recuperar(o.getName()));
                 results.calcularResultados();
@@ -67,12 +67,12 @@ public class OntologyHelper {
     }
 
 
-    public boolean insertOntology(String text, String filename) throws  SQLException{
+    public boolean insertOntology(String text, String filename){
         String domain = loadDomain(text);
         if(!ontology.insertOntology(new OntologyVO(filename, domain)) ||
                 !lexical.loadTerms(text,filename,domain) ||
                     !taxonomic.loadRelations(text,filename, domain))
-            throw  new SQLException("Error en insertOntology/OntologyHelper");
+            return false;
         else{
              return true;
         }

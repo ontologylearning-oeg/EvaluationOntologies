@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by dchavesf on 2/09/16.
  */
 public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> implements TermEvaluationDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
     private final Dao<TermEvaluationVO, Integer> termEvalDAO;
 
     public TermEvaluationImpl(ConnectionSource connectionSource) throws SQLException {
@@ -54,5 +54,19 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
             return null;
         }
 
+    }
+
+    public boolean insertTerms(ArrayList<TermEvaluationVO> t) {
+        for(TermEvaluationVO v : t){
+            try {
+                if (termEvalDAO.create(v) == 0) {
+                    return false;
+                }
+            }catch (SQLException e){
+                System.out.println("Error en insertTerms/TermEvaluationImpl "+e.getMessage());
+                return false;
+            }
+        }
+        return true;
     }
 }

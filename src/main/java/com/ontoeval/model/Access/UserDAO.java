@@ -8,4 +8,5 @@ import com.ontoeval.model.UserVO;
 public interface UserDAO {
 
     public boolean insertUser(UserVO u);
+    public boolean checkUser(UserVO u);
 }
