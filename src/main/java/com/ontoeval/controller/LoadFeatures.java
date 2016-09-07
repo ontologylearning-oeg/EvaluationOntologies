@@ -25,6 +25,10 @@ public class LoadFeatures extends HttpServlet {
         if(page==null){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+        else if(page.equals("notUser")){
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write("notUser");
+        }
         else {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(page);

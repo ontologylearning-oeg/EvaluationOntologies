@@ -11,7 +11,17 @@ function loadOntology(name) {
         data: {"name":name},
         cache: false,
         success: function (data) {
-            $("#contenido").load(data);
+            if(data=="notUser"){
+                swal({
+                    title: "Oops...",
+                    text: "You have to learn more about Knowledge Representation for answer this questions",
+                    type: "error",
+                    confirmButtonColor: "#2bbbad",
+                    confirmButtonText: "OK" });
+            }
+            else{
+                $("#contenido").load(data);
+            }
         },
         error: function (){
             swal({

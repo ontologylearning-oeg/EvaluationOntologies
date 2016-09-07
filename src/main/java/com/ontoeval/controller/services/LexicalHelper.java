@@ -3,7 +3,6 @@ package com.ontoeval.controller.services;
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
 
-import javax.management.openmbean.ArrayType;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -95,7 +94,7 @@ public class LexicalHelper {
     }
 
     private boolean termsForEval(ArrayList<TermVO> t){
-        ArrayList<TermVO> tforeval = new ArrayList<TermVO>(); int i=0;
+        ArrayList<TermVO> tforeval = new ArrayList<>(); int i=0;
         if(t.size()>0) {
             while (i<9  && i<t.size()) {
                 tforeval.add(t.get(i));
@@ -136,6 +135,14 @@ public class LexicalHelper {
             return true;
     }
 
+    public boolean checkUser (OntologyVO o,UserVO u){
+        if(evalTerms.evaluatedTermsUser(o.getName(),u.getEmail()).size()>0){
+            return true;
+        }
+        else
+            return false;
+    }
+
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){
         ArrayList<TermEvaluationVO> tevalaux = new ArrayList<TermEvaluationVO>();
         while(teval.size()!=0){
@@ -160,9 +167,6 @@ public class LexicalHelper {
         }
         terms.updateTerms(t);
     }
-
-
-
 
     public boolean loadTerms(String text, String filename, String domain){
         ArrayList<TermVO> termsaux = new ArrayList<TermVO>();
