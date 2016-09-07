@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public interface OntologyDAO {
 
 
-    public boolean insertOntology(OntologyVO ontology);
-    public ArrayList<OntologyVO> recuperarOntologias();
-    public OntologyVO recuperarOntologias(String name);
+    boolean insertOntology(OntologyVO ontology);
+    ArrayList<OntologyVO> recuperarOntologias();
+    OntologyVO recuperarOntologias(String name);
+    void updateOntology(OntologyVO o);
+
 }

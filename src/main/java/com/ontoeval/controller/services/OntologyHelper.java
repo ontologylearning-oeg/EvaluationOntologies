@@ -45,28 +45,28 @@ public class OntologyHelper {
         ServletContext context = request.getSession().getServletContext();
         UserVO user = (UserVO) context.getAttribute("user");
         OntologyVO o = ontology.recuperarOntologias(name);
-        context.setAttribute("ontology",o);
-        String page=lexical.comprobarLexical(o,user);
-        boolean flag = lexical.checkUser(o,user);
-        if(page!=null && page.equals("relations") && flag) {
-            taxonomic.createGSRelations(lexical.recuperarRelevants(o),o);
-            page=taxonomic.comprobarTaxonomic(o,user);
-            if(page.equals("results")){
-                results.setTerms(lexical.recuperar(o.getName()));
-                results.setRelations(taxonomic.recuperar(o.getName()));
-                results.calcularResultados();
-                return "./eval/results.jsp";
+
+        String page="";
+        if(o.getState().equals("Eval lexical layer"))
+            page=lexical.comprobarLexical(o,user);
+        if(o.getState().equals("Eval Taxonomic Layer")) {
+            if(lexical.checkUser(o,user)){
+                taxonomic.createGSRelations(lexical.recuperarRelevants(o), o);
+                page = taxonomic.comprobarTaxonomic(o, user);
             }
             else {
-                return page;
+                page = "notUser";
             }
         }
-        else{
-            if(flag==false){
-                return "notUser";
-            }
-            return page;
+        if(o.getState().equals("See Results")) {
+            results.setTerms(lexical.recuperar(o.getName()));
+            results.setRelations(taxonomic.recuperar(o.getName()));
+            results.calcularResultados();
+            page="./eval/results.jsp";
         }
+        ontology.updateOntology(o);
+        context.setAttribute("ontology",o);
+        return page;
 
     }
 

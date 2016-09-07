@@ -28,9 +28,11 @@
     <div class="nav-wrapper indigo">
         <a id="enlace" href="index.jsp" class="brand-logo">DrOntoEval</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
             <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
         </ul>
         <ul id="slide-out" class="side-nav">
+            <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
             <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">reorder</i></a>
@@ -45,7 +47,7 @@
         </div>
     </div>
     <div class="row" style="margin-top: 50px;">
-        <form class="col s10 offset-s2 ">
+        <form class="col s10 offset-s1" style="margin-left: 165px">
             <div class="row">
                 <div class="input-field col s5">
                     <i class="material-icons prefix">account_circle</i>
@@ -63,7 +65,7 @@
             <div class="col s2 offset-s4">
                 <a class="waves-effect waves-light btn" onclick="login();">Login</a>
             </div>
-            <div class="col s2 offset-s1">
+            <div class="col s2">
                 <a class="waves-effect waves-light btn" onclick="login('true');">Sign up</a>
             </div>
         </div>

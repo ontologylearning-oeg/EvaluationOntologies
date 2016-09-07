@@ -126,13 +126,11 @@ public class ResultsHelper {
         ArrayList<String> subsuperGS; Integer n=0; Double tp=0.0;
         ArrayList<Double> tplocal = new ArrayList<Double>();
 
-        for(String aux: gs){
-            if(learned.contains(aux)){
+        for(String aux: gs) {
+            if (learned.contains(aux)) {
                 commonTerms.add(aux);
             }
         }
-
-
         for (String aux : commonTerms){
             subsuperGS = gsterms.get(aux);
             subsuperLearned = lterms.get(aux);

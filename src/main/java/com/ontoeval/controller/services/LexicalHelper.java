@@ -84,13 +84,16 @@ public class LexicalHelper {
         }
         else{
             if(checkControl(tevalu,ontology)){
-                rellenarTermsBD(t,teval);
-                return "relations";
-            }
-            else{
-                return null;
-            }
+                    rellenarTermsBD(t,teval);
+                    ontology.setState("Eval Taxonomic Layer");
+                    return "relations";
+                }
+                else{
+                    return null;
+                }
         }
+
+
     }
 
     private boolean termsForEval(ArrayList<TermVO> t){
@@ -127,7 +130,7 @@ public class LexicalHelper {
                 }
             }
         }
-        if((c/control.size())<0.7){
+        if(control.size()>0 && (c/control.size())<0.7){
             evalTerms.deleteTerms(tevalu.get(0).getUser());
             return false;
         }
@@ -136,11 +139,8 @@ public class LexicalHelper {
     }
 
     public boolean checkUser (OntologyVO o,UserVO u){
-        if(evalTerms.evaluatedTermsUser(o.getName(),u.getEmail()).size()>0){
-            return true;
-        }
-        else
-            return false;
+        ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(o.getName(),u.getEmail());
+        return checkControl(tevalu,o);
     }
 
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){

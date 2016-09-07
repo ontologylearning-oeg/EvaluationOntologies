@@ -77,10 +77,9 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         }
     }
 
-    public ArrayList<RelationVO> getNormalRelations(String ontology) {
+    public ArrayList<RelationVO> getRelations(String ontology) {
         HashMap<String, Object> m = new HashMap<String, Object>();
         m.put("Ontology",ontology);
-        m.put("isRandom", false);
         try{
             return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){

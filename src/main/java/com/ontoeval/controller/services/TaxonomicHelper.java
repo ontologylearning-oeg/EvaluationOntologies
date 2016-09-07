@@ -30,7 +30,7 @@ public class TaxonomicHelper {
     }
 
     public ArrayList<RelationVO> recuperar(String o){
-        return relations.getNormalRelations(o);
+        return relations.getRelations(o);
     }
 
     public boolean loadRelations(String text, String filename, String domain){
@@ -94,6 +94,7 @@ public class TaxonomicHelper {
         }
         else {
             rellenarBD(ontology,recuperar(ontology.getName()),randomEval);
+            ontology.setState("See Results");
             return "results";
         }
     }

@@ -20,7 +20,7 @@ public class TermVO extends OntologyVO{
     public TermVO(String word, String ontology, String domain, String control) {
         super(ontology, domain);
         this.word = word;
-        this.isRelevant=false;
+        this.isRelevant=true;
         if(control.equals("yes")){
             this.isControl=true;
         }
@@ -32,7 +32,7 @@ public class TermVO extends OntologyVO{
     public TermVO(){
         super("example", "example");
         this.word="example";
-        this.isRelevant=false;
+        this.isRelevant=true;
         this.isControl=false;
     }
 

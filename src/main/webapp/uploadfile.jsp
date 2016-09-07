@@ -8,7 +8,7 @@
 <script src="js/libs/materialize.min.js"></script>
 
 <h1 class="row center-align">Upload a file</h1>
-<div class="row">
+<div class="row" style="margin-top: 50px">
      <form action="#">
         <div class="file-field input-field col s8 offset-s2">
             <div class="btn">

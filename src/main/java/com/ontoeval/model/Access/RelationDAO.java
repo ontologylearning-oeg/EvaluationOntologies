@@ -13,7 +13,7 @@ public interface RelationDAO {
     boolean insertRelations(ArrayList<RelationVO> rs);
     boolean checkRandomRelations();
     ArrayList<RelationVO> getRandomRelations(String ontology);
-    ArrayList<RelationVO> getNormalRelations(String ontology);
+    ArrayList<RelationVO> getRelations(String ontology);
     boolean updateRelations(ArrayList<RelationVO> r);
 
 }
