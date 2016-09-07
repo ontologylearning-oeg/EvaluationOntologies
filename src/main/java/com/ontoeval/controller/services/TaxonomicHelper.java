@@ -6,8 +6,10 @@ import com.ontoeval.model.Access.RelationEvaluationDAO;
 import com.ontoeval.model.Access.RelationEvaluationImpl;
 import com.ontoeval.model.Access.RelationImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -50,11 +52,15 @@ public class TaxonomicHelper {
         boolean flag = relations.checkRandomRelations();
         if(flag==true) {
             ArrayList<RelationVO> randomRelations = new ArrayList<RelationVO>();
-            while (relevant.size() != 0) {
-                TermVO t = relevant.get(0);
-                for (TermVO aux : relevant) {
-                    RelationVO r = new RelationVO(ontology.getName(), t.getWord(), aux.getWord(), ontology.getDomain(), true);
-                    randomRelations.add(r);
+            for(int j=0; j<relevant.size(); j++) {
+                for (int i=(j+1); i<relevant.size();i++) {
+                    TermVO t = relevant.get(j);
+                    TermVO aux = relevant.get(i);
+                    if(t.getWord()!=aux.getWord()){
+                        RelationVO r = new RelationVO(ontology.getName(), t.getWord(), aux.getWord(), ontology.getDomain(), true);
+                        RelationVO r2 = new RelationVO(ontology.getName(), aux.getWord(), t.getWord(), ontology.getDomain(), true);
+                        randomRelations.add(r);randomRelations.add(r2);
+                    }
                 }
             }
             return relations.insertRelations(randomRelations);
@@ -70,22 +76,77 @@ public class TaxonomicHelper {
 
         if(randomEval.size()!=(randomRel.size()*5)){//no ha terminado
             if(randomRel.size()!=randomEvalUser.size()){ //no ha terminado el usuario
-                for(RelationVO randomRelaux: randomRel){
+                for(int i=0; i<randomRel.size();i++){
                     for(RelationEvaluationVO aux: randomEvalUser){
-                        if(randomRelaux.getTerm1()==aux.getTerm1() && randomRelaux.getTerm2()==aux.getTerm2()){
-                            randomRel.remove(randomRelaux);
+                        if(randomRel.get(i).getTerm1()==aux.getTerm1() && randomRel.get(i).getTerm2()==aux.getTerm2()){
+                            randomRel.remove(i);
+                            i--;
                         }
                     }
                 }
-                request.getSession().getServletContext().setAttribute("relations", randomRel);
-                return "./eval/taxonomic.jsp";
+                if(relationsForEval(randomRel))
+                    return "./eval/taxonomic.jsp";
+                else
+                    return null;
             }
             else
                 return null;
         }
         else {
-            rellenarBD(ontology,relations.getNormalRelations(ontology.getName()),randomEval);
+            rellenarBD(ontology,recuperar(ontology.getName()),randomEval);
             return "results";
+        }
+    }
+
+    public String saveRelations(String text){
+        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
+        ServletContext context = request.getSession().getServletContext();
+        UserVO user = (UserVO) context.getAttribute("user");
+        OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
+        ArrayList<RelationEvaluationVO> relEval = new ArrayList<RelationEvaluationVO>();
+        while (tokenizer.hasMoreTokens()){
+            StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
+            String term1 = tokenizer1.nextToken();
+            String term2 = tokenizer1.nextToken();
+            String aux = tokenizer1.nextToken();
+            boolean eval;
+            if(aux.equals("yes"))
+                eval=true;
+            else
+                eval =false;
+            RelationEvaluationVO r = new RelationEvaluationVO(ontology.getName(),ontology.getDomain(),term1,term2,user.getEmail(),eval);
+            relEval.add(r);
+        }
+        evalRelations.insertRelations(relEval);
+        ArrayList<RelationVO> relations = (ArrayList<RelationVO>) context.getAttribute("randomRel");
+        for(RelationEvaluationVO aux : relEval){
+            for (int i=0; i<relations.size(); i++){
+                if(relations.get(i).getTerm1().equals(aux.getTerm1()) && relations.get(i).getTerm2().equals(aux.getTerm2())){
+                    relations.remove(i);
+                    break;
+                }
+            }
+        }
+        if(relationsForEval(relations)){
+            return "./eval/taxonomic.jsp";
+        }
+        else
+            return null;
+    }
+
+    private boolean relationsForEval(ArrayList<RelationVO> random){
+        ArrayList<RelationVO> relforeval = new ArrayList<RelationVO>(); int i=0;
+        if(random.size()>0){
+            while(i<8 && i<random.size()){
+                relforeval.add(random.get(i));
+                i++;
+            }
+            request.getSession().getServletContext().setAttribute("randomRel",random);
+            request.getSession().getServletContext().setAttribute("relations",relforeval);
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
@@ -98,6 +159,7 @@ public class TaxonomicHelper {
                 if(singleAux.getTerm1()==random.get(i).getTerm1() && singleAux.getTerm2()==random.get(i).getTerm2()){
                     aux.add(random.get(i));
                     random.remove(random.get(i));
+                    i--;
                 }
             }
             random.remove(0);

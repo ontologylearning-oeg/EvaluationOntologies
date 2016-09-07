@@ -47,7 +47,7 @@ public class OntologyHelper {
         OntologyVO o = ontology.recuperarOntologias(name);
         context.setAttribute("ontology",o);
         String page=lexical.comprobarLexical(o,user);
-        if(page.equals("relations")) {
+        if(page!=null && page.equals("relations")) {
             taxonomic.createGSRelations(lexical.recuperarRelevants(o),o);
             page=taxonomic.comprobarTaxonomic(o,user);
             if(page.equals("results")){

@@ -25,25 +25,33 @@
         <servlet-name>EvaluatedTerms</servlet-name>
         <servlet-class>com.ontoeval.controller.EvaluatedTerms</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EvaluatedRelations</servlet-name>
+        <servlet-class>com.ontoeval.controller.EvaluatedRelations</servlet-class>
+    </servlet>
     <servlet-mapping>
-    <servlet-name>LoadFile</servlet-name>
-    <url-pattern>/LoadFile</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>LoadOntology</servlet-name>
-    <url-pattern>/LoadOntology</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>LoadFeatures</servlet-name>
-    <url-pattern>/LoadFeatures</url-pattern>
-  </servlet-mapping>
+        <servlet-name>LoadFile</servlet-name>
+        <url-pattern>/LoadFile</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>LoadOntology</servlet-name>
+        <url-pattern>/LoadOntology</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>LoadFeatures</servlet-name>
+        <url-pattern>/LoadFeatures</url-pattern>
+      </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EvaluatedTerms</servlet-name>
         <url-pattern>/EvaluatedTerms</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EvaluatedRelations</servlet-name>
+        <url-pattern>/EvaluatedRelations</url-pattern>
     </servlet-mapping>
 
 </web-app>

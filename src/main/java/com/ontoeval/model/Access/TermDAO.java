@@ -14,6 +14,8 @@ public interface TermDAO {
     ArrayList<TermVO> loadTerms(String ontology);
     boolean updateTerms(ArrayList<TermVO> terms);
     ArrayList<TermVO> loadRelevant(String ontology);
+    ArrayList<TermVO> loadControl(String ontology);
+
 
 
 }

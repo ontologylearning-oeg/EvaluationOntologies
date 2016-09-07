@@ -9,7 +9,7 @@
 <%@ page isELIgnored="false" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="js/evalTerms.js"></script>
+<script src="js/eval.js"></script>
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
@@ -40,7 +40,7 @@
                 </div>
             </form>
         <div id="boton" class="col s2 center-align">
-            <input  class="waves-effect waves-light btn" onClick="sendTerms()" type="button" value="Send Terms">
+            <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
         </div>
     </div>
 </div>

@@ -36,7 +36,6 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
     public ArrayList<RelationEvaluationVO> getEvaluatedRelations(String ontology, String user) {
         HashMap<String, Object> m = new HashMap<String, Object>();
         m.put("Ontology",ontology);
-        m.put("isRandom", true);
         m.put("User", user);
         try{
             return (ArrayList<RelationEvaluationVO>)relationEvalDAO.queryForFieldValuesArgs(m);
@@ -49,12 +48,25 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
     public ArrayList<RelationEvaluationVO> getEvaluatedRelations(String ontology) {
         HashMap<String, Object> m = new HashMap<String, Object>();
         m.put("Ontology",ontology);
-        m.put("isRandom", true);
         try{
             return (ArrayList<RelationEvaluationVO>)relationEvalDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
             System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
             return null;
         }
+    }
+
+    public boolean insertRelations(ArrayList<RelationEvaluationVO> re) {
+        for(RelationEvaluationVO r: re){
+            try {
+                if (relationEvalDAO.create(r) == 0) {
+                    return false;
+                }
+            }catch (SQLException e){
+                System.out.println("Error en insertRelations/TermEvaluationImpl "+e.getMessage());
+                return false;
+            }
+        }
+        return true;
     }
 }

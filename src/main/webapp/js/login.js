@@ -23,7 +23,7 @@ function login(signup) {
             type: "error",
             confirmButtonColor: "#2bbbad",
             confirmButtonText: "OK" });
-        return
+        return;
     }
 
     $.ajax({

@@ -60,10 +60,10 @@
             </div>
         </form>
         <div class="row center-align">
-            <div class="col s2 offset-s3">
+            <div class="col s2 offset-s4">
                 <a class="waves-effect waves-light btn" onclick="login();">Login</a>
             </div>
-            <div class="col s2 offset-s2">
+            <div class="col s2 offset-s1">
                 <a class="waves-effect waves-light btn" onclick="login('true');">Sign up</a>
             </div>
         </div>

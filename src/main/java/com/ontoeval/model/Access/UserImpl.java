@@ -44,7 +44,7 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
     }
 
     public boolean checkUser(UserVO u) {
-        ArrayList<UserVO> arrayu = new ArrayList<UserVO>();
+        ArrayList<UserVO> arrayu;
         try {
             arrayu = (ArrayList<UserVO>) userDAO.queryForEq("email", u.getEmail());
         }catch (SQLException e){

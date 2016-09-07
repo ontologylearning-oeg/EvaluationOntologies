@@ -1,6 +1,6 @@
 package com.ontoeval.controller;
 
-import com.ontoeval.controller.services.LexicalHelper;
+import com.ontoeval.controller.services.TaxonomicHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,31 +10,29 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by dchavesf on 6/09/16.
+ * Created by dchavesf on 7/09/16.
  */
-public class EvaluatedTerms extends HttpServlet {
+public class EvaluatedRelations extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String text = request.getParameter("text");
         String page =null;
         try{
-            LexicalHelper helper = new LexicalHelper(request);
-            page = helper.saveTerms(text);
+            TaxonomicHelper helper = new TaxonomicHelper(request);
+            page = helper.saveRelations(text);
         }catch (SQLException e){
             System.out.println("Error en EvaluatedTerms "+e.getMessage());
         }
         if(page==null){
-            page = "./eval/index.jsp";
             response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write(page);
+            response.getWriter().write("./eval/index.jsp");
         }
         else {
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(page);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        doPost(request,response);
     }
 }

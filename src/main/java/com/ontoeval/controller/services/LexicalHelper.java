@@ -1,10 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
-import com.ontoeval.model.Access.TermDAO;
-import com.ontoeval.model.Access.TermEvaluationDAO;
-import com.ontoeval.model.Access.TermEvaluationImpl;
-import com.ontoeval.model.Access.TermImpl;
+import com.ontoeval.model.Access.*;
 
 import javax.management.openmbean.ArrayType;
 import javax.servlet.ServletContext;
@@ -67,7 +64,7 @@ public class LexicalHelper {
         ArrayList<TermVO> t = terms.loadTerms(ontology.getName());
         ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(ontology.getName(),user.getEmail());
         ArrayList<TermEvaluationVO> teval = evalTerms.evaluatedTerms(ontology.getName());
-        if(t.size()!=(teval.size()*5)) { //si no se ha  completado la evaluacion lexica
+        if(t.size()!=(teval.size()/5)) { //si no se ha  completado la evaluacion lexica
             if (t.size() != tevalu.size()) { //aun le falta al usuario terminos por evaluar
                 for(TermEvaluationVO taux: tevalu){
                     for (int i=0; i<t.size();i++){
@@ -87,15 +84,20 @@ public class LexicalHelper {
             }
         }
         else{
-            rellenarTermsBD(t,teval);
-            return "relations";
+            if(checkControl(tevalu,ontology)){
+                rellenarTermsBD(t,teval);
+                return "relations";
+            }
+            else{
+                return null;
+            }
         }
     }
 
     private boolean termsForEval(ArrayList<TermVO> t){
         ArrayList<TermVO> tforeval = new ArrayList<TermVO>(); int i=0;
         if(t.size()>0) {
-            while (i < 9 || i < t.size()) {
+            while (i<9  && i<t.size()) {
                 tforeval.add(t.get(i));
                 i++;
             }
@@ -114,6 +116,26 @@ public class LexicalHelper {
         return terms.loadTerms(o);
     }
 
+    public boolean checkControl(ArrayList<TermEvaluationVO> tevalu, OntologyVO ontology){
+        ArrayList<TermVO> control = terms.loadControl(ontology.getName());
+        Integer c=0;
+        for(TermVO auxc: control){
+            for(TermEvaluationVO auxt:tevalu){
+                if(auxc.getWord().equals(auxt.getTerm())){
+                    if(auxc.isRelevant()==auxt.isRelevant()){
+                        c++;
+                    }
+                }
+            }
+        }
+        if((c/control.size())<0.7){
+            evalTerms.deleteTerms(tevalu.get(0).getUser());
+            return false;
+        }
+        else
+            return true;
+    }
+
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){
         ArrayList<TermEvaluationVO> tevalaux = new ArrayList<TermEvaluationVO>();
         while(teval.size()!=0){
@@ -122,8 +144,10 @@ public class LexicalHelper {
                 if(aux.getTerm().equals(teval.get(i).getTerm())){
                     tevalaux.add(teval.get(i));
                     teval.remove(teval.get(i));
+                    i--;
                 }
             }
+            tevalaux.add(aux);
             teval.remove(0);
             if(countForRelavant(tevalaux)){
                 for(TermVO taux: t){

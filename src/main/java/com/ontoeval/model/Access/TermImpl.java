@@ -66,8 +66,9 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
 
     public boolean updateTerms(ArrayList<TermVO> terms) {
         try{
+            termDAO.executeRawNoArgs("delete from Terms;");
             for(TermVO term : terms){
-                if(termDAO.update(term)== 0){
+               if(termDAO.create(term)== 0){
                     return false;
                 }
             }
@@ -83,6 +84,19 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         boolean relevant=true;
         m.put("Ontology",ontology);
         m.put("isRelevant", relevant);
+        try{
+            return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
+        }catch (SQLException e){
+            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<TermVO> loadControl(String ontology) {
+        HashMap<String, Object> m = new HashMap<String, Object>();
+        m.put("Ontology",ontology);
+        m.put("isControl",true);
         try{
             return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){

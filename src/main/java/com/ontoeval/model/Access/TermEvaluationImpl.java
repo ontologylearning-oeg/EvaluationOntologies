@@ -69,4 +69,13 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
         }
         return true;
     }
+
+    @Override
+    public void deleteTerms(String user) {
+        try{
+            termEvalDAO.executeRawNoArgs("delete from LexicalEvaluation where user='"+user+"';");
+        }catch (SQLException e){
+            System.out.println("Error en updateTerms/TermImpl "+e.getMessage());
+        }
+    }
 }

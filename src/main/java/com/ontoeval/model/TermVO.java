@@ -10,8 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Terms")
 public class TermVO extends OntologyVO{
-
-    @DatabaseField(columnName="term",canBeNull=false, unique = true)
+    @DatabaseField(columnName="term",canBeNull=false)
     private String word;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;

@@ -12,5 +12,6 @@ public interface TermEvaluationDAO {
     ArrayList<TermEvaluationVO> evaluatedTermsUser(String ontology, String user);
     ArrayList<TermEvaluationVO> evaluatedTerms(String ontology);
     boolean insertTerms(ArrayList<TermEvaluationVO> t);
+    void deleteTerms(String user);
 
 }
