@@ -1,10 +1,8 @@
 package com.ontoeval.controller.services;
 
+import com.ontoeval.model.*;
 import com.ontoeval.model.Access.MeasureDAO;
 import com.ontoeval.model.Access.MeasureImpl;
-import com.ontoeval.model.MeasureVO;
-import com.ontoeval.model.RelationVO;
-import com.ontoeval.model.TermVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -36,11 +34,31 @@ public class ResultsHelper {
         this.relations = relations;
     }
 
-    public String calcularResultados(){
+    public String calcularResultados(OntologyVO o){
         MeasureVO measure = calculoLexico();
+        measure.setName(o.getName());
+        measure.setDomain(o.getDomain());
         calculoTaxonomico(measure);
-        request.getSession().getServletContext().setAttribute("measure",measure);
+        this.measure.insertMeasure(measure);
         return "./eval/results.jsp";
+    }
+
+    public void insertMeasures(OntologyVO o){
+        MeasureVO m = measure.getMeasure(o);
+        ArrayList<SingleMeasure> measures = new ArrayList<>();
+        SingleMeasure aux = new SingleMeasure("Recall",m.getRecall());
+        measures.add(aux);
+        aux = new SingleMeasure("Precision",m.getPrecision());
+        measures.add(aux);
+        aux = new SingleMeasure("F-Measure",m.getFmeasure());
+        measures.add(aux);
+        aux = new SingleMeasure("Taxonomic Precision",m.getTprecision());
+        measures.add(aux);
+        aux = new SingleMeasure("Taxonomic Recall",m.getTrecall());
+        measures.add(aux);
+        aux = new SingleMeasure("Taxonomic F-Measure",m.getTfmeasure());
+        measures.add(aux);
+        request.getSession().getServletContext().setAttribute("measure",measures);
     }
 
     private MeasureVO calculoLexico(){
@@ -59,10 +77,10 @@ public class ResultsHelper {
     }
 
     private void calculoTaxonomico(MeasureVO m){
-        ArrayList<RelationVO> learned = new ArrayList<RelationVO>();
-        ArrayList<RelationVO> goldstandard = new ArrayList<RelationVO>();
-        HashMap<String, ArrayList<String>> lhiterms = new HashMap<String, ArrayList<String>>();
-        HashMap<String, ArrayList<String>> gshiterms = new HashMap<String, ArrayList<String>>();
+        ArrayList<RelationVO> learned = new ArrayList<>();
+        ArrayList<RelationVO> goldstandard = new ArrayList<>();
+        HashMap<String, ArrayList<String>> lhiterms = new HashMap<>();
+        HashMap<String, ArrayList<String>> gshiterms = new HashMap<>();
         for(RelationVO r: relations){
             if(r.isGS()) {
                 goldstandard.add(r);
@@ -82,17 +100,26 @@ public class ResultsHelper {
     }
 
     private ArrayList<String> constructHierachy(ArrayList<RelationVO> relation, HashMap<String, ArrayList<String>> terms){
-        ArrayList<String> nterms = new ArrayList<String>();
-        String t=""; boolean flag=false;
+        ArrayList<String> nterms = new ArrayList<>();
+        String t=""; boolean flag=false,term1=true,term2=true;
+        nterms.add(relation.get(0).getTerm1());
+        nterms.add(relation.get(0).getTerm2());
         for(RelationVO r : relation){
             for(String n : nterms) {
-                if (!n.equals(r.getTerm1())) {
-                    nterms.add(r.getTerm1());
+                if (n.equals(r.getTerm1())) {
+                    term1=false;
                 }
-                if (!n.equals(r.getTerm2())) {
-                    nterms.add(r.getTerm2());
+                if (n.equals(r.getTerm2())) {
+                    term2=false;
                 }
             }
+            if(term1==true){
+                nterms.add(r.getTerm1());
+            }
+            if(term2==true){
+                nterms.add(r.getTerm2());
+            }
+            term1=true;term2=true;
         }
 
         for(RelationVO r: relation){

@@ -7,6 +7,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.MeasureVO;
+import com.ontoeval.model.OntologyVO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,4 +32,25 @@ public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements Meas
     }
 
 
+    @Override
+    public boolean insertMeasure(MeasureVO v) {
+        try{
+            if(measureDAO.create(v)==0)
+                return false;
+        }catch (SQLException e){
+            System.out.println("Error en MeasureImpl");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public MeasureVO getMeasure(OntologyVO o) {
+        try{
+            return measureDAO.queryForEq("Ontology",o.getName()).get(0);
+        }catch (SQLException e){
+            System.out.println("Error en MeasureImpl");
+            return null;
+        }
+    }
 }

@@ -43,6 +43,20 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         }
         return true;
     }
+
+    @Override
+    public boolean insertRandomRelation(RelationVO r) {
+        try {
+            relationDAO.executeRawNoArgs("delete from Relations where Ontology='" + r.getName() + "' and term1='" + r.getTerm1() + "' and term2='" + r.getTerm2() + "' and isRandom=1;");
+            if(relationDAO.create(r)==0)
+                return false;
+        }catch (SQLException e){
+            System.out.println("Error en insertRadomRelation/RelationImpl "+e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public boolean insertRelations(ArrayList<RelationVO> rs){
         for(RelationVO relation : rs){
             if(this.insertRelation(relation) == false){

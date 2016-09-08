@@ -45,7 +45,6 @@ public class OntologyHelper {
         ServletContext context = request.getSession().getServletContext();
         UserVO user = (UserVO) context.getAttribute("user");
         OntologyVO o = ontology.recuperarOntologias(name);
-
         String page="";
         if(o.getState().equals("Eval lexical layer"))
             page=lexical.comprobarLexical(o,user);
@@ -58,10 +57,15 @@ public class OntologyHelper {
                 page = "notUser";
             }
         }
-        if(o.getState().equals("See Results")) {
+        if(o.getState().equals("Results")) {
             results.setTerms(lexical.recuperar(o.getName()));
             results.setRelations(taxonomic.recuperar(o.getName()));
-            results.calcularResultados();
+            page=results.calcularResultados(o);
+            o.setState("See Results");
+
+        }
+        if(o.getState().equals("See Results")){
+            results.insertMeasures(o);
             page="./eval/results.jsp";
         }
         ontology.updateOntology(o);
@@ -69,7 +73,6 @@ public class OntologyHelper {
         return page;
 
     }
-
 
     public boolean insertOntology(String text, String filename){
         String domain = loadDomain(text);

@@ -94,7 +94,7 @@ public class TaxonomicHelper {
         }
         else {
             rellenarBD(ontology,recuperar(ontology.getName()),randomEval);
-            ontology.setState("See Results");
+            ontology.setState("Results");
             return "results";
         }
     }
@@ -104,7 +104,7 @@ public class TaxonomicHelper {
         ServletContext context = request.getSession().getServletContext();
         UserVO user = (UserVO) context.getAttribute("user");
         OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
-        ArrayList<RelationEvaluationVO> relEval = new ArrayList<RelationEvaluationVO>();
+        ArrayList<RelationEvaluationVO> relEval = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
             String term1 = tokenizer1.nextToken();
@@ -152,33 +152,24 @@ public class TaxonomicHelper {
     }
 
     private void rellenarBD(OntologyVO o,ArrayList<RelationVO> normal,ArrayList<RelationEvaluationVO> random){
-        ArrayList<RelationEvaluationVO> aux = new ArrayList<RelationEvaluationVO>();
+        ArrayList<RelationEvaluationVO> aux = new ArrayList<>();
         boolean flag=false;
         while(random.size()!=0){
             RelationEvaluationVO singleAux= random.get(0);
             for(int i=1; i<random.size();i++){
-                if(singleAux.getTerm1()==random.get(i).getTerm1() && singleAux.getTerm2()==random.get(i).getTerm2()){
+                if(singleAux.getTerm1().equals(random.get(i).getTerm1()) && singleAux.getTerm2().equals(random.get(i).getTerm2())){
                     aux.add(random.get(i));
                     random.remove(random.get(i));
                     i--;
                 }
             }
+            aux.add(singleAux);
             random.remove(0);
             if(countForRelevant(aux)){
-                for(RelationVO r: normal){
-                    if(random.get(0).getTerm1()==r.getTerm1() && random.get(0).getTerm2()==r.getTerm2()){
-                        r.setGS(true);
-                        flag=true;
-                        break;
-                    }
-                }
-                if(flag!=true){
-                    RelationVO v = new RelationVO(o.getName(),random.get(0).getTerm1(),random.get(0).getTerm2(),o.getDomain(),true,true);
-                    relations.insertRelation(v);
-                }
+                RelationVO v = new RelationVO(o.getName(),aux.get(0).getTerm1(),aux.get(0).getTerm2(),o.getDomain(),true,true);
+                relations.insertRandomRelation(v);
             }
-            flag=false;
-            aux = new ArrayList<RelationEvaluationVO>();
+            aux = new ArrayList<>();
         }
         relations.updateRelations(normal);
     }
