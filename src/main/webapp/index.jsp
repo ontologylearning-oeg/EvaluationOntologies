@@ -31,10 +31,12 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
             <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
+            <li><a id="login" onclick="changePage('login.jsp');">Login</a></li>
         </ul>
         <ul id="slide-out" class="side-nav">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
             <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
+            <li><a id="loginaux" onclick="changePage('login.jsp');">Login</a> </li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">reorder</i></a>
     </div>
@@ -42,35 +44,24 @@
 
 
 <div id="contenido" class="container section">
-    <div class="row">
-        <div class="col s12 center-align">
-            <h1>DrOntoEval</h1>
+    <div class="row" style="background-color: white">
+        <div class="col s12 center-align" style="margin-bottom: 100px">
+            <img src="files/doctor.png" alt="doctor">
         </div>
-    </div>
-    <div class="row" style="margin-top: 50px;">
-        <form class="col s10 offset-s1" style="margin-left: 165px">
-            <div class="row">
-                <div class="input-field col s5">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" type="email" class="validate">
-                    <label for="icon_prefix">Email</label>
-                </div>
-                <div class="input-field col s5">
-                    <i class="material-icons prefix">person_pin</i>
-                    <input id="icon_password" type="password" class="validate">
-                    <label for="icon_password">Password</label>
-                </div>
+        <div class="row">
+            <div class="col s4 offset-s2 center-align">
+                <a href="http://www.upm.es">
+                    <img src="files/upm.gif" alt="upm" height="70">
+                </a>
             </div>
-        </form>
-        <div class="row center-align">
-            <div class="col s2 offset-s4">
-                <a class="waves-effect waves-light btn" onclick="login();">Login</a>
-            </div>
-            <div class="col s2">
-                <a class="waves-effect waves-light btn" onclick="login('true');">Sign up</a>
+            <div class="col s4 center-align">
+                <a href="http://www.oeg-upm.net">
+                    <img src="files/oeg.png" alt="oeg" height="70">
+                </a>
             </div>
         </div>
     </div>
+
 </div>
 </body>
 <script>

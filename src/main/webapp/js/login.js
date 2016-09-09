@@ -68,10 +68,12 @@ function login(signup) {
 function  changeToLogin(flag) {
     console.log(flag);
     if(flag=="on"){
+        $("#login").remove();
+        $("#loginaux").remove();
         $("#nav-mobile").append('<li id="logout"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#slide-out").append('<li id="logoutaux"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#enlace").removeAttr('href');
-        $("#enlace").attr('onClick', 'changePage("instructions.jsp");');
+        $("#enlace").attr('onClick', 'changePage("./eval/index.jsp");');
         $("#contenido").load("instructions.jsp");
     }
     else if (flag=="off"){
@@ -83,6 +85,8 @@ function  changeToLogin(flag) {
             success: function (data) {
                 $("#logout").remove();
                 $("#logoutaux").remove();
+                $("#nav-mobile").append('<li><a id="login" onclick="changePage(\'login.jsp\');">Login</a></li>');
+                $("#slide-out").append('<li><a id="loginaux" onclick="changePage(\'login.jsp\');">Login</a></li>');
                 $("#enlace").removeAttr('onClick');
                 $("#enlace").attr('href', 'index.jsp');
                 window.location.replace("index.jsp");
