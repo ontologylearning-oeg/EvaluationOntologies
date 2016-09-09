@@ -29,7 +29,7 @@ public class LexicalHelper {
         ServletContext context = request.getSession().getServletContext();
         UserVO user = (UserVO) context.getAttribute("user");
         OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
-        ArrayList<TermEvaluationVO> terms = new ArrayList<TermEvaluationVO>();
+        ArrayList<TermEvaluationVO> terms = new ArrayList<>();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
             String term = tokenizer1.nextToken();
@@ -173,9 +173,9 @@ public class LexicalHelper {
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         tokenizer.nextToken();tokenizer.nextToken();
         String term = tokenizer.nextToken();
-        while(!term.equals("Taxonomic;")){
+        while(!term.equals("Taxonomic;;")){
             StringTokenizer tokenizer1 = new StringTokenizer(term,";");
-            TermVO aux = new TermVO(tokenizer1.nextToken(),filename, domain,tokenizer1.nextToken());
+            TermVO aux = new TermVO(tokenizer1.nextToken(),filename, domain,tokenizer1.nextToken(),tokenizer1.nextToken());
             termsaux.add(aux);
             term = tokenizer.nextToken();
         }

@@ -10,9 +10,9 @@ import com.ontoeval.controller.services.OntologyHelper;
 @DatabaseTable(tableName = "LexicalEvaluation")
 public class TermEvaluationVO extends OntologyVO{
 
-    @DatabaseField(columnName="Term",canBeNull=false, uniqueCombo = true)
+    @DatabaseField(columnName="Term",canBeNull=false)
     private String term;
-    @DatabaseField(columnName="User",canBeNull=false, uniqueCombo = true)
+    @DatabaseField(columnName="User",canBeNull=false)
     private String user;
     @DatabaseField(columnName="Relevant")
     private boolean relevant;

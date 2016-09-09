@@ -27,7 +27,7 @@
 <body>
 <nav>   
     <div class="nav-wrapper indigo">
-        <a id="enlace" href="index.jsp" class="brand-logo">DrOntoEval</a>
+        <a id="enlace" href="index.jsp" class="brand-logo">DrOntoEval: Evaluation of Ontology Learning</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
             <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>

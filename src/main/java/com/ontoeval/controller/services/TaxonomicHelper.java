@@ -37,9 +37,10 @@ public class TaxonomicHelper {
         ArrayList<RelationVO> relationsaux = new ArrayList<RelationVO>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         String term = tokenizer.nextToken();
-        while(!term.equals("Taxonomic;")){
+        while(!term.equals("Taxonomic;;")){
             term = tokenizer.nextToken();
         }
+        tokenizer.nextToken();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
             RelationVO relation = new RelationVO(filename,tokenizer1.nextToken(),tokenizer1.nextToken(),domain,false);
@@ -49,8 +50,8 @@ public class TaxonomicHelper {
     }
 
     public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology){
-        boolean flag = relations.checkRandomRelations();
-        if(flag==true) {
+        ArrayList<RelationVO> flag = relations.getRandomRelations(ontology.getName());
+        if(flag.size()==0) {
             ArrayList<RelationVO> randomRelations = new ArrayList<RelationVO>();
             for(int j=0; j<relevant.size(); j++) {
                 for (int i=(j+1); i<relevant.size();i++) {
@@ -136,7 +137,7 @@ public class TaxonomicHelper {
     }
 
     private boolean relationsForEval(ArrayList<RelationVO> random){
-        ArrayList<RelationVO> relforeval = new ArrayList<RelationVO>(); int i=0;
+        ArrayList<RelationVO> relforeval = new ArrayList<>(); int i=0;
         if(random.size()>0){
             while(i<8 && i<random.size()){
                 relforeval.add(random.get(i));
@@ -153,7 +154,6 @@ public class TaxonomicHelper {
 
     private void rellenarBD(OntologyVO o,ArrayList<RelationVO> normal,ArrayList<RelationEvaluationVO> random){
         ArrayList<RelationEvaluationVO> aux = new ArrayList<>();
-        boolean flag=false;
         while(random.size()!=0){
             RelationEvaluationVO singleAux= random.get(0);
             for(int i=1; i<random.size();i++){

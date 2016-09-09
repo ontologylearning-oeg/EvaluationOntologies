@@ -29,6 +29,21 @@ public class TermVO extends OntologyVO{
         }
     }
 
+    public TermVO(String word, String ontology, String domain, String control, String isRelevant) {
+        super(ontology, domain);
+        this.word = word;
+        if(isRelevant.equals("yes"))
+            this.isRelevant=true;
+        else
+            this.isRelevant=false;
+        if(control.equals("yes")){
+            this.isControl=true;
+        }
+        else{
+            this.isControl=false;
+        }
+    }
+
     public TermVO(){
         super("example", "example");
         this.word="example";

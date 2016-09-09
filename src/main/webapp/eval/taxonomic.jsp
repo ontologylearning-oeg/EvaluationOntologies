@@ -13,7 +13,7 @@
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
-        <h1>Which of these relations are true for the <c:out value="${applicationScope.ontology.domain}"/> domain?</h1>
+        <h1>Which of these relations belong to the <c:out value="${applicationScope.ontology.domain}"/> domain?</h1>
     </div>
     <div class="col s12" style="margin-left: -20px">
         <form action="#">

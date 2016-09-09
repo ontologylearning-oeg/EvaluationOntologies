@@ -66,19 +66,6 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         return true;
     }
 
-    public boolean checkRandomRelations() {
-        try{
-            if(relationDAO.queryForEq("isRandom",true).size()==0){
-                return true;
-            }
-            else
-                return false;
-        }catch (SQLException e){
-            System.out.println("Error en getRandomRelations/RelationImpl "+e.getMessage());
-            return false;
-        }
-    }
-
     public ArrayList<RelationVO> getRandomRelations(String ontology) {
         HashMap<String, Object> m = new HashMap<String, Object>();
         m.put("Ontology",ontology);
