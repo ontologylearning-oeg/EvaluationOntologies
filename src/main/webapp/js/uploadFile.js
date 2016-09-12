@@ -1,7 +1,7 @@
 /**
  * Created by dchavesf on 1/09/16.
  */
-
+$(document).ajaxStop($.unblockUI);
 
 function subirFichero(){
     if (!window.FileReader) {
@@ -37,10 +37,7 @@ function subirFichero(){
 function sendToServer(text, filename){
     $.ajax({
         beforeSend: function(){
-            swal({
-                title: "Uploading file",
-                timer: 4000,
-                showConfirmButton: false });
+            $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,

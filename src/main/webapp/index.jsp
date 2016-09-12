@@ -15,6 +15,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="js/libs/materialize.min.js"></script>
     <script src="js/libs/highcharts.js"></script>
+    <script src="js/libs/blockUI.js"></script>
     <script src="js/login.js"></script>
     <script src="js/libs/sweetalert-master/dist/sweetalert.min.js"></script>
 

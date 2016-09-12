@@ -7,6 +7,9 @@ $( document ).ready(function(){
     $(".download").click();
 
 });
+
+$(document).ajaxStop($.unblockUI);
+
 function changePage(a) {
     $("#contenido").load(a);
 }
@@ -27,10 +30,7 @@ function login(signup) {
 
     $.ajax({
         beforeSend: function(){
-            swal({
-                title: "Login...",
-                timer: 500,
-                showConfirmButton: false });
+            $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,
@@ -55,10 +55,7 @@ function login(signup) {
 function loadOntos() {
     $.ajax({
         beforeSend: function(){
-            swal({
-                title: "Load ontologies...",
-                timer: 500,
-                showConfirmButton: false });
+            $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,
@@ -89,15 +86,13 @@ function  changeToLogin(flag) {
         $("#nav-mobile").append('<li id="logout"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#slide-out").append('<li id="logoutaux"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#enlace").removeAttr('href');
-        $("#enlace").attr('href', 'instructions.jsp');
+        $("#enlace").attr('onClick', 'changePage("instructions.jsp")');
         $("#contenido").load("instructions.jsp");
     }
     else if (flag=="off"){
          $.ajax({
              beforeSend: function(){
-                 swal({title: "Logout...",
-                     timer: 500,
-                     showConfirmButton: false });
+                 $.blockUI({ message: null });
              },
             type: "POST",
             timeout: 50000,

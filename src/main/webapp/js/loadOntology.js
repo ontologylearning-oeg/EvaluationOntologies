@@ -2,14 +2,11 @@
  * Created by dchavesf on 2/09/16.
  */
 
-
+$(document).ajaxStop($.unblockUI);
 function loadOntology(name) {
     $.ajax({
         beforeSend: function(){
-            swal({
-                title: "Loading the ontology",
-                timer: 500,
-                showConfirmButton: false });
+            $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,

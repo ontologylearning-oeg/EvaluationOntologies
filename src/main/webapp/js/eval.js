@@ -2,7 +2,7 @@
  * Created by dchavesf on 6/09/16.
  */
 
-
+$(document).ajaxStop($.unblockUI);
 var terms=[];
 $('input[type="radio"]').on('change', function() {
     var answer="";
@@ -28,10 +28,7 @@ function sendAnswers(servlet) {
     }
     $.ajax({
         beforeSend: function(){
-            swal({
-                title: "Sending evaluations",
-                timer: 500,
-                showConfirmButton: false });
+            $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,
