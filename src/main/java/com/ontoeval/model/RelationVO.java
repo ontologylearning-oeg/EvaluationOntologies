@@ -16,6 +16,11 @@ public class RelationVO extends OntologyVO{
     private boolean isGS;
     @DatabaseField(columnName="isRandom")
     private boolean isRandom;
+    @DatabaseField(columnName = "yes")
+    private Integer yes;
+    @DatabaseField(columnName = "no")
+    private Integer no;
+
 
     public RelationVO(String name, String term1, String term2, String domain, boolean isRandom) {
         super(name,domain);
@@ -23,6 +28,8 @@ public class RelationVO extends OntologyVO{
         this.term2 = term2;
         this.isGS = false;
         this.isRandom= isRandom;
+        yes=0;
+        no=0;
     }
 
     public RelationVO(String name, String term1, String term2, String domain, boolean isGS, boolean isRandom) {
@@ -31,6 +38,8 @@ public class RelationVO extends OntologyVO{
         this.term2 = term2;
         this.isGS = isGS;
         this.isRandom= isRandom;
+        yes=0;
+        no=0;
     }
 
     public RelationVO() {
@@ -39,6 +48,8 @@ public class RelationVO extends OntologyVO{
         this.term2 = "example2";
         this.isGS = false;
         this.isRandom = false;
+        yes=0;
+        no=0;
     }
 
     public String getTerm1() {
@@ -49,9 +60,7 @@ public class RelationVO extends OntologyVO{
         this.term1 = term1;
     }
 
-    public String getTerm2() {
-        return term2;
-    }
+    public String getTerm2() { return term2; }
 
     public void setTerm2(String term2) {
         this.term2 = term2;
@@ -68,4 +77,12 @@ public class RelationVO extends OntologyVO{
     public boolean isRandom() { return isRandom; }
 
     public void setRandom(boolean random) { isRandom = random; }
+
+    public Integer getYes() { return yes; }
+
+    public void setYes(Integer yes) { this.yes = yes; }
+
+    public Integer getNo() { return no; }
+
+    public void setNo(Integer no) { this.no = no; }
 }

@@ -79,7 +79,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     }
 
     public ArrayList<RelationVO> getRelations(String ontology) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         try{
             return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
@@ -90,17 +90,11 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     }
 
     public boolean updateRelations(ArrayList<RelationVO> r) {
-        try{
-            for(RelationVO relation : r){
-                if(relationDAO.update(relation) == 0){
-                    return false;
-                }
+        boolean flag=true;
+        for(RelationVO relation : r){
+                flag=this.insertRandomRelation(relation);
             }
-        }catch (SQLException e){
-            System.out.println("Error en updateRelations/TermEvaluationImpl "+e.getMessage());
-            return false;
-        }
-        return true;
+        return flag;
     }
 
 

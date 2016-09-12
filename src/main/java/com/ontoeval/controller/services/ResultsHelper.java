@@ -15,6 +15,7 @@ import java.util.HashMap;
  */
 public class ResultsHelper {
     private HttpServletRequest request;
+    private final static Integer evaluators=5;
     private MeasureDAO measure;
     private ArrayList<TermVO> terms;
     private ArrayList<RelationVO> relations;
@@ -39,6 +40,8 @@ public class ResultsHelper {
         measure.setName(o.getName());
         measure.setDomain(o.getDomain());
         calculoTaxonomico(measure);
+        measure.setFkappa(FleissKappa(true));
+        measure.setTfkappa(FleissKappa(false));
         this.measure.insertMeasure(measure);
         return "./eval/results.jsp";
     }
@@ -57,6 +60,10 @@ public class ResultsHelper {
         aux = new SingleMeasure("Taxonomic Recall",m.getTrecall());
         measures.add(aux);
         aux = new SingleMeasure("Taxonomic F-Measure",m.getTfmeasure());
+        measures.add(aux);
+        aux = new SingleMeasure("FK",m.getFkappa());
+        measures.add(aux);
+        aux = new SingleMeasure("TFK",m.getTfkappa());
         measures.add(aux);
         request.getSession().getServletContext().setAttribute("measure",measures);
     }
@@ -148,10 +155,10 @@ public class ResultsHelper {
     }
 
     private Double taxonomicPrecision(ArrayList<String> gs, ArrayList<String> learned, HashMap<String, ArrayList<String>> gsterms, HashMap<String, ArrayList<String>> lterms){
-        ArrayList<String> commonTerms = new ArrayList<String>();
+        ArrayList<String> commonTerms = new ArrayList<>();
         ArrayList<String> subsuperLearned;
         ArrayList<String> subsuperGS; Integer n=0; Double tp=0.0;
-        ArrayList<Double> tplocal = new ArrayList<Double>();
+        ArrayList<Double> tplocal = new ArrayList<>();
 
         for(String aux: gs) {
             if (learned.contains(aux)) {
@@ -189,6 +196,36 @@ public class ResultsHelper {
 
     }
 
+    private Double FleissKappa(boolean flag){
+        Double pi = 0.0;
+        Integer pjYes =0, pjNo=0,nrandomRel=0;
+        if(flag){
+            for(TermVO t : terms){
+                pi += ((Math.pow(t.getYes(),2)+Math.pow(t.getNo(),2)-this.evaluators)/(this.evaluators*(this.evaluators-1)));
+                pjNo +=t.getNo();
+                pjYes +=t.getYes();
+            }
+            pjYes = pjYes / (this.evaluators*terms.size());
+            pjNo = pjNo / (this.evaluators*terms.size());
+            pi = pi / terms.size();
+        }
+        else{
+            for(RelationVO t : relations){
+                if(t.isRandom()){
+                    nrandomRel++;
+                    pi += ((Math.pow(t.getYes(),2)+Math.pow(t.getNo(),2)-this.evaluators)/(this.evaluators*(this.evaluators-1)));
+                    pjNo +=t.getNo();
+                    pjYes +=t.getYes();
+                }
+            }
+            pjYes = pjYes / (this.evaluators*nrandomRel);
+            pjNo = pjNo / (this.evaluators*nrandomRel);
+            pi = pi / nrandomRel;
+        }
+
+        Double pj = Math.pow(pjNo,2)+Math.pow(pjYes,2);
+        return  (pi-pj)/(1-pj);
+    }
 
 
 }

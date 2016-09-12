@@ -52,7 +52,7 @@ public class TaxonomicHelper {
     public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology){
         ArrayList<RelationVO> flag = relations.getRandomRelations(ontology.getName());
         if(flag.size()==0) {
-            ArrayList<RelationVO> randomRelations = new ArrayList<RelationVO>();
+            ArrayList<RelationVO> randomRelations = new ArrayList<>();
             for(int j=0; j<relevant.size(); j++) {
                 for (int i=(j+1); i<relevant.size();i++) {
                     TermVO t = relevant.get(j);
@@ -94,7 +94,7 @@ public class TaxonomicHelper {
                 return null;
         }
         else {
-            rellenarBD(ontology,recuperar(ontology.getName()),randomEval);
+            rellenarBD(recuperar(ontology.getName()),randomEval);
             ontology.setState("Results");
             return "results";
         }
@@ -152,7 +152,7 @@ public class TaxonomicHelper {
         }
     }
 
-    private void rellenarBD(OntologyVO o,ArrayList<RelationVO> normal,ArrayList<RelationEvaluationVO> random){
+    private void rellenarBD(ArrayList<RelationVO> normal,ArrayList<RelationEvaluationVO> random){
         ArrayList<RelationEvaluationVO> aux = new ArrayList<>();
         while(random.size()!=0){
             RelationEvaluationVO singleAux= random.get(0);
@@ -165,27 +165,27 @@ public class TaxonomicHelper {
             }
             aux.add(singleAux);
             random.remove(0);
-            if(countForRelevant(aux)){
-                RelationVO v = new RelationVO(o.getName(),aux.get(0).getTerm1(),aux.get(0).getTerm2(),o.getDomain(),true,true);
-                relations.insertRandomRelation(v);
+            Integer rel = countForRelevant(aux);
+            for(RelationVO r: normal){
+                if(aux.get(0).getTerm1().equals(r.getTerm1()) && aux.get(0).getTerm2().equals(r.getTerm2()) && r.isRandom()){
+                    r.setYes(rel);
+                    r.setNo(5-rel);
+                    if(rel>2)
+                        r.setGS(true);
+                }
             }
             aux = new ArrayList<>();
         }
         relations.updateRelations(normal);
     }
 
-    private boolean countForRelevant(ArrayList<RelationEvaluationVO> r){
+    private Integer countForRelevant(ArrayList<RelationEvaluationVO> r){
         Integer rel=0;
         for(RelationEvaluationVO aux:r){
             if(aux.isRelevant()){
                 rel++;
             }
         }
-        if(rel>2){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return rel;
     }
 }

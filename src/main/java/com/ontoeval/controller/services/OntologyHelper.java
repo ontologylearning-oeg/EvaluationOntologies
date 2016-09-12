@@ -84,12 +84,14 @@ public class OntologyHelper {
              return true;
         }
     }
+
     private String loadDomain(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         tokenizer = new StringTokenizer(tokenizer.nextToken(),";");
         tokenizer.nextToken();
         return tokenizer.nextToken();
     }
+
 
 
 }

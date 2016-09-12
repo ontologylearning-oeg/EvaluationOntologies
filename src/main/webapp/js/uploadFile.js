@@ -1,11 +1,7 @@
 /**
  * Created by dchavesf on 1/09/16.
  */
-$( document ).ready(function(){
-    $(".button-collapse").sideNav();
-    $(".download").click();
 
-});
 
 function subirFichero(){
     if (!window.FileReader) {
@@ -40,6 +36,12 @@ function subirFichero(){
 
 function sendToServer(text, filename){
     $.ajax({
+        beforeSend: function(){
+            swal({
+                title: "Uploading file",
+                timer: 4000,
+                showConfirmButton: false });
+        },
         type: "POST",
         timeout: 50000,
         url: "/LoadFile",

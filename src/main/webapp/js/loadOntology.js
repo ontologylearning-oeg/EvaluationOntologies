@@ -5,6 +5,12 @@
 
 function loadOntology(name) {
     $.ajax({
+        beforeSend: function(){
+            swal({
+                title: "Loading the ontology",
+                timer: 500,
+                showConfirmButton: false });
+        },
         type: "POST",
         timeout: 50000,
         url: "/LoadFeatures",

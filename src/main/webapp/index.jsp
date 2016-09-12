@@ -25,17 +25,15 @@
 </head>
 
 <body>
-<nav>   
+<nav>
     <div class="nav-wrapper indigo">
         <a id="enlace" href="index.jsp" class="brand-logo">DrOntoEval: Evaluation of Ontology Learning</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
-            <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
             <li><a id="login" onclick="changePage('login.jsp');">Login</a></li>
         </ul>
         <ul id="slide-out" class="side-nav">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
-            <li><a onclick="changePage('uploadfile.jsp');">Upload File</a></li>
             <li><a id="loginaux" onclick="changePage('login.jsp');">Login</a> </li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">reorder</i></a>
@@ -45,8 +43,8 @@
 
 <div id="contenido" class="container section">
     <div class="row" style="background-color: white">
-        <div class="col s12 center-align" style="margin-bottom: 100px">
-            <img src="files/doctor.png" alt="doctor">
+        <div class="col s12 center-align" style="margin-bottom: 50px">
+            <img src="files/doctor.png" alt="doctor" height="400">
         </div>
         <div class="row">
             <div class="col s4 offset-s2 center-align">
@@ -63,8 +61,7 @@
     </div>
 
 </div>
-</body>
-<script>
 
-</script>
+</body>
+
 </html>

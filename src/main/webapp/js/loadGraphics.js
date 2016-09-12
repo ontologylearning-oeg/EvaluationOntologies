@@ -3,8 +3,8 @@
  */
 $( document ).ready(function(){
     var mes=[];
-    var names=['Recall','Precision','F-Measure','Taxonomic Precision','Taxonomic Recall','Taxonomic F-Measure'];
-    for(var i=0; i<6;i++){
+    var names=['Recall','Precision','F-Measure','FK','Taxonomic Precision','Taxonomic Recall','Taxonomic F-Measure', 'TFK'];
+    for(var i=0; i<8;i++){
         mes[i] = parseFloat(document.getElementById(names[i]).getAttribute("data-value"))*100;
     }
 
@@ -64,14 +64,20 @@ $( document ).ready(function(){
                 name: 'F-Measure',
                 y: mes[2]
             }, {
-                name: 'TPrecision',
+                name: 'Fleiss Kappa',
                 y: mes[3]
             }, {
-                name: 'TRecall',
+                name: 'TPrecision',
                 y: mes[4]
             }, {
-                name: 'TF-Measure',
+                name: 'TRecall',
                 y: mes[5]
+            }, {
+                name: 'TF-Measure',
+                y: mes[6]
+            },{
+                name: 'TFleiss Kappa',
+                y: mes[7]
             }]
         }],
 

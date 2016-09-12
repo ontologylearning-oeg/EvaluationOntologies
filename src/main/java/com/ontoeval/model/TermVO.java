@@ -16,6 +16,10 @@ public class TermVO extends OntologyVO{
     private boolean isRelevant;
     @DatabaseField(columnName = "isControl")
     private boolean isControl;
+    @DatabaseField(columnName = "yes")
+    private Integer yes;
+    @DatabaseField(columnName = "no")
+    private Integer no;
 
     public TermVO(String word, String ontology, String domain, String control) {
         super(ontology, domain);
@@ -66,4 +70,20 @@ public class TermVO extends OntologyVO{
     public boolean isControl() {return isControl;}
 
     public void setControl(boolean control) { isControl = control; }
+
+    public Integer getYes() {
+        return yes;
+    }
+
+    public void setYes(Integer yes) {
+        this.yes = yes;
+    }
+
+    public Integer getNo() {
+        return no;
+    }
+
+    public void setNo(Integer no) {
+        this.no = no;
+    }
 }

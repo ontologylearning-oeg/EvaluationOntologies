@@ -144,7 +144,7 @@ public class LexicalHelper {
     }
 
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){
-        ArrayList<TermEvaluationVO> tevalaux = new ArrayList<TermEvaluationVO>();
+        ArrayList<TermEvaluationVO> tevalaux = new ArrayList<>();
         while(teval.size()!=0){
             TermEvaluationVO aux = teval.get(0);
             for(int i=1; i<teval.size();i++){
@@ -156,20 +156,23 @@ public class LexicalHelper {
             }
             tevalaux.add(aux);
             teval.remove(0);
-            if(countForRelavant(tevalaux)){
-                for(TermVO taux: t){
-                    if(taux.getWord().equals(tevalaux.get(0).getTerm())){
+            Integer rel = countForRelavant(tevalaux);
+            for(TermVO taux: t){
+                if(taux.getWord().equals(tevalaux.get(0).getTerm())){
+                    if(rel>2)
                         taux.setRelevant(true);
-                    }
+                    taux.setYes(rel);
+                    taux.setNo(5-rel);
                 }
             }
-            tevalaux = new ArrayList<TermEvaluationVO>();
+
+            tevalaux = new ArrayList<>();
         }
         terms.updateTerms(t);
     }
 
     public boolean loadTerms(String text, String filename, String domain){
-        ArrayList<TermVO> termsaux = new ArrayList<TermVO>();
+        ArrayList<TermVO> termsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         tokenizer.nextToken();tokenizer.nextToken();
         String term = tokenizer.nextToken();
@@ -182,19 +185,14 @@ public class LexicalHelper {
         return terms.InsertTerms(termsaux);
     }
 
-    private boolean countForRelavant(ArrayList<TermEvaluationVO> t){
+    private Integer countForRelavant(ArrayList<TermEvaluationVO> t){
         Integer rel=0;
         for(TermEvaluationVO aux:t){
             if(aux.isRelevant()){
                 rel++;
             }
         }
-        if(rel>2){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return rel;
     }
 
 

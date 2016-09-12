@@ -14,12 +14,16 @@ public class MeasureVO extends OntologyVO {
     private double precision;
     @DatabaseField(columnName="F-Measure")
     private double fmeasure;
+    @DatabaseField(columnName="Fleiss Kappa")
+    private double fkappa;
     @DatabaseField(columnName="TR")
     private double trecall;
     @DatabaseField(columnName="TP")
     private double tprecision;
     @DatabaseField(columnName="TF")
     private double tfmeasure;
+    @DatabaseField(columnName="TFleiss Kappa")
+    private double tfkappa;
 
     public MeasureVO(String name, String domain, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {
         super(name,domain);
@@ -88,4 +92,12 @@ public class MeasureVO extends OntologyVO {
     public void setTfmeasure(double tfmeasure) {
         this.tfmeasure = tfmeasure;
     }
+
+    public double getFkappa() { return fkappa; }
+
+    public void setFkappa(double fkappa) { this.fkappa = fkappa; }
+
+    public double getTfkappa() { return tfkappa; }
+
+    public void setTfkappa(double tfkappa) { this.tfkappa = tfkappa; }
 }

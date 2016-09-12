@@ -27,6 +27,12 @@ function sendAnswers(servlet) {
         text=text+terms[i]+"\n";
     }
     $.ajax({
+        beforeSend: function(){
+            swal({
+                title: "Sending evaluations",
+                timer: 500,
+                showConfirmButton: false });
+        },
         type: "POST",
         timeout: 50000,
         url: servlet,
