@@ -70,15 +70,18 @@ public class ResultsHelper {
 
     private MeasureVO calculoLexico(){
         MeasureVO m = new MeasureVO();
-        Integer totalSize = terms.size();
-        Integer relevant=0;
+        Integer relevant=0,gs=0,both=0;
         for(TermVO t: terms){
-            if(t.isRelevant()){
-                relevant++;
+            if(t.isGoldStandad()){
+                gs++;
             }
+            if(t.isRelevant())
+                relevant++;
+            if(t.isRelevant() && t.isGoldStandad())
+                both++;
         }
-        m.setRecall(relevant/relevant);
-        m.setPrecision(relevant/totalSize);
+        m.setRecall(both/gs);
+        m.setPrecision(both/relevant);
         m.setFmeasure((2*(m.getRecall()*m.getPrecision()))/(m.getRecall()+m.getPrecision()));
         return m;
     }
@@ -102,8 +105,12 @@ public class ResultsHelper {
         m.setTprecision(tp);
         Double tr = taxonomicPrecision(termsl,termsgold, lhiterms, gshiterms);
         m.setTrecall(tr);
-        Double tf = (2*tp*tr)/(tp+tr);
-        m.setTfmeasure((2*m.getRecall()*tf)/(tf+m.getRecall()));
+        if(tp!=0 && tr!=0){
+            Double tf = (2*tp*tr)/(tp+tr);
+            m.setTfmeasure((2*m.getRecall()*tf)/(tf+m.getRecall()));
+        }
+        else
+            m.setTfmeasure(0);
     }
 
     private ArrayList<String> constructHierachy(ArrayList<RelationVO> relation, HashMap<String, ArrayList<String>> terms){
@@ -156,9 +163,8 @@ public class ResultsHelper {
 
     private Double taxonomicPrecision(ArrayList<String> gs, ArrayList<String> learned, HashMap<String, ArrayList<String>> gsterms, HashMap<String, ArrayList<String>> lterms){
         ArrayList<String> commonTerms = new ArrayList<>();
-        ArrayList<String> subsuperLearned;
-        ArrayList<String> subsuperGS; Integer n=0; Double tp=0.0;
-        ArrayList<Double> tplocal = new ArrayList<>();
+        ArrayList<String> subsuperLearned, subsuperGS;
+        Integer n=0; Double tp=0.0;
 
         for(String aux: gs) {
             if (learned.contains(aux)) {
@@ -168,14 +174,16 @@ public class ResultsHelper {
         for (String aux : commonTerms){
             subsuperGS = gsterms.get(aux);
             subsuperLearned = lterms.get(aux);
-            for(String auxGS: subsuperGS){
-                if(!learned.contains(auxGS)){
-                    subsuperGS.remove(auxGS);
+            for(int i=0;i<subsuperGS.size();i++){
+                if(!learned.contains(subsuperGS.get(i))){
+                    subsuperGS.remove(i);
+                    i--;
                 }
             }
-            for(String auxL: subsuperLearned){
-                if(!gs.contains(auxL)){
-                    subsuperLearned.remove(auxL);
+            for(int i=0; i<subsuperLearned.size();i++){
+                if(!gs.contains(subsuperLearned.get(i))){
+                    subsuperLearned.remove(i);
+                    i--;
                 }
             }
 
@@ -184,12 +192,9 @@ public class ResultsHelper {
                     n++;
                 }
             }
-
-            tplocal.add((double)(n/subsuperLearned.size()));
+            if(subsuperLearned.size()>0)
+                tp=tp+(double)(n/subsuperLearned.size());
             n=0;
-        }
-        for(Double tpaux : tplocal){
-            tp+=tpaux;
         }
 
         return tp/commonTerms.size();
@@ -198,7 +203,7 @@ public class ResultsHelper {
 
     private Double FleissKappa(boolean flag){
         Double pi = 0.0;
-        Integer pjYes =0, pjNo=0,nrandomRel=0;
+        Double pjYes =0.0, pjNo=0.0; Integer nrandomRel=0;
         if(flag){
             for(TermVO t : terms){
                 pi += ((Math.pow(t.getYes(),2)+Math.pow(t.getNo(),2)-this.evaluators)/(this.evaluators*(this.evaluators-1)));

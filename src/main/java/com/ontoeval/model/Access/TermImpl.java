@@ -56,10 +56,24 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
     }
 
     public ArrayList<TermVO> loadTerms(String ontology){
+
         try{
             return (ArrayList<TermVO>)termDAO.queryForEq("Ontology",ontology);
         }catch (SQLException e){
             System.out.println("Error en loadTerms/TermImpl "+e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public ArrayList<TermVO> loadNormal(String ontology) {
+        HashMap<String, Object> m = new HashMap<>();
+        m.put("Ontology",ontology);
+        m.put("isControl",false);
+        try{
+            return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
+        }catch (SQLException e){
+            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
             return null;
         }
     }
@@ -79,11 +93,11 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         return true;
     }
 
-    public ArrayList<TermVO> loadRelevant(String ontology) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
-        boolean relevant=true;
+    public ArrayList<TermVO> loadGS(String ontology) {
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
-        m.put("isRelevant", relevant);
+        m.put("isGS", true);
+        m.put("isControl",false);
         try{
             return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){

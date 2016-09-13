@@ -92,6 +92,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     public boolean updateRelations(ArrayList<RelationVO> r) {
         boolean flag=true;
         for(RelationVO relation : r){
+            if(relation.isRandom())
                 flag=this.insertRandomRelation(relation);
             }
         return flag;

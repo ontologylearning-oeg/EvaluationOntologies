@@ -20,6 +20,7 @@
          <div data-value="${m.measure}" id="${m.name}"></div>
         </c:forEach>
         <div id="chart"></div>
+        <div id="chart2"></div>
     </div>
 
 

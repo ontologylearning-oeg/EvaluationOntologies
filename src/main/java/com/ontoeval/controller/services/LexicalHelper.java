@@ -110,12 +110,12 @@ public class LexicalHelper {
         return false;
     }
 
-    public ArrayList<TermVO> recuperarRelevants(OntologyVO o){
-        return terms.loadRelevant(o.getName());
+    public ArrayList<TermVO> recuperarGS(OntologyVO o){
+        return terms.loadGS(o.getName());
     }
 
     public ArrayList<TermVO> recuperar(String o){
-        return terms.loadTerms(o);
+        return terms.loadNormal(o);
     }
 
     public boolean checkControl(ArrayList<TermEvaluationVO> tevalu, OntologyVO ontology){
@@ -159,8 +159,8 @@ public class LexicalHelper {
             Integer rel = countForRelavant(tevalaux);
             for(TermVO taux: t){
                 if(taux.getWord().equals(tevalaux.get(0).getTerm())){
-                    if(rel>2)
-                        taux.setRelevant(true);
+                    if(rel>2 && !taux.isControl())
+                        taux.setGoldStandad(true);
                     taux.setYes(rel);
                     taux.setNo(5-rel);
                 }

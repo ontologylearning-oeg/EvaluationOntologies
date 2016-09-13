@@ -7,14 +7,15 @@ $( document ).ready(function(){
     for(var i=0; i<8;i++){
         mes[i] = parseFloat(document.getElementById(names[i]).getAttribute("data-value"))*100;
     }
-
+    mes[3]=mes[3]/100;
+    mes[7]=mes[7]/100;
     // Create the chart
     $('#chart').highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: ''
+            text: 'Measures'
         },
         subtitle: {
             text: ''
@@ -64,9 +65,6 @@ $( document ).ready(function(){
                 name: 'F-Measure',
                 y: mes[2]
             }, {
-                name: 'Fleiss Kappa',
-                y: mes[3]
-            }, {
                 name: 'TPrecision',
                 y: mes[4]
             }, {
@@ -75,14 +73,65 @@ $( document ).ready(function(){
             }, {
                 name: 'TF-Measure',
                 y: mes[6]
-            },{
-                name: 'TFleiss Kappa',
-                y: mes[7]
             }]
         }],
 
     });
 
 
+    $('#chart2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Fleiss\' Kappa'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            min: 0,
+            max: 100
 
+        },
+        legend: {
+            enabled: false
+        },
+        credits:{
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+
+        series: [{
+            name: 'Fleiss Kappa',
+            colorByPoint: true,
+            data: [{
+                name: 'Fleiss Kappa',
+                y: mes[3]
+            }, {
+                name: 'Taxonomic Fleiss Kappa',
+                y: mes[7]
+            }]
+        }],
+
+    });
 });

@@ -14,24 +14,14 @@ public class TermVO extends OntologyVO{
     private String word;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;
+    @DatabaseField(columnName="isGS")
+    private boolean isGoldStandad;
     @DatabaseField(columnName = "isControl")
     private boolean isControl;
     @DatabaseField(columnName = "yes")
     private Integer yes;
     @DatabaseField(columnName = "no")
     private Integer no;
-
-    public TermVO(String word, String ontology, String domain, String control) {
-        super(ontology, domain);
-        this.word = word;
-        this.isRelevant=true;
-        if(control.equals("yes")){
-            this.isControl=true;
-        }
-        else{
-            this.isControl=false;
-        }
-    }
 
     public TermVO(String word, String ontology, String domain, String control, String isRelevant) {
         super(ontology, domain);
@@ -46,6 +36,8 @@ public class TermVO extends OntologyVO{
         else{
             this.isControl=false;
         }
+
+        this.isGoldStandad=false;
     }
 
     public TermVO(){
@@ -53,6 +45,7 @@ public class TermVO extends OntologyVO{
         this.word="example";
         this.isRelevant=true;
         this.isControl=false;
+        this.isGoldStandad=false;
     }
 
     public String getWord() {
@@ -85,5 +78,13 @@ public class TermVO extends OntologyVO{
 
     public void setNo(Integer no) {
         this.no = no;
+    }
+
+    public boolean isGoldStandad() {
+        return isGoldStandad;
+    }
+
+    public void setGoldStandad(boolean goldStandad) {
+        isGoldStandad = goldStandad;
     }
 }

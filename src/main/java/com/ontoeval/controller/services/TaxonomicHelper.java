@@ -34,7 +34,7 @@ public class TaxonomicHelper {
     }
 
     public boolean loadRelations(String text, String filename, String domain){
-        ArrayList<RelationVO> relationsaux = new ArrayList<RelationVO>();
+        ArrayList<RelationVO> relationsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         String term = tokenizer.nextToken();
         while(!term.equals("Taxonomic;;")){
