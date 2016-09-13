@@ -27,7 +27,7 @@ public class UserHelper {
                 return false;
             }
             else{
-                request.getSession().getServletContext().setAttribute("user",user);
+                request.getSession().setAttribute("user",user);
                 return true;
             }
         }
@@ -36,7 +36,7 @@ public class UserHelper {
                 return false;
             }
             else{
-                request.getSession().getServletContext().setAttribute("user",user);
+                request.getSession().setAttribute("user",user);
                 return true;
             }
 

@@ -5,6 +5,7 @@ import com.ontoeval.model.Access.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -42,8 +43,8 @@ public class OntologyHelper {
     }
 
     public String loadFeatures(String name){
-        ServletContext context = request.getSession().getServletContext();
-        UserVO user = (UserVO) context.getAttribute("user");
+        HttpSession session = request.getSession();
+        UserVO user = (UserVO) session.getAttribute("user");
         OntologyVO o = ontology.recuperarOntologias(name);
         String page="";
         if(o.getState().equals("Eval lexical layer"))
@@ -69,7 +70,7 @@ public class OntologyHelper {
             page="./eval/results.jsp";
         }
         ontology.updateOntology(o);
-        context.setAttribute("ontology",o);
+        session.setAttribute("ontology",o);
         return page;
 
     }

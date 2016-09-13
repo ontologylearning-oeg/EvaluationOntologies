@@ -3,8 +3,8 @@ package com.ontoeval.controller.services;
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ public class LexicalHelper {
 
     public String saveTerms(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        ServletContext context = request.getSession().getServletContext();
-        UserVO user = (UserVO) context.getAttribute("user");
-        OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
+        HttpSession session = request.getSession();
+        UserVO user = (UserVO) session.getAttribute("user");
+        OntologyVO ontology = (OntologyVO) session.getAttribute("ontology");
         ArrayList<TermEvaluationVO> terms = new ArrayList<>();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
@@ -44,7 +44,7 @@ public class LexicalHelper {
             terms.add(t);
         }
         evalTerms.insertTerms(terms);
-        ArrayList<TermVO> t = (ArrayList<TermVO>)request.getSession().getServletContext().getAttribute("terms");
+        ArrayList<TermVO> t = (ArrayList<TermVO>)request.getSession().getAttribute("terms");
         for(TermEvaluationVO taux: terms){
             for (int i=0; i<t.size();i++){
                 if(taux.getTerm().equals(t.get(i).getWord())){
@@ -103,8 +103,8 @@ public class LexicalHelper {
                 tforeval.add(t.get(i));
                 i++;
             }
-            request.getSession().getServletContext().setAttribute("termsUser", tforeval);
-            request.getSession().getServletContext().setAttribute("terms", t);
+            request.getSession().setAttribute("termsUser", tforeval);
+            request.getSession().setAttribute("terms", t);
             return true;
         }
         return false;

@@ -15,7 +15,7 @@ $( document ).ready(function(){
             type: 'column'
         },
         title: {
-            text: 'Measures'
+            text: 'Measures of quality'
         },
         subtitle: {
             text: ''
@@ -28,7 +28,8 @@ $( document ).ready(function(){
                 text: 'Total percent of results'
             },
             min: 0,
-            max: 100
+            max: 100,
+            gridLineWidth: 0
 
         },
         legend: {
@@ -84,7 +85,7 @@ $( document ).ready(function(){
             type: 'column'
         },
         title: {
-            text: 'Fleiss\' Kappa'
+            text: 'Fleiss Kappa: Agreement between experts'
         },
         subtitle: {
             text: ''
@@ -96,8 +97,9 @@ $( document ).ready(function(){
             title: {
                 text: ''
             },
-            min: 0,
-            max: 100
+            min: -1,
+            max: 1,
+            gridLineWidth: 0
 
         },
         legend: {

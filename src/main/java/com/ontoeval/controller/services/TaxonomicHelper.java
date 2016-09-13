@@ -6,10 +6,9 @@ import com.ontoeval.model.Access.RelationEvaluationDAO;
 import com.ontoeval.model.Access.RelationEvaluationImpl;
 import com.ontoeval.model.Access.RelationImpl;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -102,9 +101,9 @@ public class TaxonomicHelper {
 
     public String saveRelations(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        ServletContext context = request.getSession().getServletContext();
-        UserVO user = (UserVO) context.getAttribute("user");
-        OntologyVO ontology = (OntologyVO) context.getAttribute("ontology");
+        HttpSession session = request.getSession();
+        UserVO user = (UserVO) session.getAttribute("user");
+        OntologyVO ontology = (OntologyVO) session.getAttribute("ontology");
         ArrayList<RelationEvaluationVO> relEval = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
@@ -120,7 +119,7 @@ public class TaxonomicHelper {
             relEval.add(r);
         }
         evalRelations.insertRelations(relEval);
-        ArrayList<RelationVO> relations = (ArrayList<RelationVO>) context.getAttribute("randomRel");
+        ArrayList<RelationVO> relations = (ArrayList<RelationVO>) session.getAttribute("randomRel");
         for(RelationEvaluationVO aux : relEval){
             for (int i=0; i<relations.size(); i++){
                 if(relations.get(i).getTerm1().equals(aux.getTerm1()) && relations.get(i).getTerm2().equals(aux.getTerm2())){
@@ -143,8 +142,8 @@ public class TaxonomicHelper {
                 relforeval.add(random.get(i));
                 i++;
             }
-            request.getSession().getServletContext().setAttribute("randomRel",random);
-            request.getSession().getServletContext().setAttribute("relations",relforeval);
+            request.getSession().setAttribute("randomRel",random);
+            request.getSession().setAttribute("relations",relforeval);
             return true;
         }
         else{

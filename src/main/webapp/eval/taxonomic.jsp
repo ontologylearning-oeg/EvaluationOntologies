@@ -13,12 +13,12 @@
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
-        <h1>Which of these relations belong to the <c:out value="${applicationScope.ontology.domain}"/> domain?</h1>
+        <h1>Which of these relations belong to the <c:out value="${sessionScope.ontology.domain}"/> domain?</h1>
     </div>
     <div class="col s12" style="margin-left: -20px">
         <form action="#">
             <div class="row center-align" style="margin-left: 70px">
-                <c:forEach var="relation" items="${applicationScope.relations}">
+                <c:forEach var="relation" items="${sessionScope.relations}">
                     <div class="col s4 offset-s1 card-panel teal center-align" style="background-color: rgba(248, 187, 134, 0.2)!important">
                        <div style="margin-top: 20px; margin-bottom: 20px">
                             ${relation.term1} is a ${relation.term2}

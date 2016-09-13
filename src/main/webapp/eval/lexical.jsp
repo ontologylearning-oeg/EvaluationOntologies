@@ -13,12 +13,12 @@
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
-        <h1>Which of these terms strictly belong to the <c:out value="${applicationScope.ontology.domain}"/> domain?</h1>
+        <h1>Which of these terms strictly belong to the <c:out value="${sessionScope.ontology.domain}"/> domain?</h1>
     </div>
     <div class="col s12" style="margin-left: -20px">
             <form action="#">
                 <div class="row center-align">
-                    <c:forEach var="term" items="${applicationScope.termsUser}">
+                    <c:forEach var="term" items="${sessionScope.termsUser}">
 
                         <div class="col s3 offset-s1 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
                         <div class="row" style="margin-left: 20px; margin-top: 8px">

@@ -65,12 +65,12 @@ public class ResultsHelper {
         measures.add(aux);
         aux = new SingleMeasure("TFK",m.getTfkappa());
         measures.add(aux);
-        request.getSession().getServletContext().setAttribute("measure",measures);
+        request.getSession().setAttribute("measure",measures);
     }
 
     private MeasureVO calculoLexico(){
         MeasureVO m = new MeasureVO();
-        Integer relevant=0,gs=0,both=0;
+        Double relevant=0.0,gs=0.0,both=0.0;
         for(TermVO t: terms){
             if(t.isGoldStandad()){
                 gs++;

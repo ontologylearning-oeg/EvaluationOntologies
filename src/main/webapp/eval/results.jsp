@@ -12,15 +12,15 @@
 
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
-        <h1>Results for <c:out value="${applicationScope.ontology.name}"/> Ontology</h1>
+        <h1>Results for <c:out value="${sessionScope.ontology.name}"/> Ontology</h1>
     </div>
     <div class="row">
 
-        <c:forEach var="m" items="${applicationScope.measure}">
+        <c:forEach var="m" items="${sessionScope.measure}">
          <div data-value="${m.measure}" id="${m.name}"></div>
         </c:forEach>
         <div id="chart"></div>
-        <div id="chart2"></div>
+        <div id="chart2" style="margin-top: 40px"></div>
     </div>
 
 
