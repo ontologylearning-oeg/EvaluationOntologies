@@ -78,4 +78,5 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
             System.out.println("Error en updateTerms/TermImpl "+e.getMessage());
         }
     }
+
 }

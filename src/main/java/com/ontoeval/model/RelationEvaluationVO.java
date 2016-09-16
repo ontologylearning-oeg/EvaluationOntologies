@@ -12,24 +12,20 @@ public class RelationEvaluationVO extends OntologyVO {
     private String term1;
     @DatabaseField(columnName="term2",canBeNull=false, uniqueCombo = true)
     private String term2;
-    @DatabaseField(columnName="User",canBeNull=false, uniqueCombo = true)
-    private String user;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;
 
     public RelationEvaluationVO(String name, String domain, String term1, String term2, String user, boolean isRelevant) {
-        super(name, domain);
+        super(name, domain,user);
         this.term1 = term1;
         this.term2 = term2;
-        this.user = user;
         this.isRelevant = isRelevant;
     }
 
     public RelationEvaluationVO(){
-        super("exmaple","example");
+        super("exmaple","example","user");
         this.term1="term1";
         this.term2="term2";
-        this.user=null;
         this.isRelevant=false;
     }
 
@@ -45,14 +41,6 @@ public class RelationEvaluationVO extends OntologyVO {
 
     public void setTerm2(String term2) {
         this.term2 = term2;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public boolean isRelevant() {

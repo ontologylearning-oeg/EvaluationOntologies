@@ -23,8 +23,8 @@ public class RelationVO extends OntologyVO{
 
 
 
-    public RelationVO(String name, String term1, String term2, String domain, boolean isRandom) {
-        super(name,domain);
+    public RelationVO(String name, String term1, String term2, String domain, boolean isRandom, String user) {
+        super(name,domain,user);
         this.term1 = term1;
         this.term2 = term2;
         this.isGS = false;
@@ -33,8 +33,8 @@ public class RelationVO extends OntologyVO{
         no=0;
     }
 
-    public RelationVO(String name, String term1, String term2, String domain, boolean isGS, boolean isRandom) {
-        super(name,domain);
+    public RelationVO(String name, String term1, String term2, String domain, boolean isGS, boolean isRandom,String user) {
+        super(name,domain,user);
         this.term1 = term1;
         this.term2 = term2;
         this.isGS = isGS;
@@ -44,7 +44,7 @@ public class RelationVO extends OntologyVO{
     }
 
     public RelationVO() {
-        super("example", "domain");
+        super("example", "domain","user");
         this.term1 = "example1";
         this.term2 = "example2";
         this.isGS = false;

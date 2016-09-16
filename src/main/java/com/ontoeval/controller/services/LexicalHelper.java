@@ -124,7 +124,7 @@ public class LexicalHelper {
         for(TermVO auxc: control){
             for(TermEvaluationVO auxt:tevalu){
                 if(auxc.getWord().equals(auxt.getTerm())){
-                    if(auxc.isRelevant()==auxt.isRelevant()){
+                    if(auxc.getRelevant()==auxt.isRelevant()){
                         c++;
                     }
                 }
@@ -159,7 +159,7 @@ public class LexicalHelper {
             Integer rel = countForRelavant(tevalaux);
             for(TermVO taux: t){
                 if(taux.getWord().equals(tevalaux.get(0).getTerm())){
-                    if(rel>2 && !taux.isControl())
+                    if(rel>2 && !taux.getControl())
                         taux.setGoldStandad(true);
                     taux.setYes(rel);
                     taux.setNo(5-rel);
@@ -171,14 +171,14 @@ public class LexicalHelper {
         terms.updateTerms(t);
     }
 
-    public boolean loadTerms(String text, String filename, String domain){
+    public boolean loadTerms(String text, String filename, String domain, String user){
         ArrayList<TermVO> termsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         tokenizer.nextToken();tokenizer.nextToken();
         String term = tokenizer.nextToken();
         while(!term.equals("Taxonomic;;")){
             StringTokenizer tokenizer1 = new StringTokenizer(term,";");
-            TermVO aux = new TermVO(tokenizer1.nextToken(),filename, domain,tokenizer1.nextToken(),tokenizer1.nextToken());
+            TermVO aux = new TermVO(tokenizer1.nextToken(),filename, domain,tokenizer1.nextToken(),tokenizer1.nextToken(),user);
             termsaux.add(aux);
             term = tokenizer.nextToken();
         }

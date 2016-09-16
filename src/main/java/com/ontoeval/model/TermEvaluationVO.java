@@ -12,22 +12,19 @@ public class TermEvaluationVO extends OntologyVO{
 
     @DatabaseField(columnName="Term",canBeNull=false)
     private String term;
-    @DatabaseField(columnName="User",canBeNull=false)
-    private String user;
     @DatabaseField(columnName="Relevant")
     private boolean relevant;
 
     public TermEvaluationVO(String ontology, String domain,String term, String user, boolean isRelvant) {
-        super(ontology,domain);
+        super(ontology,domain,user);
         this.term = term;
-        this.user = user;
         this.relevant = isRelvant;
     }
 
-    public TermEvaluationVO() {
-        term = "example";
-        user = "example@example.com";
-        relevant=false;
+    public TermEvaluationVO(){
+        super("example","domain","user");
+        this.term="example";
+        this.relevant=false;
     }
 
     public String getTerm() {
@@ -36,14 +33,6 @@ public class TermEvaluationVO extends OntologyVO{
 
     public void setTerm(String term) {
         this.term = term;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public boolean isRelevant() {

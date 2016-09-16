@@ -63,6 +63,16 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
     }
 
     @Override
+    public ArrayList<OntologyVO> getOntologiesByUser(String name) {
+        try{
+            return (ArrayList<OntologyVO>)ontoDAO.queryForEq("User",name);
+        }catch (SQLException e){
+            System.out.println("Error en OntologyImpl, recuperar"+ e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
     public void updateOntology(OntologyVO o) {
         try{
             ontoDAO.executeRaw("delete from Ontologies where Ontology='"+o.getName()+"';");

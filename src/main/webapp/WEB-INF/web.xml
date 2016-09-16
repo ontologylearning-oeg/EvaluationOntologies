@@ -29,6 +29,10 @@
         <servlet-name>EvaluatedRelations</servlet-name>
         <servlet-class>com.ontoeval.controller.EvaluatedRelations</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadAdmin</servlet-name>
+        <servlet-class>com.ontoeval.controller.LoadAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoadFile</servlet-name>
         <url-pattern>/LoadFile</url-pattern>
@@ -52,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>EvaluatedRelations</servlet-name>
         <url-pattern>/EvaluatedRelations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadAdmin</servlet-name>
+        <url-pattern>/LoadAdmin</url-pattern>
     </servlet-mapping>
 
 </web-app>

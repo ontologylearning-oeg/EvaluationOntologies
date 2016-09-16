@@ -1,6 +1,7 @@
 package com.ontoeval.controller;
 
-import com.ontoeval.controller.services.OntologyHelper;
+import com.ontoeval.controller.services.AdminHelper;
+import com.ontoeval.model.UserVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,30 +11,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 /**
- * Created by dchavesf on 1/09/16.
+ * Created by dchavesf on 16/09/16.
  */
-public class LoadOntology extends HttpServlet {
+public class LoadAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean flag=true;
-        String name = request.getParameter("user");
+        String name = request.getParameter("name");
         try{
-            OntologyHelper helper = new OntologyHelper(request);
-            flag=helper.loadOntologies(name);
+            AdminHelper helper = new AdminHelper(request);
+            flag=helper.loadAdmin(name);
         }catch (SQLException e){
             System.out.println("Error en LoadOntology "+e.getMessage());
         }
         if(flag==false){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
-        else {
-            String page;
-            if (name != null) {
-                page = "./eval/admin.jsp";
-            } else {
-                page = "./eval/index.jsp";
-            }
-            response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write(page);
         }
     }
 

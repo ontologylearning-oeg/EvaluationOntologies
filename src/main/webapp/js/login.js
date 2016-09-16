@@ -5,7 +5,6 @@
 $( document ).ready(function(){
     $(".button-collapse").sideNav();
     $(".download").click();
-
 });
 
 $(document).ajaxStop($.unblockUI);
@@ -52,17 +51,18 @@ function login(signup) {
 
 }
 
-function loadOntos() {
+function loadOntos(a) {
     $.ajax({
         beforeSend: function(){
             $.blockUI({ message: null });
         },
         type: "POST",
         timeout: 50000,
+        data: {"user": a},
         url: "/LoadOntology",
         cache: false,
         success: function (data) {
-            changePage("./eval/index.jsp")
+            changePage(data)
         },
         error: function (){
             swal({
@@ -75,6 +75,8 @@ function loadOntos() {
     });
 }
 
+
+
 function  changeToLogin(flag) {
     if(flag=="on"){
         $("#login").remove();
@@ -83,6 +85,8 @@ function  changeToLogin(flag) {
         $("#slide-out").append('<li><a id="auxUpload" onclick="changePage(\'uploadfile.jsp\');">Upload File</a></li>');
         $("#nav-mobile").append('<li><a id="ontos" onclick="loadOntos();">Ontologies</a></li>');
         $("#slide-out").append('<li><a id="auxontos" onclick="loadOntos();">Ontologies</a></li>');
+        $("#nav-mobile").append('<li><a id="admin" onclick="loadOntos(\'name\')">Admin</a></li>');
+        $("#slide-out").append('<li><a id="auxAdmin" onclick="loadOntos(\'name\')">Admin</a></li>');
         $("#nav-mobile").append('<li id="logout"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#slide-out").append('<li id="logoutaux"><a onclick="changeToLogin(\'off\')">Log out</a></li>');
         $("#enlace").removeAttr('href');
@@ -103,6 +107,8 @@ function  changeToLogin(flag) {
                 $("#logoutaux").remove();
                 $("#upload").remove();
                 $("#auxUpload").remove();
+                $("#admin").remove();
+                $("#auxAdmin").remove();
                 $("#ontos").remove();
                 $("#auxontos").remove();
                 $("#nav-mobile").append('<li><a id="login" onclick="changePage(\'login.jsp\');">Login</a></li>');

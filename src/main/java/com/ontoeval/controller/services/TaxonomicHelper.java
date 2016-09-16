@@ -32,7 +32,7 @@ public class TaxonomicHelper {
         return relations.getRelations(o);
     }
 
-    public boolean loadRelations(String text, String filename, String domain){
+    public boolean loadRelations(String text, String filename, String domain, String user){
         ArrayList<RelationVO> relationsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         String term = tokenizer.nextToken();
@@ -42,13 +42,13 @@ public class TaxonomicHelper {
         tokenizer.nextToken();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
-            RelationVO relation = new RelationVO(filename,tokenizer1.nextToken(),tokenizer1.nextToken(),domain,false);
+            RelationVO relation = new RelationVO(filename,tokenizer1.nextToken(),tokenizer1.nextToken(),domain,false,user);
             relationsaux.add(relation);
         }
         return relations.insertRelations(relationsaux);
     }
 
-    public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology){
+    public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology, String user){
         ArrayList<RelationVO> flag = relations.getRandomRelations(ontology.getName());
         if(flag.size()==0) {
             ArrayList<RelationVO> randomRelations = new ArrayList<>();
@@ -57,8 +57,8 @@ public class TaxonomicHelper {
                     TermVO t = relevant.get(j);
                     TermVO aux = relevant.get(i);
                     if(t.getWord()!=aux.getWord()){
-                        RelationVO r = new RelationVO(ontology.getName(), t.getWord(), aux.getWord(), ontology.getDomain(), true);
-                        RelationVO r2 = new RelationVO(ontology.getName(), aux.getWord(), t.getWord(), ontology.getDomain(), true);
+                        RelationVO r = new RelationVO(ontology.getName(), t.getWord(), aux.getWord(), ontology.getDomain(), true,user);
+                        RelationVO r2 = new RelationVO(ontology.getName(), aux.getWord(), t.getWord(), ontology.getDomain(), true,user);
                         randomRelations.add(r);randomRelations.add(r2);
                     }
                 }

@@ -36,3 +36,29 @@ function loadOntology(name) {
         }
     });
 }
+
+
+
+function loadAdmin(a){
+    $.ajax({
+        beforeSend: function(){
+            $.blockUI({ message: null });
+        },
+        type: "POST",
+        timeout: 50000,
+        data:{"name":a},
+        url: "/LoadAdmin",
+        cache: false,
+        success: function (data) {
+            $("#contenido").load("./eval/ontoAdmin.jsp");
+        },
+        error: function (){
+            swal({
+                title: "Oops...",
+                text: "There is not ontologies for evaluating",
+                type: "error",
+                confirmButtonColor: "#2bbbad",
+                confirmButtonText: "OK" });
+        }
+    });
+}

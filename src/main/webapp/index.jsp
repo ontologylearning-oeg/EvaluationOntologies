@@ -31,11 +31,11 @@
         <a id="enlace" href="index.jsp" class="brand-logo">DrOntoEval: Evaluation of Ontology Learning</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
-            <li><a id="login" onclick="changePage('login.jsp');">Login</a></li>
+            <li><a id="login" onclick="changePage('login.jsp');">Login/Signup</a></li>
         </ul>
         <ul id="slide-out" class="side-nav">
             <li><a href="files/demo.csv" download class="download">Download dataset template</a></li>
-            <li><a id="loginaux" onclick="changePage('login.jsp');">Login</a> </li>
+            <li><a id="loginaux" onclick="changePage('login.jsp');">Login/Signup</a></li>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">reorder</i></a>
     </div>

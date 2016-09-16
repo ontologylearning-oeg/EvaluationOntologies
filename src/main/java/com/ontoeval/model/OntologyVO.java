@@ -16,17 +16,21 @@ public class OntologyVO {
     private String domain;
     @DatabaseField(columnName="State", canBeNull = false)
     private String state;
+    @DatabaseField(columnName="User", canBeNull = false)
+    private String user;
 
-    public OntologyVO(String name, String domain) {
+    public OntologyVO(String name, String domain, String user) {
         StringTokenizer tokenizer = new StringTokenizer(name,".");
         this.name = tokenizer.nextToken();
         this.domain=domain;
+        this.user=user;
         this.state = "Eval lexical layer";
     }
 
     public OntologyVO() {
         this.name = "example";
         this.domain = "example";
+        this.user="user";
         this.state = "Eval lexical layer";
     }
 
@@ -45,4 +49,12 @@ public class OntologyVO {
     public String getState() { return state; }
 
     public void setState(String state) { this.state = state; }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }

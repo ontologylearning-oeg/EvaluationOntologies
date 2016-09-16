@@ -13,38 +13,40 @@ public class TermVO extends OntologyVO{
     @DatabaseField(columnName="term",canBeNull=false)
     private String word;
     @DatabaseField(columnName="isRelevant")
-    private boolean isRelevant;
+    private boolean relevant;
     @DatabaseField(columnName="isGS")
     private boolean isGoldStandad;
     @DatabaseField(columnName = "isControl")
-    private boolean isControl;
+    private boolean control;
     @DatabaseField(columnName = "yes")
     private Integer yes;
     @DatabaseField(columnName = "no")
     private Integer no;
 
-    public TermVO(String word, String ontology, String domain, String control, String isRelevant) {
-        super(ontology, domain);
+    public TermVO(String word, String ontology, String domain, String control, String isRelevant,String user) {
+        super(ontology, domain,user);
         this.word = word;
         if(isRelevant.equals("yes"))
-            this.isRelevant=true;
+            this.relevant=true;
         else
-            this.isRelevant=false;
+            this.relevant=false;
         if(control.equals("yes")){
-            this.isControl=true;
+            this.control=true;
         }
         else{
-            this.isControl=false;
+            this.control=false;
         }
 
         this.isGoldStandad=false;
+        this.yes=0;
+        this.no=0;
     }
 
     public TermVO(){
-        super("example", "example");
+        super("example", "example","user");
         this.word="example";
-        this.isRelevant=true;
-        this.isControl=false;
+        this.relevant=true;
+        this.control=false;
         this.isGoldStandad=false;
     }
 
@@ -56,13 +58,13 @@ public class TermVO extends OntologyVO{
         this.word = word;
     }
 
-    public boolean isRelevant() { return isRelevant; }
+    public boolean getRelevant() { return relevant; }
 
-    public void setRelevant(boolean relevant) { isRelevant = relevant; }
+    public void setRelevant(boolean relevant) { this.relevant = relevant; }
 
-    public boolean isControl() {return isControl;}
+    public boolean getControl() {return control;}
 
-    public void setControl(boolean control) { isControl = control; }
+    public void setControl(boolean control) { this.control = control; }
 
     public Integer getYes() {
         return yes;

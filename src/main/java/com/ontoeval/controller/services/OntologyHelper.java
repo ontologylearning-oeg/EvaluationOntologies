@@ -29,17 +29,26 @@ public class OntologyHelper {
         ontology = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
-    public boolean loadOntologies(){
-        ServletContext context = request.getSession().getServletContext();
-        ArrayList<OntologyVO> onts = ontology.recuperarOntologias();
-        if(onts==null || onts.size()==0){
-            return false;
+    public boolean loadOntologies(String name){
+        HttpSession context = request.getSession();
+        if(name!=null){
+            ArrayList<OntologyVO> onts = ontology.getOntologiesByUser(((UserVO)context.getAttribute("user")).getEmail());
+            if (onts == null || onts.size() == 0) {
+                return false;
+            } else {
+                context.setAttribute("userOnts", onts);
+                return true;
+            }
         }
-        else{
-            context.setAttribute("ontos",onts);
-            return true;
+        else {
+            ArrayList<OntologyVO> onts = ontology.recuperarOntologias();
+            if (onts == null || onts.size() == 0) {
+                return false;
+            } else {
+                context.setAttribute("ontos", onts);
+                return true;
+            }
         }
-
     }
 
     public String loadFeatures(String name){
@@ -51,7 +60,7 @@ public class OntologyHelper {
             page=lexical.comprobarLexical(o,user);
         if(o.getState().equals("Eval Taxonomic Layer")) {
             if(lexical.checkUser(o,user)){
-                taxonomic.createGSRelations(lexical.recuperarGS(o), o);
+                taxonomic.createGSRelations(lexical.recuperarGS(o), o,user.getEmail());
                 page = taxonomic.comprobarTaxonomic(o, user);
             }
             else {
@@ -77,9 +86,10 @@ public class OntologyHelper {
 
     public boolean insertOntology(String text, String filename){
         String domain = loadDomain(text);
-        if(!ontology.insertOntology(new OntologyVO(filename, domain)) ||
-                !lexical.loadTerms(text,filename,domain) ||
-                    !taxonomic.loadRelations(text,filename, domain))
+        UserVO u = (UserVO)request.getSession().getAttribute("user");
+        if(!ontology.insertOntology(new OntologyVO(filename, domain,u.getEmail())) ||
+                !lexical.loadTerms(text,filename,domain,u.getEmail()) ||
+                    !taxonomic.loadRelations(text,filename, domain,u.getEmail()))
             return false;
         else{
              return true;

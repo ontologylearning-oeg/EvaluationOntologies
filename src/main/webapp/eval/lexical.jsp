@@ -14,6 +14,24 @@
 <div id="contenido" class="container section">
     <div class="col s12 center-align">
         <h1>Which of these terms strictly belong to the <c:out value="${sessionScope.ontology.domain}"/> domain?</h1>
+
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4 class="center-align">How should I answer the questions?</h4>
+            <p>Here you have some examples of questions you have to answer</p>
+            <dl>
+                <dt type="disc">Does <u><strong>WATER</strong></u> belong to the Computer Graphics domain? </dt>
+                <dd>You have to answer <u><strong>NO</strong></u>, because WATER it is not a term from this domain.</dd>
+                <dt type="disc">Does <u><strong>CARD</strong></u> belong to the Computer Graphics domain? </dt>
+                <dd>You have to answer <u><strong>YES</strong></u>, because CARD references to the graphics cards of the computers.</dd>
+                <dt type="disc">Does <u><strong>DATA</strong></u> belong to the Computer Graphics domain? </dt>
+                <dd>You have to answer <u><strong>NO</strong></u>, because DATA it is not strictly a term from this domain.</dd>
+
+            </dl>
+            <p>Remember, answer <u><strong>YES</strong></u> only if strictly the term belongs to the Computer Graphics domain.</p>
+        </div>
     </div>
     <div class="col s12" style="margin-left: -20px">
             <form action="#">
@@ -39,8 +57,15 @@
                     </c:forEach>
                 </div>
             </form>
-        <div id="boton" class="col s2 center-align">
-            <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
+        <div class="row">
+            <div class="s12">
+            <div id="boton" class="col s2 offset-s4">
+                <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
+            </div>
+            <div class="col s3 offset-s1">
+                <a class="waves-effect waves-light btn modal-trigger" id="modal" href="#modal1">How should I answer?</a>
+            </div>
+            </div>
         </div>
     </div>
 </div>

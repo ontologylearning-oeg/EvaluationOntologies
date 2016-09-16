@@ -39,6 +39,7 @@ public class ResultsHelper {
         MeasureVO measure = calculoLexico();
         measure.setName(o.getName());
         measure.setDomain(o.getDomain());
+        measure.setUser(o.getUser());
         calculoTaxonomico(measure);
         measure.setFkappa(FleissKappa(true));
         measure.setTfkappa(FleissKappa(false));
@@ -75,9 +76,9 @@ public class ResultsHelper {
             if(t.isGoldStandad()){
                 gs++;
             }
-            if(t.isRelevant())
+            if(t.getRelevant())
                 relevant++;
-            if(t.isRelevant() && t.isGoldStandad())
+            if(t.getRelevant() && t.isGoldStandad())
                 both++;
         }
         m.setRecall(both/gs);

@@ -25,18 +25,8 @@ public class MeasureVO extends OntologyVO {
     @DatabaseField(columnName="TFleiss Kappa")
     private double tfkappa;
 
-    public MeasureVO(String name, String domain, double recall, double precision, double fmeasure, double trecall, double tprecision, double tfmeasure) {
-        super(name,domain);
-        this.recall = recall;
-        this.precision = precision;
-        this.fmeasure = fmeasure;
-        this.trecall = trecall;
-        this.tprecision = tprecision;
-        this.tfmeasure = tfmeasure;
-    }
-
-    public MeasureVO() {
-        super("example","example");
+   public MeasureVO() {
+        super("example","example","user");
         this.recall = 0.0;
         this.precision = 0.0;
         this.fmeasure = 0.0;
