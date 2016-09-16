@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by dchavesf on 1/09/16.
  */
 public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements OntologyDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<OntologyVO, Integer> ontoDAO;
 
 

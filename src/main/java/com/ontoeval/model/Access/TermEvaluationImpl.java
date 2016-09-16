@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by dchavesf on 2/09/16.
  */
 public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> implements TermEvaluationDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<TermEvaluationVO, Integer> termEvalDAO;
 
     public TermEvaluationImpl(ConnectionSource connectionSource) throws SQLException {

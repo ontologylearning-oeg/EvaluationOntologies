@@ -28,8 +28,7 @@ $( document ).ready(function(){
                 text: 'Total percent of results'
             },
             min: 0,
-            max: 100,
-            gridLineWidth: 0
+            max: 100
 
         },
         legend: {
@@ -98,8 +97,7 @@ $( document ).ready(function(){
                 text: ''
             },
             min: -1,
-            max: 1,
-            gridLineWidth: 0
+            max: 1
 
         },
         legend: {

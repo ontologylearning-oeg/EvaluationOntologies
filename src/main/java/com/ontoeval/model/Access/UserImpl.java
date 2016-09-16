@@ -7,16 +7,18 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.UserVO;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by dchavesf on 1/09/16.
  */
 public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?autoReconnect=true&useSSL=false";
+    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<UserVO, Integer> userDAO;
 
 
@@ -32,8 +34,9 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
     }
 
     public boolean insertUser(UserVO u){
+        UserVO v = new UserVO(u.getEmail(),DigestUtils.md5Hex(u.getPassword()));
         try{
-            if(userDAO.create(u)==0){
+            if(userDAO.create(v)==0){
                 return false;
             }
         } catch (SQLException ex) {
@@ -45,8 +48,12 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
 
     public boolean checkUser(UserVO u) {
         ArrayList<UserVO> arrayu;
+        String encrypt = DigestUtils.md5Hex(u.getPassword());
+        HashMap<String, Object> map= new HashMap<>();
+        map.put("email",u.getEmail());
+        map.put("pass", encrypt);
         try {
-            arrayu = (ArrayList<UserVO>) userDAO.queryForEq("email", u.getEmail());
+            arrayu = (ArrayList<UserVO>) userDAO.queryForFieldValuesArgs(map);
         }catch (SQLException e){
             System.out.println("Error en importar usuario "+e.getMessage());
             return false;

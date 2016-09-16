@@ -22,6 +22,7 @@ public class RelationVO extends OntologyVO{
     private Integer no;
 
 
+
     public RelationVO(String name, String term1, String term2, String domain, boolean isRandom) {
         super(name,domain);
         this.term1 = term1;
