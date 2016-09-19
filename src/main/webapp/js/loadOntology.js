@@ -55,7 +55,7 @@ function loadAdmin(a){
         error: function (){
             swal({
                 title: "Oops...",
-                text: "There is not ontologies for evaluating",
+                text: "There is a problem with the database",
                 type: "error",
                 confirmButtonColor: "#2bbbad",
                 confirmButtonText: "OK" });

@@ -11,6 +11,10 @@ a {
     cursor:pointer;
 }
 
+.odata{
+    font-size: 150% !important;
+}
+
 .container {
     width: 90% !important;
 }
@@ -21,11 +25,6 @@ body{
 
 #boton{
     margin-top: 20px !important;
-}
-
-
-.antecedent {
-    height: 200px;
 }
 
 tr > td {

@@ -13,7 +13,7 @@
         <h1>Instructions for the evaluation</h1>
     </div>
     <div class="col s2 offset-s5 center-align">
-        <a class="waves-effect waves-light btn" onclick="loadOntos()">BEGIN</a>
+        <a class="waves-effect waves-light btn" onclick="loadOntos()">Continue</a>
     </div>
 
 

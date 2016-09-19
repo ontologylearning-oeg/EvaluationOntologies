@@ -8,7 +8,6 @@ import com.ontoeval.model.TermVO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -36,8 +35,8 @@ public class AdminHelper {
         ArrayList<TermVO> t = terms.loadTerms(o.getName());
         ArrayList<TermEvaluationVO> teval = evalTerms.evaluatedTerms(o.getName());
         yesandno(t,(ArrayList<TermEvaluationVO>)teval.clone());
-        admin.setTerms(terms.loadNormal(o.getName()));
-        admin.setNterms(t.size());
+        admin.setTerms(t);
+        admin.setNterms(terms.loadNormal(o.getName()).size());
         admin.setNevaluations(t.size()*5);
         admin.setNcontrol(terms.loadControl(o.getName()).size());
         admin.setNevaluators(countEvaluators(teval));

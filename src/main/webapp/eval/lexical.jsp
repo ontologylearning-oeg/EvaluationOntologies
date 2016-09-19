@@ -27,7 +27,7 @@
                 <dt type="disc">Does <u><strong>CARD</strong></u> belong to the Computer Graphics domain? </dt>
                 <dd>You have to answer <u><strong>YES</strong></u>, because CARD references to the graphics cards of the computers.</dd>
                 <dt type="disc">Does <u><strong>DATA</strong></u> belong to the Computer Graphics domain? </dt>
-                <dd>You have to answer <u><strong>NO</strong></u>, because DATA it is not strictly a term from this domain.</dd>
+                <dd>You have to answer <u><strong>NO</strong></u>, because DATA is not strictly a term from this domain.</dd>
 
             </dl>
             <p>Remember, answer <u><strong>YES</strong></u> only if strictly the term belongs to the Computer Graphics domain.</p>
@@ -57,15 +57,14 @@
                     </c:forEach>
                 </div>
             </form>
-        <div class="row">
-            <div class="s12">
-            <div id="boton" class="col s2 offset-s4">
-                <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
-            </div>
-            <div class="col s3 offset-s1">
-                <a class="waves-effect waves-light btn modal-trigger" id="modal" href="#modal1">How should I answer?</a>
-            </div>
-            </div>
+    </div>
+    <div class="row">
+        <div id="boton" class="col s3 offset-s4">
+            <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
+        </div>
+        <div class="col s3" style="margin-top: 20px;margin-left: -50px;">
+            <a class="waves-effect waves-light btn modal-trigger" id="modal" href="#modal1">How should I answer?</a>
         </div>
     </div>
+
 </div>

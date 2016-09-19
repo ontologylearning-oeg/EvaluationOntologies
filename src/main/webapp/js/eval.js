@@ -4,10 +4,9 @@
 
 $(document).ajaxStop($.unblockUI);
 
+
 $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $("#modal").leanModal();
-    $('#modal1').openModal();
 });
 
 var terms=[];
