@@ -40,20 +40,33 @@ public class AdminHelper {
         admin.setNevaluations(t.size()*5);
         admin.setNcontrol(terms.loadControl(o.getName()).size());
         admin.setNevaluators(countEvaluators(teval));
-        admin.setComplete((double)teval.size()/(double)admin.getNevaluations());
+        if(admin.getNevaluations()!=0)
+            admin.setComplete((double)teval.size()/(double)admin.getNevaluations());
+        else
+            admin.setComplete(0.0);
+        admin.setOntology(o.getName());
         request.getSession().setAttribute("admin",admin);
         return true;
     }
 
+    public boolean removeOntology(String name){
+        return ontos.removeOntology(name);
+    }
+
     private Integer countEvaluators(ArrayList<TermEvaluationVO> teval){
         ArrayList<String> users= new ArrayList<>();
-        users.add(teval.get(0).getUser());
-        for(TermEvaluationVO t: teval){
-            if(!users.contains(t.getUser())){
-                users.add(t.getUser());
+        if(teval.size()>0){
+            users.add(teval.get(0).getUser());
+            for(TermEvaluationVO t: teval){
+                if(!users.contains(t.getUser())){
+                    users.add(t.getUser());
+                }
             }
+            return users.size();
         }
-        return users.size();
+        else
+            return 0;
+
     }
 
 

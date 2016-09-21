@@ -1,12 +1,13 @@
 package com.ontoeval.model;
 
-import java.sql.Array;
+
 import java.util.ArrayList;
 
 /**
  * Created by dchavesf on 16/09/16.
  */
 public class AdminVO {
+    private String ontology;
     private Integer nevaluators;
     private Integer nterms;
     private Integer ncontrol;
@@ -75,5 +76,13 @@ public class AdminVO {
         for(TermVO t: terms){
             this.terms.add(t);
         }
+    }
+
+    public String getOntology() {
+        return ontology;
+    }
+
+    public void setOntology(String ontology) {
+        this.ontology = ontology;
     }
 }

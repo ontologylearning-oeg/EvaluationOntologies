@@ -3,6 +3,8 @@
  */
 
 $(document).ajaxStop($.unblockUI);
+
+
 function loadOntology(name) {
     $.ajax({
         beforeSend: function(){
@@ -51,6 +53,30 @@ function loadAdmin(a){
         cache: false,
         success: function (data) {
             $("#contenido").load("./eval/ontoAdmin.jsp");
+        },
+        error: function (){
+            swal({
+                title: "Oops...",
+                text: "There is a problem with the database",
+                type: "error",
+                confirmButtonColor: "#2bbbad",
+                confirmButtonText: "OK" });
+        }
+    });
+}
+
+function removeOntology(a){
+    $.ajax({
+        beforeSend: function(){
+            $.blockUI({ message: null });
+        },
+        type: "POST",
+        timeout: 50000,
+        data:{"name":a,"remove":true},
+        url: "/LoadAdmin",
+        cache: false,
+        success: function (data) {
+            $("#contenido").load("./instructions.jsp");
         },
         error: function (){
             swal({

@@ -7,6 +7,7 @@ $(document).ajaxStop($.unblockUI);
 
 $(document).ready(function(){
     $("#modal").leanModal();
+    //  $('#modal1').openModal();
 });
 
 var terms=[];

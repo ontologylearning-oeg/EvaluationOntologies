@@ -15,5 +15,6 @@ public interface OntologyDAO {
     OntologyVO recuperarOntologias(String name);
     ArrayList<OntologyVO> getOntologiesByUser(String name);
     void updateOntology(OntologyVO o);
+    boolean removeOntology(String name);
 
 }

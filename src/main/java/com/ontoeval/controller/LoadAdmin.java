@@ -17,9 +17,13 @@ public class LoadAdmin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean flag=true;
         String name = request.getParameter("name");
+        String r = request.getParameter("remove");
         try{
             AdminHelper helper = new AdminHelper(request);
-            flag=helper.loadAdmin(name);
+            if(r==null)
+                flag=helper.loadAdmin(name);
+            else
+                flag= helper.removeOntology(name);
         }catch (SQLException e){
             System.out.println("Error en LoadOntology "+e.getMessage());
         }
