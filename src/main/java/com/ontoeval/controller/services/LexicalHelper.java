@@ -16,11 +16,13 @@ import java.util.StringTokenizer;
 public class LexicalHelper {
     private final HttpServletRequest request;
     private final TermDAO terms;
+    private final UserDAO user;
     private final TermEvaluationDAO evalTerms;
 
     public LexicalHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
         terms = new TermImpl(TermImpl.CrearConexion());
+        user = new UserImpl(UserImpl.CrearConexion());
         evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
     }
 
@@ -130,12 +132,16 @@ public class LexicalHelper {
                 }
             }
         }
-        if(control.size()>0 && (c/control.size())<0.7){
-            evalTerms.deleteTerms(tevalu.get(0).getUser());
-            return false;
+        if(tevalu.size()>0){
+            if(control.size()>0 && ((double)c/(double)control.size())<0.7){
+                evalTerms.deleteTerms(tevalu.get(0).getUser());
+                return false;
+            }
+            else
+                return true;
         }
         else
-            return true;
+            return false;
     }
 
     public boolean checkUser (OntologyVO o,UserVO u){

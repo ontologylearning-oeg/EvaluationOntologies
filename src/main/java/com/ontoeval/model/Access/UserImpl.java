@@ -65,4 +65,5 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
             return true;
         }
     }
+
 }
