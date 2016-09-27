@@ -67,7 +67,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     }
 
     public ArrayList<RelationVO> getRandomRelations(String ontology) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         m.put("isRandom", true);
         try{

@@ -34,7 +34,7 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
 
 
     public ArrayList<RelationEvaluationVO> getEvaluatedRelations(String ontology, String user) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         m.put("User", user);
         try{
@@ -46,7 +46,7 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
     }
 
     public ArrayList<RelationEvaluationVO> getEvaluatedRelations(String ontology) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         try{
             return (ArrayList<RelationEvaluationVO>)relationEvalDAO.queryForFieldValuesArgs(m);

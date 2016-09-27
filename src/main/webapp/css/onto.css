@@ -19,6 +19,10 @@ a {
     width: 90% !important;
 }
 
+li{
+    margin-bottom: 10px !important;
+}
+
 body{
     background-color:#c6e0e8;
 }
