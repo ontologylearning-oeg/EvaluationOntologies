@@ -18,12 +18,14 @@ public class LexicalHelper {
     private final TermDAO terms;
     private final TermEvaluationDAO evalTerms;
     private final UserEvalDAO userEval;
+    private final OntologyDAO ont;
 
     public LexicalHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
         terms = new TermImpl(TermImpl.CrearConexion());
         evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
         userEval = new UserEvalImpl(UserEvalImpl.CrearConexion());
+        ont = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
     public String saveTerms(String text){
@@ -57,8 +59,18 @@ public class LexicalHelper {
         }
         if(termsForEval(t))
             return "./eval/lexical.jsp";
-        else
-            return null;
+        else{
+            //comprobar el usuario
+            String p= comprobarLexical(ontology,user);
+            if(p!=null && p.equals("relations")){
+                ont.updateOntology(ontology);
+                return null;
+            }
+            else{
+                return p;
+            }
+        }
+
     }
 
     public String comprobarLexical(OntologyVO ontology, UserVO user){
@@ -81,13 +93,21 @@ public class LexicalHelper {
             }
             else{
                 if(u==null){
-                    UserEvalVO ue = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
-                    userEval.insert(ue);
+                    u = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
+                    userEval.insert(u);
                 }
-                return null;
+                if(u.isValid())
+                    return null;
+                else
+                    return "notUser";
             }
         }
         else{
+            if(u==null){
+                u = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
+                userEval.insert(u);
+            }
+
             if(u.isValid()){
                 rellenarTermsBD(t,teval);
                 ontology.setState("Eval Taxonomic Layer");

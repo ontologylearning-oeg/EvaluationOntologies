@@ -46,7 +46,17 @@ function sendAnswers(servlet) {
             if(data=="./eval/index.jsp"){
                 Materialize.toast("You've finished this part of the evaluation!", 2000, 'rounded');
             }
+            else if(data=="notUser"){
+                swal({
+                    title: "Oops...",
+                    text: "You are not a valid user for this evaluation",
+                    type: "error",
+                    confirmButtonColor: "#2bbbad",
+                    confirmButtonText: "OK" });
+                data="./eval/index.jsp";
+            }
             $("#contenido").load(data);
+
         },
         error: function (){
             swal({

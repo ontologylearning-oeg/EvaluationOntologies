@@ -108,7 +108,7 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
 
     @Override
     public ArrayList<TermVO> loadControl(String ontology) {
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         m.put("isControl",true);
         try{

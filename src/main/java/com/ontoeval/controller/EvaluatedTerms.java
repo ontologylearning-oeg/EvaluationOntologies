@@ -1,6 +1,7 @@
 package com.ontoeval.controller;
 
 import com.ontoeval.controller.services.LexicalHelper;
+import com.ontoeval.controller.services.OntologyHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,12 @@ public class EvaluatedTerms extends HttpServlet {
         }
         if(page==null){
             page = "./eval/index.jsp";
+            try{
+                OntologyHelper o = new OntologyHelper(request);
+                o.loadOntologies(null);
+            }catch (SQLException e){
+                System.out.println("Error en EvaluatedTerms "+e.getMessage());
+            }
             response.setContentType("text/html;charset=UTF-8");
             response.getWriter().write(page);
         }

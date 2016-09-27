@@ -8,9 +8,9 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "TaxonomicEvaluation")
 public class RelationEvaluationVO extends OntologyVO {
-    @DatabaseField(columnName="term1",canBeNull=false, uniqueCombo = true)
+    @DatabaseField(columnName="term1",canBeNull=false)
     private String term1;
-    @DatabaseField(columnName="term2",canBeNull=false, uniqueCombo = true)
+    @DatabaseField(columnName="term2",canBeNull=false)
     private String term2;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;

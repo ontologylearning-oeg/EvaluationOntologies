@@ -16,6 +16,7 @@
     <div class="col s8 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
         <p class="center-align" style="font-size: 120%;">
             Welcome to the web application for evaluating the taxonomic and the lexical layer of an ontology learning process.
+            <br>
             The main instructions are:
         </p>
             <ol>

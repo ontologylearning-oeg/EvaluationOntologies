@@ -243,6 +243,7 @@ public class ResultsHelper {
         this.setTerms(h.recuperar(o.getName()));
         MeasureVO m = measure.getMeasure(o);
         caluloLexico(m,value);
+        request.getSession().setAttribute("value",value);
         insertMeasures(o,m);
     }
 
