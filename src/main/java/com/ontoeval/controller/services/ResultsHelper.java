@@ -3,6 +3,7 @@ package com.ontoeval.controller.services;
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.MeasureDAO;
 import com.ontoeval.model.Access.MeasureImpl;
+import com.ontoeval.model.Access.OntologyImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -47,8 +48,12 @@ public class ResultsHelper {
         return "./eval/results.jsp";
     }
 
-    public void insertMeasures(OntologyVO o){
-        MeasureVO m = measure.getMeasure(o);
+    public void insertMeasures(OntologyVO o, MeasureVO m2){
+        MeasureVO m;
+        if(m2==null)
+            m = measure.getMeasure(o);
+        else
+            m= m2;
         ArrayList<SingleMeasure> measures = new ArrayList<>();
         SingleMeasure aux = new SingleMeasure("Recall",m.getRecall());
         measures.add(aux);
@@ -233,5 +238,31 @@ public class ResultsHelper {
         return  (pi-pj)/(1-pj);
     }
 
+    public void changeRelevevance(Integer value, LexicalHelper h){
+        OntologyVO o = (OntologyVO)request.getSession().getAttribute("ontology");
+        this.setTerms(h.recuperar(o.getName()));
+        MeasureVO m = measure.getMeasure(o);
+        caluloLexico(m,value);
+        insertMeasures(o,m);
+    }
+
+    private void caluloLexico(MeasureVO m, Integer value){
+        Double gs=0.0,both=0.0;
+        for(int i=0; i<terms.size();i++){
+            if(i>=value)
+                terms.get(i).setRelevant(false);
+
+            if(terms.get(i).isGoldStandad()){
+                gs++;
+            }
+            //falta el index aquí en el comprobación
+            if(terms.get(i).getRelevant() && terms.get(i).isGoldStandad())
+                both++;
+        }
+        m.setRecall(both/gs);
+        m.setPrecision(both/value);
+        m.setFmeasure((2*(m.getRecall()*m.getPrecision()))/(m.getRecall()+m.getPrecision()));
+
+    }
 
 }

@@ -16,14 +16,14 @@ import java.util.StringTokenizer;
 public class LexicalHelper {
     private final HttpServletRequest request;
     private final TermDAO terms;
-    private final UserDAO user;
     private final TermEvaluationDAO evalTerms;
+    private final UserEvalDAO userEval;
 
     public LexicalHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
         terms = new TermImpl(TermImpl.CrearConexion());
-        user = new UserImpl(UserImpl.CrearConexion());
         evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
+        userEval = new UserEvalImpl(UserEvalImpl.CrearConexion());
     }
 
     public String saveTerms(String text){
@@ -65,8 +65,9 @@ public class LexicalHelper {
         ArrayList<TermVO> t = terms.loadTerms(ontology.getName());
         ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(ontology.getName(),user.getEmail());
         ArrayList<TermEvaluationVO> teval = evalTerms.evaluatedTerms(ontology.getName());
-        if(t.size()!=(teval.size()/5)) { //si no se ha  completado la evaluacion lexica
-            if (t.size() != tevalu.size()) { //aun le falta al usuario terminos por evaluar
+        UserEvalVO u = userEval.check(user.getEmail(), ontology.getName());
+        if(t.size() > (teval.size()/5)) { //si no se ha  completado la evaluacion lexica
+            if (t.size()!=tevalu.size() && u==null) { //aun le falta al usuario terminos por evaluar
                 for(TermEvaluationVO taux: tevalu){
                     for (int i=0; i<t.size();i++){
                         if(taux.getTerm().equals(t.get(i).getWord())){
@@ -75,24 +76,26 @@ public class LexicalHelper {
                         }
                     }
                 }
-                if(termsForEval(t))
-                    return "./eval/lexical.jsp";
-                else
-                    return null;
+                termsForEval(t);
+                return "./eval/lexical.jsp";
             }
             else{
+                if(u==null){
+                    UserEvalVO ue = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
+                    userEval.insert(ue);
+                }
                 return null;
             }
         }
         else{
-            if(checkControl(tevalu,ontology)){
-                    rellenarTermsBD(t,teval);
-                    ontology.setState("Eval Taxonomic Layer");
-                    return "relations";
-                }
-                else{
-                    return null;
-                }
+            if(u.isValid()){
+                rellenarTermsBD(t,teval);
+                ontology.setState("Eval Taxonomic Layer");
+                return "relations";
+            }
+            else{
+                return "notUser";
+            }
         }
 
 
@@ -132,21 +135,18 @@ public class LexicalHelper {
                 }
             }
         }
-        if(tevalu.size()>0){
-            if(control.size()>0 && ((double)c/(double)control.size())<0.7){
-                evalTerms.deleteTerms(tevalu.get(0).getUser());
-                return false;
-            }
-            else
-                return true;
+        if(control.size()>0 && ((double)c/(double)control.size())<0.7){
+            evalTerms.deleteTerms(tevalu.get(0).getUser());
+            return false;
         }
         else
-            return false;
+            return true;
+
+
     }
 
     public boolean checkUser (OntologyVO o,UserVO u){
-        ArrayList<TermEvaluationVO> tevalu = evalTerms.evaluatedTermsUser(o.getName(),u.getEmail());
-        return checkControl(tevalu,o);
+        return userEval.check(u.getEmail(),o.getName()).isValid();
     }
 
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){

@@ -19,20 +19,20 @@
             The main instructions are:
         </p>
             <ol>
-                <li>When you click on the button "Continue" you are going to see the list of ontologies have been uploaded in the database</li>
-                <li>Once you are login into the application you can <strong>upload an ontology</strong></li>
-                <li>You can <strong>download the template of the ontology</strong> at the top of this page</li>
-                <li>Each uploaded ontology has a state:</li>
+                <li class="liI">When you click on the button "Continue" you are going to see the list of ontologies have been uploaded in the database</li>
+                <li class="liI">Once you are login into the application you can <strong>upload an ontology</strong></li>
+                <li class="liI">You can <strong>download the template of the ontology</strong> at the top of this page</li>
+                <li class="liI">Each uploaded ontology has a state:</li>
                 <ol>
-                    <li><strong>Lexical evaluation:</strong> you are going to evaluate terms from a domain</li>
-                    <li><strong>Taxonomic evaluation:</strong> you are going to evaluate taxonomic relations from a domain</li>
-                    <li><strong>See results:</strong> you can see the final results of the evaluation (recall, precision, Fleiss' Kappa...)</li>
+                    <li class="liI"><strong>Lexical evaluation:</strong> you are going to evaluate terms from a domain</li>
+                    <li class="liI"><strong>Taxonomic evaluation:</strong> you are going to evaluate taxonomic relations from a domain</li>
+                    <li class="liI"><strong>See results:</strong> you can see the final results of the evaluation (recall, precision, Fleiss' Kappa...)</li>
                 </ol>
-                <li>Remember to answer correctly the <strong>control questions</strong></li>
-                <li>All of the terms and relations are going to be evaluated for <strong>five different</strong> experts</li>
-                <li>You can not do the taxonomic evaluation if the lexical evaluation has not finished yet </li>
-                <li>You can not see the results if the taxonomic evaluation has not finished yet </li>
-                <li>You can <strong>read our research</strong> about this topic <a href="https://www.dropbox.com/s/hj656db5wcfxazp/ChavesFragaDavid_TFM.pdf?dl=0">at this link</a> (Spanish) or <a href="">at this one</a> (English)</li>
+                <li class="liI">Remember to answer correctly the <strong>control questions</strong></li>
+                <li class="liI">All of the terms and relations are going to be evaluated for <strong>five different</strong> experts</li>
+                <li class="liI">You can not do the taxonomic evaluation if the lexical evaluation has not finished yet </li>
+                <li class="liI">You can not see the results if the taxonomic evaluation has not finished yet </li>
+                <li class="liI">You can <strong>read our research</strong> about this topic <a href="https://www.dropbox.com/s/hj656db5wcfxazp/ChavesFragaDavid_TFM.pdf?dl=0">at this link</a> (Spanish) or <a href="">at this one</a> (English)</li>
             </ol>
 
     </div>

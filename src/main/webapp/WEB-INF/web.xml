@@ -33,6 +33,10 @@
         <servlet-name>LoadAdmin</servlet-name>
         <servlet-class>com.ontoeval.controller.LoadAdmin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeRelevance</servlet-name>
+        <servlet-class>com.ontoeval.controller.ChangeRelevance</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoadFile</servlet-name>
         <url-pattern>/LoadFile</url-pattern>
@@ -60,6 +64,11 @@
     <servlet-mapping>
         <servlet-name>LoadAdmin</servlet-name>
         <url-pattern>/LoadAdmin</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ChangeRelevance</servlet-name>
+        <url-pattern>/ChangeRelevance</url-pattern>
     </servlet-mapping>
 
 </web-app>

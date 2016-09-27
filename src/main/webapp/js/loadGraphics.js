@@ -135,3 +135,31 @@ $( document ).ready(function(){
 
     });
 });
+
+
+$(document).ajaxStop($.unblockUI);
+
+function changeRelevantTerms(){
+    val = $("#test").val();
+    $.ajax({
+        beforeSend: function(){
+            $.blockUI({ message: null });
+        },
+        type: "POST",
+        timeout: 50000,
+        data: {"value": val},
+        url: "/ChangeRelevance",
+        cache: false,
+        success: function (data) {
+            changePage("./eval/results.jsp")
+        },
+        error: function (){
+            swal({
+                title: "Oops...",
+                text: "The relevant terms cant be changed",
+                type: "error",
+                confirmButtonColor: "#2bbbad",
+                confirmButtonText: "OK" });
+        }
+    });
+}
