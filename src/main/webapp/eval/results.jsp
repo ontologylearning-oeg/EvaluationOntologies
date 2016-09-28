@@ -42,15 +42,16 @@
 
 
             <div class="col s8 offset-s2 card-panel teal z-depth-3" style="margin-top:30px;background-color: rgba(248, 187, 134, 0.2)!important">
-            <div class="center-align col s10 offset-s1" style="margin-top: 20px">
-                <h5>Relevance learned terms</h5>
-            </div>
-            <div class="center-align col s10 offset-s1">
-                <form action="#">
-                    <p class="range-field">
-                        <input type="range" id="test" min="0" onchange="changeRelevantTerms()" max="<c:out value="${sessionScope.sterms}"/>" value="<c:out value="${sessionScope.value}"/>"/>
-                    </p>
-                </form>
+                <div class="center-align col s10 offset-s1" style="margin-top: 20px">
+                    <h5>Relevance learned terms</h5>
+                </div>
+                <div class="center-align col s10 offset-s1">
+                    <form action="#">
+                        <p class="range-field">
+                            <input type="range" id="test" min="0" onchange="changeRelevantTerms()" max="<c:out value="${sessionScope.sterms}"/>" value="<c:out value="${sessionScope.value}"/>"/>
+                        </p>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
