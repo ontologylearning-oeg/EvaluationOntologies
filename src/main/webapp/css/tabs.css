@@ -1,0 +1,12 @@
+
+.tabs .indicator{
+    background-color: black !important;
+}
+
+.tabs .tab a{
+    color: black !important;
+}
+
+.tabs .tab a:hover{
+    color: white !important;
+}

@@ -139,6 +139,12 @@ $( document ).ready(function(){
 
 $(document).ajaxStop($.unblockUI);
 
+
+$(document).ready(function(){
+    $('ul.tabs').tabs();
+});
+
+
 function changeRelevantTerms(){
     val = $("#test").val();
     $.ajax({
