@@ -2,8 +2,8 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
+import com.ontoeval.model.Access.Implement.OntologyImpl;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;

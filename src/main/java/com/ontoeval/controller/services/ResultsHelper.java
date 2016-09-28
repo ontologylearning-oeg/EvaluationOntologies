@@ -2,8 +2,7 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.MeasureDAO;
-import com.ontoeval.model.Access.MeasureImpl;
-import com.ontoeval.model.Access.OntologyImpl;
+import com.ontoeval.model.Access.Implement.MeasureImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

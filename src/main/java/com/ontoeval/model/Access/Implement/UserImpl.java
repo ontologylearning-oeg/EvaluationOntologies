@@ -1,4 +1,4 @@
-package com.ontoeval.model.Access;
+package com.ontoeval.model.Access.Implement;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.Dao;
@@ -6,6 +6,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.ontoeval.model.Access.UserDAO;
 import com.ontoeval.model.UserVO;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -17,7 +18,7 @@ import java.util.HashMap;
 /**
  * Created by dchavesf on 1/09/16.
  */
-public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO  {
+public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<UserVO, Integer> userDAO;
 

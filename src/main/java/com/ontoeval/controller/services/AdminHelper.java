@@ -1,6 +1,9 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.Access.*;
+import com.ontoeval.model.Access.Implement.OntologyImpl;
+import com.ontoeval.model.Access.Implement.TermEvaluationImpl;
+import com.ontoeval.model.Access.Implement.TermImpl;
 import com.ontoeval.model.AdminVO;
 import com.ontoeval.model.OntologyVO;
 import com.ontoeval.model.TermEvaluationVO;

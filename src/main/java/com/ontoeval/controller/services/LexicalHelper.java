@@ -2,6 +2,10 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
+import com.ontoeval.model.Access.Implement.OntologyImpl;
+import com.ontoeval.model.Access.Implement.TermEvaluationImpl;
+import com.ontoeval.model.Access.Implement.TermImpl;
+import com.ontoeval.model.Access.Implement.UserEvalImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

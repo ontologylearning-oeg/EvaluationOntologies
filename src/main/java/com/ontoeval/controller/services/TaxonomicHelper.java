@@ -3,8 +3,8 @@ package com.ontoeval.controller.services;
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.RelationDAO;
 import com.ontoeval.model.Access.RelationEvaluationDAO;
-import com.ontoeval.model.Access.RelationEvaluationImpl;
-import com.ontoeval.model.Access.RelationImpl;
+import com.ontoeval.model.Access.Implement.RelationEvaluationImpl;
+import com.ontoeval.model.Access.Implement.RelationImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

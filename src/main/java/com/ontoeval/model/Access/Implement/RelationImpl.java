@@ -1,4 +1,4 @@
-package com.ontoeval.model.Access;
+package com.ontoeval.model.Access.Implement;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.dao.Dao;
@@ -6,6 +6,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.ontoeval.model.Access.RelationDAO;
 import com.ontoeval.model.RelationVO;
 
 import java.io.IOException;

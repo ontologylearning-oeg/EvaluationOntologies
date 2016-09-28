@@ -1,7 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.Access.UserDAO;
-import com.ontoeval.model.Access.UserImpl;
+import com.ontoeval.model.Access.Implement.UserImpl;
 import com.ontoeval.model.UserVO;
 
 import javax.servlet.http.HttpServletRequest;

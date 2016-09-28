@@ -1,5 +1,16 @@
 Domain;Computer Graphics;
 Lexical;Control;isRelevant
+bootle;yes;no
+table;yes;no
+plane;yes;no
+headphones;yes;no
+chair;yes;no
+boat;yes;no
+bike;yes;no
+car;yes;no
+water;yes;no
+alcohol;yes;no
+Taxonomic;;
 graphics;no;yes
 results;no;yes
 images;no;yes
@@ -104,16 +115,7 @@ normals;no;yes
 variations;no;yes
 levels;no;yes
 sets;no;yes
-bootle;yes;no
-table;yes;no
-plane;yes;no
-headphones;yes;no
-chair;yes;no
-boat;yes;no
-bike;yes;no
-car;yes;no
-water;yes;no
-alcohol;yes;no
-Taxonomic;;
 sublcass;class;
-graphics;results;
+graphics;images;
+points;graphics;
+angles;graphics
