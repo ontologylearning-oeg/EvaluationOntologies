@@ -149,17 +149,18 @@ public class LexicalHelper {
 
     public boolean checkControl(ArrayList<TermEvaluationVO> tevalu, OntologyVO ontology){
         ArrayList<TermVO> control = terms.loadControl(ontology.getName());
-        Integer c=0;
+        Integer c=0, ncontrol=0;
         for(TermVO auxc: control){
             for(TermEvaluationVO auxt:tevalu){
                 if(auxc.getWord().equals(auxt.getTerm())){
                     if(auxc.getRelevant()==auxt.isRelevant()){
                         c++;
                     }
+                    ncontrol++;
                 }
             }
         }
-        if(control.size()>0 && ((double)c/(double)control.size())<0.7){
+        if((ncontrol!=control.size()) || (control.size()>0 && ((double)c/(double)control.size())<0.7)){
             evalTerms.deleteTerms(tevalu.get(0).getUser());
             return false;
         }
@@ -170,7 +171,13 @@ public class LexicalHelper {
     }
 
     public boolean checkUser (OntologyVO o,UserVO u){
-        return userEval.check(u.getEmail(),o.getName()).isValid();
+        UserEvalVO ueval = userEval.check(u.getEmail(),o.getName());
+        if(ueval==null){
+            return false;
+        }
+        else{
+            return ueval.isValid();
+        }
     }
 
     public void rellenarTermsBD(ArrayList<TermVO> t, ArrayList<TermEvaluationVO> teval){

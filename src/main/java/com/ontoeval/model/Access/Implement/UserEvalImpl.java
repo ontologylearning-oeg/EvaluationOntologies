@@ -63,4 +63,17 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
             return arrayu.get(0);
         }
     }
+
+    @Override
+    public Integer nUsers(String ontology) {
+        HashMap<String, Object> map= new HashMap<>();
+        map.put("ontology",ontology);
+        map.put("valid", false);
+        try {
+            return userEvalDAO.queryForFieldValues(map).size();
+        }catch (SQLException e){
+            System.out.println("Error en importar usuario "+e.getMessage());
+            return 0;
+        }
+    }
 }

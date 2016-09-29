@@ -20,8 +20,8 @@
             The main instructions are:
         </p>
             <ol>
-                <li class="liI">When you click on the button "Continue" you are going to see the list of ontologies have been uploaded in the database</li>
-                <li class="liI">Once you are login into the application you can <strong>upload an ontology</strong></li>
+                <li class="liI">When you click on the button "Continue" you are going to see the uploaded ontologies in the database</li>
+                <li class="liI">Once you are login into the application you can <strong>upload your learned ontology</strong></li>
                 <li class="liI">You can <strong>download the template of the ontology</strong> at the top of this page</li>
                 <li class="liI">Each uploaded ontology has a state:</li>
                 <ol>

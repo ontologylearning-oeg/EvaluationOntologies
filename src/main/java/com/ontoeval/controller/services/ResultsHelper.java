@@ -27,7 +27,7 @@ public class ResultsHelper {
         measure = new MeasureImpl(MeasureImpl.CrearConexion());
     }
 
-    public void setTerms(ArrayList<TermVO> terms) {
+        public void setTerms(ArrayList<TermVO> terms) {
         this.terms = terms;
     }
 
@@ -255,7 +255,6 @@ public class ResultsHelper {
             if(terms.get(i).isGoldStandad()){
                 gs++;
             }
-            //falta el index aquí en el comprobación
             if(terms.get(i).getRelevant() && terms.get(i).isGoldStandad())
                 both++;
         }

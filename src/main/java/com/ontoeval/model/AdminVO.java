@@ -13,6 +13,7 @@ public class AdminVO {
     private Integer ncontrol;
     private Integer nevaluations;
     private Double complete;
+    private Integer tevaluators;
     private ArrayList<TermVO> terms;
 
     public AdminVO(Integer nevaluators, Integer nterms, Integer ncontrol, Integer nevaluations, Double complete, ArrayList<TermVO> terms) {
@@ -84,5 +85,13 @@ public class AdminVO {
 
     public void setOntology(String ontology) {
         this.ontology = ontology;
+    }
+
+    public Integer getTevaluators() {
+        return tevaluators;
+    }
+
+    public void setTevaluators(Integer tevaluators) {
+        this.tevaluators = tevaluators;
     }
 }

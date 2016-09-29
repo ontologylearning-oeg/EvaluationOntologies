@@ -17,8 +17,8 @@
             <h1>Admin your Ontology</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col s3 offset-s1 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
+    <div class="row" style="margin-left: 70px;">
+        <div class="col s3 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
             <div class="odata">
                 <p class="center-align"><c:out value="${sessionScope.admin.nterms}"/></p>
                 <p class="card-title center-align">Terms</p>
@@ -36,18 +36,22 @@
                 <p class="card-title center-align">Distinct experts</p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col s3 offset-s2 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
+        <div class="col s3 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
             <div class="odata">
                 <p class="center-align"><fmt:formatNumber type="percent" maxFractionDigits="2" value="${sessionScope.admin.complete}"/></p>
                 <p class="card-title center-align">Complete</p>
             </div>
         </div>
-        <div class="col s3 offset-s2 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
+        <div class="col s3 offset-s1 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
             <div class="odata">
                 <p class="center-align"><c:out value="${sessionScope.admin.nevaluations}"/></p>
                 <p class="card-title center-align">Total evaluations</p>
+            </div>
+        </div>
+        <div class="col s3 offset-s1 card-panel teal" style="background-color: rgba(248, 187, 134, 0.2)!important">
+            <div class="odata">
+                <p class="center-align"><c:out value="${sessionScope.admin.tevaluators}"/></p>
+                <p class="card-title center-align">Untrusted evaluators</p>
             </div>
         </div>
     </div>

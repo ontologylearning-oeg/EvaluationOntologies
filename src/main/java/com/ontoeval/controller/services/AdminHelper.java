@@ -4,6 +4,7 @@ import com.ontoeval.model.Access.*;
 import com.ontoeval.model.Access.Implement.OntologyImpl;
 import com.ontoeval.model.Access.Implement.TermEvaluationImpl;
 import com.ontoeval.model.Access.Implement.TermImpl;
+import com.ontoeval.model.Access.Implement.UserEvalImpl;
 import com.ontoeval.model.AdminVO;
 import com.ontoeval.model.OntologyVO;
 import com.ontoeval.model.TermEvaluationVO;
@@ -23,12 +24,14 @@ public class AdminHelper {
     private final TermEvaluationDAO evalTerms;
     private final OntologyDAO ontos;
     private AdminVO admin;
+    private UserEvalDAO userEval;
 
     public AdminHelper(HttpServletRequest request) throws SQLException, IOException {
         this.request=request;
         terms = new TermImpl(TermImpl.CrearConexion());
         ontos = new OntologyImpl(OntologyImpl.CrearConexion());
         evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
+        userEval=new UserEvalImpl(UserEvalImpl.CrearConexion());
         admin = new AdminVO();
     }
 
@@ -40,6 +43,7 @@ public class AdminHelper {
         yesandno(t,(ArrayList<TermEvaluationVO>)teval.clone());
         admin.setTerms(t);
         admin.setNterms(terms.loadNormal(o.getName()).size());
+        admin.setTevaluators(userEval.nUsers(ontology));
         admin.setNevaluations(t.size()*5);
         admin.setNcontrol(terms.loadControl(o.getName()).size());
         admin.setNevaluators(countEvaluators(teval));

@@ -92,6 +92,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
            ontoDAO.executeRaw("delete from Measure where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from LexicalEvaluation where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from TaxonomicEvaluation where Ontology='"+name+"';");
+           ontoDAO.executeRaw("delete from UserEval where ontology='"+name+"';");
            return true;
        }catch (SQLException e){
            System.out.println("Error en OntologyImpl, removeOntology "+ e.getMessage());
