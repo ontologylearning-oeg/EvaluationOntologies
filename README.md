@@ -1,7 +1,6 @@
 # EvaluationOntologies
-Webapp for do the Evaluation of Ontology Learning 
+Deploy target/EvaluationOntologies.war into an Apache Tomcat
 
-Deploy Evaluation Ontologies war into an Apache Tomcat
 Create a database call DrOntoEval
 
 Run your server ;)
