@@ -56,7 +56,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
 
     public OntologyVO recuperarOntologias(String name){
         try{
-            return ontoDAO.queryForEq("Ontology",name).get(0);
+            return ontoDAO.queryForEq("Name",name).get(0);
         }catch (SQLException e){
             System.out.println("Error en OntologyImpl, recuperar1"+ e.getMessage());
             return null;
@@ -76,7 +76,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
     @Override
     public void updateOntology(OntologyVO o) {
         try{
-            ontoDAO.executeRaw("delete from Ontologies where Ontology='"+o.getName()+"';");
+            ontoDAO.delete(o);
             insertOntology(o);
         }catch (SQLException e){
             System.out.println("Error en OntologyImpl, updateOntology "+ e.getMessage());
@@ -86,7 +86,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
     @Override
     public boolean removeOntology(String name) {
        try{
-           ontoDAO.executeRaw("delete from Ontologies where Ontology='"+name+"';");
+           ontoDAO.executeRaw("delete from Ontologies where Name='"+name+"';");
            ontoDAO.executeRaw("delete from Terms where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from Relations where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from Measure where Ontology='"+name+"';");

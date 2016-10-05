@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by dchavesf on 1/09/16.
  */
 @DatabaseTable(tableName = "Measure")
-public class MeasureVO extends OntologyVO {
+public class MeasureVO{
     @DatabaseField(columnName="Recall")
     private double recall;
     @DatabaseField(columnName="Precision")
@@ -24,9 +24,10 @@ public class MeasureVO extends OntologyVO {
     private double tfmeasure;
     @DatabaseField(columnName="TFleiss Kappa")
     private double tfkappa;
+    @DatabaseField(columnName = "Ontology" , foreign = true)
+    private OntologyVO ontology;
 
    public MeasureVO() {
-        super("example","example","user");
         this.recall = 0.0;
         this.precision = 0.0;
         this.fmeasure = 0.0;
@@ -90,4 +91,12 @@ public class MeasureVO extends OntologyVO {
     public double getTfkappa() { return tfkappa; }
 
     public void setTfkappa(double tfkappa) { this.tfkappa = tfkappa; }
+
+    public OntologyVO getOntology() {
+        return ontology;
+    }
+
+    public void setOntology(OntologyVO ontology) {
+        this.ontology = ontology;
+    }
 }

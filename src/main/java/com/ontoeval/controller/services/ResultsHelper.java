@@ -37,9 +37,7 @@ public class ResultsHelper {
 
     public String calcularResultados(OntologyVO o){
         MeasureVO measure = calculoLexico();
-        measure.setName(o.getName());
-        measure.setDomain(o.getDomain());
-        measure.setUser(o.getUser());
+        measure.setOntology(o);
         calculoTaxonomico(measure);
         measure.setFkappa(FleissKappa(true));
         measure.setTfkappa(FleissKappa(false));
@@ -153,7 +151,9 @@ public class ResultsHelper {
                 }
                 if(flag==true) {
                     if (terms.containsKey(n)) {
-                        terms.get(n).add(t);
+                        if(!terms.get(n).contains(t)){
+                            terms.get(n).add(t);
+                        }
                     } else {
                         terms.put(n, new ArrayList<String>());
                         terms.get(n).add(t);

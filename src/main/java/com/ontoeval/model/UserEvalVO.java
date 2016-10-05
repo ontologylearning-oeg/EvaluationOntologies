@@ -8,38 +8,38 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "UserEval")
 public class UserEvalVO {
-    @DatabaseField(columnName="user",canBeNull=false)
-    private String user;
-    @DatabaseField(columnName="ontology",canBeNull=false)
-    private String ontology;
+    @DatabaseField(columnName="user",canBeNull=false, foreign = true)
+    private UserVO user;
+    @DatabaseField(columnName="ontology",canBeNull=false, foreign = true)
+    private OntologyVO ontology;
     @DatabaseField(columnName="valid",canBeNull=false)
     private boolean valid;
 
-    public UserEvalVO(String user, String ontology, boolean valid) {
+    public UserEvalVO(UserVO user, OntologyVO ontology, boolean valid) {
         this.user = user;
         this.ontology = ontology;
         this.valid = valid;
     }
 
-    public UserEvalVO() {
-        this.user = "";
-        this.ontology = "";
+    public UserEvalVO (){
+        this.user = null;
+        this.ontology = null;
         this.valid = false;
     }
 
-    public String getUser() {
+    public UserVO getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(UserVO user) {
         this.user = user;
     }
 
-    public String getOntology() {
+    public OntologyVO getOntology() {
         return ontology;
     }
 
-    public void setOntology(String ontology) {
+    public void setOntology(OntologyVO ontology) {
         this.ontology = ontology;
     }
 
@@ -50,4 +50,5 @@ public class UserEvalVO {
     public void setValid(boolean valid) {
         this.valid = valid;
     }
-}
+
+    }

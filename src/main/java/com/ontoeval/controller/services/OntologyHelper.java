@@ -18,6 +18,7 @@ public class OntologyHelper {
     private final HttpServletRequest request;
     private final OntologyDAO ontology;
     private final LexicalHelper lexical;
+    private final InstructionsHelper instructions;
     private final ResultsHelper results;
     private final TaxonomicHelper taxonomic;
 
@@ -26,6 +27,7 @@ public class OntologyHelper {
         lexical = new LexicalHelper(request);
         taxonomic = new TaxonomicHelper(request);
         results = new ResultsHelper(request);
+        instructions = new InstructionsHelper(request);
         ontology = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
@@ -55,6 +57,7 @@ public class OntologyHelper {
         HttpSession session = request.getSession();
         UserVO user = (UserVO) session.getAttribute("user");
         OntologyVO o = ontology.recuperarOntologias(name);
+        session.setAttribute("instructions",instructions.getInstructions(o));
         String page="";
         if(o.getState().equals("Eval lexical layer"))
             page=lexical.comprobarLexical(o,user);
@@ -89,11 +92,14 @@ public class OntologyHelper {
     public boolean insertOntology(String text, String filename){
         String domain = loadDomain(text);
         UserVO u = (UserVO)request.getSession().getAttribute("user");
-        if(!ontology.insertOntology(new OntologyVO(filename, domain,u.getEmail())) ||
-                !lexical.loadTerms(text,filename,domain,u.getEmail()) ||
-                    !taxonomic.loadRelations(text,filename, domain,u.getEmail()))
+        OntologyVO o = new OntologyVO(filename, domain,u);
+        if(!ontology.insertOntology(o) ||
+                !lexical.loadTerms(text,o) ||
+                    !taxonomic.loadRelations(text,o)){
             return false;
+        }
         else{
+             request.getSession().setAttribute("ontology",o);
              return true;
         }
     }

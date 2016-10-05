@@ -37,6 +37,10 @@
         <servlet-name>ChangeRelevance</servlet-name>
         <servlet-class>com.ontoeval.controller.ChangeRelevance</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoadInstructions</servlet-name>
+        <servlet-class>com.ontoeval.controller.LoadInstructions</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoadFile</servlet-name>
         <url-pattern>/LoadFile</url-pattern>
@@ -71,4 +75,8 @@
         <url-pattern>/ChangeRelevance</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>LoadInstructions</servlet-name>
+        <url-pattern>/LoadInstructions</url-pattern>
+    </servlet-mapping>
 </web-app>

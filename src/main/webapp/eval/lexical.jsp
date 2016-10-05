@@ -22,15 +22,15 @@
             <h4 class="center-align">How should I answer the questions?</h4>
             <p>Here you have some examples of questions you have to answer</p>
             <dl>
-                <dt type="disc">Does <u><strong>WATER</strong></u> belong to the Computer Graphics domain? </dt>
-                <dd>You have to answer <u><strong>NO</strong></u>, because WATER it is not a term from this domain.</dd>
-                <dt type="disc">Does <u><strong>CARD</strong></u> belong to the Computer Graphics domain? </dt>
-                <dd>You have to answer <u><strong>YES</strong></u>, because CARD references to the graphics cards of the computers.</dd>
-                <dt type="disc">Does <u><strong>DATA</strong></u> belong to the Computer Graphics domain? </dt>
-                <dd>You have to answer <u><strong>NO</strong></u>, because DATA is not strictly a term from this domain.</dd>
+                <dt type="disc">Does <u><strong><c:out value="${sessionScope.instructions.noRelevantTerm}"/></strong></u> belong to the <c:out value="${sessionScope.ontology.domain}"/> domain? </dt>
+                <dd>You have to answer <u><strong>NO</strong></u>, because <c:out value="${sessionScope.instructions.noRelevantTerm}"/> it is not a term from this domain.</dd>
+                <dt type="disc">Does <u><strong><c:out value="${sessionScope.instructions.relevantTerm}"/></strong></u> belong to the <c:out value="${sessionScope.ontology.domain}"/> domain? </dt>
+                <dd>You have to answer <u><strong>YES</strong></u>, because <c:out value="${sessionScope.instructions.relevantTerm}"/> references to <c:out value="${sessionScope.instructions.reason}"/>.</dd>
+                <dt type="disc">Does <u><strong><c:out value="${sessionScope.instructions.noStrictlyRelevantTerm}"/></strong></u> belong to the <c:out value="${sessionScope.ontology.domain}"/> domain? </dt>
+                <dd>You have to answer <u><strong>NO</strong></u>, because <c:out value="${sessionScope.instructions.noStrictlyRelevantTerm}"/> is not strictly a term from this domain.</dd>
 
             </dl>
-            <p>Remember, answer <u><strong>YES</strong></u> only if strictly the term belongs to the Computer Graphics domain.</p>
+            <p>Remember, answer <u><strong>YES</strong></u> only if strictly the term belongs to the <c:out value="${sessionScope.ontology.domain}"/> domain.</p>
         </div>
     </div>
     <div class="col s12" style="margin-left: -20px">

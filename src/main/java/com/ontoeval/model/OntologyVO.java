@@ -1,5 +1,6 @@
 package com.ontoeval.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -10,16 +11,17 @@ import java.util.StringTokenizer;
  */
 @DatabaseTable(tableName = "Ontologies")
 public class OntologyVO {
-    @DatabaseField(columnName="Ontology",canBeNull=false)
+    @DatabaseField(columnName="Name",canBeNull=false, id=true)
     private String name;
     @DatabaseField(columnName="Domain", canBeNull = false)
     private String domain;
     @DatabaseField(columnName="State", canBeNull = false)
     private String state;
-    @DatabaseField(columnName="User", canBeNull = false)
-    private String user;
+    @DatabaseField(columnName="User", foreign = true)
+    private UserVO user;
 
-    public OntologyVO(String name, String domain, String user) {
+
+    public OntologyVO(String name, String domain, UserVO user) {
         StringTokenizer tokenizer = new StringTokenizer(name,".");
         this.name = tokenizer.nextToken();
         this.domain=domain;
@@ -30,7 +32,7 @@ public class OntologyVO {
     public OntologyVO() {
         this.name = "example";
         this.domain = "example";
-        this.user="user";
+        this.user=null;
         this.state = "Eval lexical layer";
     }
 
@@ -50,11 +52,11 @@ public class OntologyVO {
 
     public void setState(String state) { this.state = state; }
 
-    public String getUser() {
+    public UserVO getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(UserVO user) {
         this.user = user;
     }
 }

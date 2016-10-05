@@ -48,7 +48,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     @Override
     public boolean insertRandomRelation(RelationVO r) {
         try {
-            relationDAO.executeRawNoArgs("delete from Relations where Ontology='" + r.getName() + "' and term1='" + r.getTerm1() + "' and term2='" + r.getTerm2() + "' and isRandom=1;");
+            relationDAO.executeRawNoArgs("delete from Relations where Ontology='" + r.getOntology().getName() + "' and term1='" + r.getTerm1() + "' and term2='" + r.getTerm2() + "' and isRandom=1;");
             if(relationDAO.create(r)==0)
                 return false;
         }catch (SQLException e){

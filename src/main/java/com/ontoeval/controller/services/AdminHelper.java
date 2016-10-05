@@ -63,10 +63,10 @@ public class AdminHelper {
     private Integer countEvaluators(ArrayList<TermEvaluationVO> teval){
         ArrayList<String> users= new ArrayList<>();
         if(teval.size()>0){
-            users.add(teval.get(0).getUser());
+            users.add(teval.get(0).getUser().getEmail());
             for(TermEvaluationVO t: teval){
                 if(!users.contains(t.getUser())){
-                    users.add(t.getUser());
+                    users.add(t.getUser().getEmail());
                 }
             }
             return users.size();

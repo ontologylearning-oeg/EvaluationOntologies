@@ -7,7 +7,7 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by dchavesf on 1/09/16.
  */
 @DatabaseTable(tableName = "Relations")
-public class RelationVO extends OntologyVO{
+public class RelationVO{
     @DatabaseField(columnName="term1",canBeNull=false)
     private String term1;
     @DatabaseField(columnName="term2",canBeNull=false)
@@ -20,11 +20,12 @@ public class RelationVO extends OntologyVO{
     private Integer yes;
     @DatabaseField(columnName = "no")
     private Integer no;
+    @DatabaseField(columnName = "Ontology" , foreign = true)
+    private OntologyVO ontology;
 
 
-
-    public RelationVO(String name, String term1, String term2, String domain, boolean isRandom, String user) {
-        super(name,domain,user);
+    public RelationVO(OntologyVO o, String term1, String term2, boolean isRandom) {
+        this.ontology = o;
         this.term1 = term1;
         this.term2 = term2;
         this.isGS = false;
@@ -33,18 +34,7 @@ public class RelationVO extends OntologyVO{
         no=0;
     }
 
-    public RelationVO(String name, String term1, String term2, String domain, boolean isGS, boolean isRandom,String user) {
-        super(name,domain,user);
-        this.term1 = term1;
-        this.term2 = term2;
-        this.isGS = isGS;
-        this.isRandom= isRandom;
-        yes=0;
-        no=0;
-    }
-
     public RelationVO() {
-        super("example", "domain","user");
         this.term1 = "example1";
         this.term2 = "example2";
         this.isGS = false;
@@ -86,4 +76,12 @@ public class RelationVO extends OntologyVO{
     public Integer getNo() { return no; }
 
     public void setNo(Integer no) { this.no = no; }
+
+    public OntologyVO getOntology() {
+        return ontology;
+    }
+
+    public void setOntology(OntologyVO ontology) {
+        this.ontology = ontology;
+    }
 }

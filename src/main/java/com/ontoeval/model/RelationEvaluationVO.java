@@ -7,26 +7,32 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by dchavesf on 5/09/16.
  */
 @DatabaseTable(tableName = "TaxonomicEvaluation")
-public class RelationEvaluationVO extends OntologyVO {
+public class RelationEvaluationVO{
     @DatabaseField(columnName="term1",canBeNull=false)
     private String term1;
     @DatabaseField(columnName="term2",canBeNull=false)
     private String term2;
     @DatabaseField(columnName="isRelevant")
     private boolean isRelevant;
+    @DatabaseField(columnName = "Ontology" , foreign = true)
+    private OntologyVO ontology;
+    @DatabaseField(columnName = "User" , foreign = true)
+    private UserVO user;
 
-    public RelationEvaluationVO(String name, String domain, String term1, String term2, String user, boolean isRelevant) {
-        super(name, domain,user);
+    public RelationEvaluationVO(OntologyVO o, String term1, String term2, UserVO user, boolean isRelevant) {
+        this.ontology=o;
+        this.user=user;
         this.term1 = term1;
         this.term2 = term2;
         this.isRelevant = isRelevant;
     }
 
-    public RelationEvaluationVO(){
-        super("exmaple","example","user");
-        this.term1="term1";
-        this.term2="term2";
-        this.isRelevant=false;
+    public RelationEvaluationVO() {
+        this.ontology=null;
+        this.user=null;
+        this.term1 = "";
+        this.term2 = "";
+        this.isRelevant = false;
     }
 
     public String getTerm1() { return term1; }
@@ -49,5 +55,21 @@ public class RelationEvaluationVO extends OntologyVO {
 
     public void setRelevant(boolean relevant) {
         isRelevant = relevant;
+    }
+
+    public OntologyVO getOntology() {
+        return ontology;
+    }
+
+    public void setOntology(OntologyVO ontology) {
+        this.ontology = ontology;
+    }
+
+    public UserVO getUser() {
+        return user;
+    }
+
+    public void setUser(UserVO user) {
+        this.user = user;
     }
 }

@@ -32,7 +32,7 @@ public class TaxonomicHelper {
         return relations.getRelations(o);
     }
 
-    public boolean loadRelations(String text, String filename, String domain, String user){
+    public boolean loadRelations(String text, OntologyVO o){
         ArrayList<RelationVO> relationsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         String term = tokenizer.nextToken();
@@ -42,7 +42,7 @@ public class TaxonomicHelper {
         tokenizer.nextToken();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
-            RelationVO relation = new RelationVO(filename,tokenizer1.nextToken(),tokenizer1.nextToken(),domain,false,user);
+            RelationVO relation = new RelationVO(o,tokenizer1.nextToken(),tokenizer1.nextToken(),false);
             relationsaux.add(relation);
         }
         return relations.insertRelations(relationsaux);
@@ -57,8 +57,8 @@ public class TaxonomicHelper {
                     TermVO t = relevant.get(j);
                     TermVO aux = relevant.get(i);
                     if(t.getWord()!=aux.getWord()){
-                        RelationVO r = new RelationVO(ontology.getName(), t.getWord(), aux.getWord(), ontology.getDomain(), true,user);
-                        RelationVO r2 = new RelationVO(ontology.getName(), aux.getWord(), t.getWord(), ontology.getDomain(), true,user);
+                        RelationVO r = new RelationVO(ontology, t.getWord(), aux.getWord(), true);
+                        RelationVO r2 = new RelationVO(ontology, aux.getWord(), t.getWord(), true);
                         randomRelations.add(r);randomRelations.add(r2);
                     }
                 }
@@ -115,7 +115,7 @@ public class TaxonomicHelper {
                 eval=true;
             else
                 eval =false;
-            RelationEvaluationVO r = new RelationEvaluationVO(ontology.getName(),ontology.getDomain(),term1,term2,user.getEmail(),eval);
+            RelationEvaluationVO r = new RelationEvaluationVO(ontology,term1,term2,user,eval);
             relEval.add(r);
         }
         evalRelations.insertRelations(relEval);

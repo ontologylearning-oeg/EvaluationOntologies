@@ -33,6 +33,47 @@ function subirFichero(){
     }
 }
 
+function sendInstructions() {
+    var relevant = $('#relevant').val();
+    var norelevant = $('#noRelevant').val();
+    var strictly = $('#noStrictly').val();
+    var reason = $('#reason').val();
+    if(relevant=="" || norelevant=="" || strictly=="" || reason==""){
+        swal({
+            title: "Oops...",
+            text: "Please fill all the gaps",
+            type: "error",
+            confirmButtonColor: "#2bbbad",
+            confirmButtonText: "OK"
+        });
+    }
+    else {
+        $.ajax({
+            beforeSend: function () {
+                $.blockUI({message: null});
+            },
+            type: "POST",
+            timeout: 50000,
+            url: "/LoadInstructions",
+            data: {"relevant": relevant, "norelevant": norelevant, "strictly":strictly,"reason":reason},
+            cache: false,
+            success: function (data) {
+                Materialize.toast('File has being uploaded!', 2000, 'rounded');
+                $('#modal1').closeModal();
+            },
+            error: function () {
+                swal({
+                    title: "Oops...",
+                    text: "We cant send the instructions",
+                    type: "error",
+                    confirmButtonColor: "#2bbbad",
+                    confirmButtonText: "OK"
+                });
+            }
+        });
+    }
+}
+
 
 function sendToServer(text, filename){
     $.ajax({
@@ -45,7 +86,7 @@ function sendToServer(text, filename){
         data: {"texto":text,"nombre":filename},
         cache: false,
         success: function (data) {
-            Materialize.toast('File has being uploaded!', 2000, 'rounded');
+            $('#modal1').openModal();
         },
         error: function (){
             swal({

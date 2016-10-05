@@ -43,7 +43,7 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
             return (ArrayList<TermEvaluationVO>)termEvalDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
             System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -52,7 +52,7 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
             return (ArrayList<TermEvaluationVO>)termEvalDAO.queryForEq("Ontology", ontology);
         }catch (SQLException e){
             System.out.println("Error en evaluatedTerms/TermEvaluationImpl "+e.getMessage());
-            return null;
+            return new ArrayList<>();
         }
 
     }

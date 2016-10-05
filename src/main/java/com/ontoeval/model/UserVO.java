@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "Users")
 public class UserVO {
-    @DatabaseField(columnName="email",canBeNull=false, unique = true)
+    @DatabaseField(columnName="email",canBeNull=false, unique = true, id=true)
     private String email;
     @DatabaseField(columnName = "pass", canBeNull =false)
     private String password;

@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 
 @DatabaseTable(tableName = "Terms")
-public class TermVO extends OntologyVO{
+public class TermVO{
     @DatabaseField(columnName="term",canBeNull=false)
     private String word;
     @DatabaseField(columnName="isRelevant")
@@ -22,9 +22,11 @@ public class TermVO extends OntologyVO{
     private Integer yes;
     @DatabaseField(columnName = "no")
     private Integer no;
+    @DatabaseField(columnName = "Ontology" , foreign = true)
+    private OntologyVO ontology;
 
-    public TermVO(String word, String ontology, String domain, String control, String isRelevant,String user) {
-        super(ontology, domain,user);
+    public TermVO(OntologyVO o, String word, String control, String isRelevant) {
+        this.ontology=o;
         this.word = word;
         if(isRelevant.equals("yes"))
             this.relevant=true;
@@ -43,7 +45,6 @@ public class TermVO extends OntologyVO{
     }
 
     public TermVO(){
-        super("example", "example","user");
         this.word="example";
         this.relevant=true;
         this.control=false;
@@ -88,5 +89,13 @@ public class TermVO extends OntologyVO{
 
     public void setGoldStandad(boolean goldStandad) {
         isGoldStandad = goldStandad;
+    }
+
+    public OntologyVO getOntology() {
+        return ontology;
+    }
+
+    public void setOntology(OntologyVO ontology) {
+        this.ontology = ontology;
     }
 }

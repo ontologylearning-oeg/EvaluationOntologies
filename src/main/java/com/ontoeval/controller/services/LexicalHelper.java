@@ -48,7 +48,7 @@ public class LexicalHelper {
             }
             else
                 eval=false;
-            TermEvaluationVO t = new TermEvaluationVO(ontology.getName(),ontology.getDomain(),term,user.getEmail(),eval);
+            TermEvaluationVO t = new TermEvaluationVO(ontology,user,term,eval);
             terms.add(t);
         }
         evalTerms.insertTerms(terms);
@@ -97,7 +97,7 @@ public class LexicalHelper {
             }
             else{
                 if(u==null){
-                    u = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
+                    u = new UserEvalVO(user,ontology,checkControl(tevalu,ontology));
                     userEval.insert(u);
                 }
                 if(u.isValid())
@@ -108,7 +108,7 @@ public class LexicalHelper {
         }
         else{
             if(u==null){
-                u = new UserEvalVO(user.getEmail(),ontology.getName(),checkControl(tevalu,ontology));
+                u = new UserEvalVO(user,ontology,checkControl(tevalu,ontology));
                 userEval.insert(u);
             }
 
@@ -161,7 +161,7 @@ public class LexicalHelper {
             }
         }
         if((ncontrol!=control.size()) || (control.size()>0 && ((double)c/(double)control.size())<0.7)){
-            evalTerms.deleteTerms(tevalu.get(0).getUser());
+            evalTerms.deleteTerms(tevalu.get(0).getUser().getEmail());
             return false;
         }
         else
@@ -208,14 +208,14 @@ public class LexicalHelper {
         terms.updateTerms(t);
     }
 
-    public boolean loadTerms(String text, String filename, String domain, String user){
+    public boolean loadTerms(String text, OntologyVO o){
         ArrayList<TermVO> termsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         tokenizer.nextToken();tokenizer.nextToken();
         String term = tokenizer.nextToken();
         while(!term.equals("Taxonomic;;")){
             StringTokenizer tokenizer1 = new StringTokenizer(term,";");
-            TermVO aux = new TermVO(tokenizer1.nextToken(),filename, domain,tokenizer1.nextToken(),tokenizer1.nextToken(),user);
+            TermVO aux = new TermVO(o, tokenizer1.nextToken(),tokenizer1.nextToken(),tokenizer1.nextToken());
             termsaux.add(aux);
             term = tokenizer.nextToken();
         }
