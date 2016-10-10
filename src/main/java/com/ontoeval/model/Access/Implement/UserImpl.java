@@ -41,7 +41,7 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
                 return false;
             }
         } catch (SQLException ex) {
-            System.out.println("Error en importar usuario "+ex.getMessage());
+            System.out.println("Error en insertUser/UserImpl "+ex.getMessage());
             return false;
         }
         return true;
@@ -56,7 +56,7 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
         try {
             arrayu = (ArrayList<UserVO>) userDAO.queryForFieldValuesArgs(map);
         }catch (SQLException e){
-            System.out.println("Error en importar usuario "+e.getMessage());
+            System.out.println("Error en checkuser/UserImpl "+e.getMessage());
             return false;
         }
         if(arrayu.size()==0){

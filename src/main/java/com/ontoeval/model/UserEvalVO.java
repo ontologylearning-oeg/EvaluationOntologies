@@ -8,11 +8,11 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "UserEval")
 public class UserEvalVO {
-    @DatabaseField(columnName="user",canBeNull=false, foreign = true)
+    @DatabaseField(columnName="User",canBeNull=false, foreign = true)
     private UserVO user;
-    @DatabaseField(columnName="ontology",canBeNull=false, foreign = true)
+    @DatabaseField(columnName="Ontology",canBeNull=false, foreign = true)
     private OntologyVO ontology;
-    @DatabaseField(columnName="valid",canBeNull=false)
+    @DatabaseField(columnName="Valid",canBeNull=false)
     private boolean valid;
 
     public UserEvalVO(UserVO user, OntologyVO ontology, boolean valid) {

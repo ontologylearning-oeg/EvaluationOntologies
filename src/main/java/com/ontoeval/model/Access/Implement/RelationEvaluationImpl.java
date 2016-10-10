@@ -41,7 +41,7 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
         try{
             return (ArrayList<RelationEvaluationVO>)relationEvalDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en getEvaluatedRelations/RelationEvaluationImpl "+e.getMessage());
             return null;
         }
     }
@@ -52,7 +52,7 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
         try{
             return (ArrayList<RelationEvaluationVO>)relationEvalDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en getEvaluatedRelations/RelationEvaluationImpl "+e.getMessage());
             return null;
         }
     }
@@ -64,7 +64,7 @@ public class RelationEvaluationImpl extends BaseDaoImpl<RelationEvaluationVO, In
                     return false;
                 }
             }catch (SQLException e){
-                System.out.println("Error en insertRelations/TermEvaluationImpl "+e.getMessage());
+                System.out.println("Error en insertRelations/RelationEvaluationImpl "+e.getMessage());
                 return false;
             }
         }

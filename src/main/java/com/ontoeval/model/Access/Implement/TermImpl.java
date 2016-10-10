@@ -74,7 +74,7 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         try{
             return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en loadNormal/TermImpl "+e.getMessage());
             return null;
         }
     }
@@ -102,7 +102,7 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         try{
             return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en loadGS/TermImpl "+e.getMessage());
             return null;
         }
     }
@@ -115,7 +115,7 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         try{
             return (ArrayList<TermVO>)termDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en loadControl/TermImpl "+e.getMessage());
             return null;
         }
     }

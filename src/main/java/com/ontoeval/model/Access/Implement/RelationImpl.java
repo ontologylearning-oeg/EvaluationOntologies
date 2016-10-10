@@ -74,7 +74,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         try{
             return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en getRandomrelations/RelationImpl "+e.getMessage());
             return null;
         }
     }
@@ -85,7 +85,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         try{
             return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
         }catch (SQLException e){
-            System.out.println("Error en evaluatedTermsUser/TermEvaluationImpl "+e.getMessage());
+            System.out.println("Error en getRelations/RelationImpl "+e.getMessage());
             return null;
         }
     }

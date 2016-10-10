@@ -36,7 +36,7 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
 
 
     public ArrayList<TermEvaluationVO> evaluatedTermsUser(String ontology, String user){
-        HashMap<String, Object> m = new HashMap<String, Object>();
+        HashMap<String, Object> m = new HashMap<>();
         m.put("Ontology",ontology);
         m.put("User", user);
         try{
@@ -74,7 +74,7 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
     @Override
     public void deleteTerms(String user) {
         try{
-            termEvalDAO.executeRawNoArgs("delete from LexicalEvaluation where user='"+user+"';");
+            termEvalDAO.executeRawNoArgs("delete from LexicalEvaluation where User='"+user+"';");
         }catch (SQLException e){
             System.out.println("Error en updateTerms/TermImpl "+e.getMessage());
         }

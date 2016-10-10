@@ -39,7 +39,7 @@ public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements Meas
             if(measureDAO.create(v)==0)
                 return false;
         }catch (SQLException e){
-            System.out.println("Error en MeasureImpl");
+            System.out.println("Error en MeasureImpl/insertMeasure "+e.getMessage());
             return false;
         }
         return true;
@@ -50,7 +50,7 @@ public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements Meas
         try{
             return measureDAO.queryForEq("Ontology",o.getName()).get(0);
         }catch (SQLException e){
-            System.out.println("Error en MeasureImpl");
+            System.out.println("Error en MeasureImpl/getMeasure "+e.getMessage());
             return null;
         }
     }

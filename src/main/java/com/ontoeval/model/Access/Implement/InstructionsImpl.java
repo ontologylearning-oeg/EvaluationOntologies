@@ -38,7 +38,7 @@ public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> imple
             if(instructionDAO.create(v)==0)
                 return false;
         }catch (SQLException e){
-            System.out.println("Error en insertIntruccion");
+            System.out.println("Error en insertInstructions "+e.getMessage());
             return false;
         }
         return true;
@@ -49,7 +49,7 @@ public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> imple
         try{
             return instructionDAO.queryForEq("Ontology",o.getName()).get(0);
         }catch (SQLException e){
-            System.out.println("Error en MeasureImpl");
+            System.out.println("Error en InstructionsImpl/getMeasure "+e.getMessage());
             return new InstructionsVO();
         }
     }

@@ -49,7 +49,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
         try{
             return (ArrayList<OntologyVO>) ontoDAO.queryForAll();
         }catch (SQLException e){
-            System.out.println("Error en OntologyImpl, recuperar2"+ e.getMessage());
+            System.out.println("Error en OntologyImpl, recuperar2 "+ e.getMessage());
             return null;
         }
     }
@@ -58,7 +58,7 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
         try{
             return ontoDAO.queryForEq("Name",name).get(0);
         }catch (SQLException e){
-            System.out.println("Error en OntologyImpl, recuperar1"+ e.getMessage());
+            System.out.println("Error en OntologyImpl, recuperar1 "+ e.getMessage());
             return null;
         }
     }
@@ -92,7 +92,8 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
            ontoDAO.executeRaw("delete from Measure where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from LexicalEvaluation where Ontology='"+name+"';");
            ontoDAO.executeRaw("delete from TaxonomicEvaluation where Ontology='"+name+"';");
-           ontoDAO.executeRaw("delete from UserEval where ontology='"+name+"';");
+           ontoDAO.executeRaw("delete from UserEval where Ontology='"+name+"';");
+           ontoDAO.executeRaw("delete from Instructions where Ontology='"+name+"';");
            return true;
        }catch (SQLException e){
            System.out.println("Error en OntologyImpl, removeOntology "+ e.getMessage());

@@ -39,7 +39,7 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
                 return false;
             }
         }catch (SQLException e){
-            System.out.println("Error en create "+e.getMessage());
+            System.out.println("Error en insert/UserEvalImpl "+e.getMessage());
         }
         return true;
     }
@@ -48,12 +48,12 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
     public UserEvalVO check(String name, String ontology) {
         ArrayList<UserEvalVO> arrayu;
         HashMap<String, Object> map= new HashMap<>();
-        map.put("user",name);
-        map.put("ontology", ontology);
+        map.put("User",name);
+        map.put("Ontology", ontology);
         try {
             arrayu = (ArrayList<UserEvalVO>) userEvalDAO.queryForFieldValuesArgs(map);
         }catch (SQLException e){
-            System.out.println("Error en importar usuario "+e.getMessage());
+            System.out.println("Error en check/UserEvalImpl "+e.getMessage());
             return null;
         }
         if(arrayu.size()==0){
@@ -67,12 +67,12 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
     @Override
     public Integer nUsers(String ontology) {
         HashMap<String, Object> map= new HashMap<>();
-        map.put("ontology",ontology);
-        map.put("valid", false);
+        map.put("Ontology",ontology);
+        map.put("Valid", false);
         try {
             return userEvalDAO.queryForFieldValues(map).size();
         }catch (SQLException e){
-            System.out.println("Error en importar usuario "+e.getMessage());
+            System.out.println("Error en nUsers/UserEvalImpl "+e.getMessage());
             return 0;
         }
     }
