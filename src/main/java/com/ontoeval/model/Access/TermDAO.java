@@ -16,6 +16,7 @@ public interface TermDAO {
     boolean updateTerms(ArrayList<TermVO> terms);
     ArrayList<TermVO> loadGS(String ontology);
     ArrayList<TermVO> loadControl(String ontology);
+    void close();
 
 
 

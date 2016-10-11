@@ -19,10 +19,11 @@ import java.sql.SQLException;
 public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> implements InstructionsDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<InstructionsVO, Integer> instructionDAO;
-
+    private ConnectionSource connectionSource;
 
     public InstructionsImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, InstructionsVO.class);
+        this.connectionSource=connectionSource;
         instructionDAO = DaoManager.createDao(connectionSource, InstructionsVO.class);
         TableUtils.createTableIfNotExists(connectionSource, InstructionsVO.class);
     }
@@ -51,6 +52,14 @@ public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> imple
         }catch (SQLException e){
             System.out.println("Error en InstructionsImpl/getMeasure "+e.getMessage());
             return new InstructionsVO();
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 

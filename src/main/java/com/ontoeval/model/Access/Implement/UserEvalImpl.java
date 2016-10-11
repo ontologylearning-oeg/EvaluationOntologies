@@ -21,9 +21,11 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
 
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<UserEvalVO, Integer> userEvalDAO;
+    private ConnectionSource connectionSource;
 
     public UserEvalImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, UserEvalVO.class);
+        this.connectionSource=connectionSource;
         userEvalDAO = DaoManager.createDao(connectionSource, UserEvalVO.class);
         TableUtils.createTableIfNotExists(connectionSource, UserEvalVO.class);
     }
@@ -74,6 +76,14 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
         }catch (SQLException e){
             System.out.println("Error en nUsers/UserEvalImpl "+e.getMessage());
             return 0;
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 }

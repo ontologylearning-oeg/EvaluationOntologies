@@ -9,6 +9,6 @@ import com.ontoeval.model.OntologyVO;
 public interface MeasureDAO {
 
     boolean insertMeasure(MeasureVO v);
-
     MeasureVO getMeasure(OntologyVO o);
+    void close();
 }

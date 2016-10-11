@@ -20,10 +20,11 @@ import java.util.HashMap;
 public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements RelationDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<RelationVO, Integer> relationDAO;
-
+    private ConnectionSource connectionSource;
 
     public RelationImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, RelationVO.class);
+        this.connectionSource=connectionSource;
         relationDAO = DaoManager.createDao(connectionSource, RelationVO.class);
         TableUtils.createTableIfNotExists(connectionSource, RelationVO.class);
     }
@@ -97,6 +98,14 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
                 flag=this.insertRandomRelation(relation);
             }
         return flag;
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
+        }
     }
 
 

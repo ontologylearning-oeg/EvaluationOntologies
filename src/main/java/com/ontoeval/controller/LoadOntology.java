@@ -19,6 +19,7 @@ public class LoadOntology extends HttpServlet {
         try{
             OntologyHelper helper = new OntologyHelper(request);
             flag=helper.loadOntologies(name);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadOntology "+e.getMessage());
         }

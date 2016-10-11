@@ -32,6 +32,13 @@ public class LexicalHelper {
         ont = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
+    public void close(){
+        terms.close();
+        evalTerms.close();
+        userEval.close();
+        ont.close();
+    }
+
     public String saveTerms(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
         HttpSession session = request.getSession();

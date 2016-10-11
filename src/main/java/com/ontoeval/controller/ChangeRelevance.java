@@ -20,6 +20,7 @@ public class ChangeRelevance extends HttpServlet {
             LexicalHelper h = new LexicalHelper(request);
             ResultsHelper helper = new ResultsHelper(request);
             helper.changeRelevevance(value,h);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en changeRelevance "+e.getMessage());
         }

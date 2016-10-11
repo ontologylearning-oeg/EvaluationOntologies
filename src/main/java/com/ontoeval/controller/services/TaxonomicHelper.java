@@ -28,6 +28,11 @@ public class TaxonomicHelper {
         evalRelations=new RelationEvaluationImpl(RelationEvaluationImpl.CrearConexion());
     }
 
+    public void close(){
+        relations.close();
+        evalRelations.close();
+    }
+
     public ArrayList<RelationVO> recuperar(String o){
         return relations.getRelations(o);
     }

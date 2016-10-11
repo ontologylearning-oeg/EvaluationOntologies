@@ -31,6 +31,16 @@ public class OntologyHelper {
         ontology = new OntologyImpl(OntologyImpl.CrearConexion());
     }
 
+    public void close(){
+       ontology.close();
+       lexical.close();
+       instructions.close();
+       results.close();
+       taxonomic.close();
+    }
+
+
+
     public boolean loadOntologies(String name){
         HttpSession context = request.getSession();
         if(name!=null){

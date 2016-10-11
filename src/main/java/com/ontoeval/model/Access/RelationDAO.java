@@ -15,5 +15,6 @@ public interface RelationDAO {
     ArrayList<RelationVO> getRandomRelations(String ontology);
     ArrayList<RelationVO> getRelations(String ontology);
     boolean updateRelations(ArrayList<RelationVO> r);
+    void close();
 
 }

@@ -20,10 +20,11 @@ import java.util.HashMap;
 public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<TermVO, Integer> termDAO;
-
+    private ConnectionSource connectionSource;
 
     public TermImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, TermVO.class);
+        this.connectionSource=connectionSource;
         termDAO = DaoManager.createDao(connectionSource, TermVO.class);
         TableUtils.createTableIfNotExists(connectionSource, TermVO.class);
     }
@@ -117,6 +118,14 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         }catch (SQLException e){
             System.out.println("Error en loadControl/TermImpl "+e.getMessage());
             return null;
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 

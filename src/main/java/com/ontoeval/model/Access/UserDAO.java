@@ -11,4 +11,5 @@ public interface UserDAO {
 
     boolean insertUser(UserVO u);
     boolean checkUser(UserVO u);
+    void close();
 }

@@ -23,6 +23,10 @@ public class InstructionsHelper {
         instructions = new InstructionsImpl(InstructionsImpl.CrearConexion());
     }
 
+    public void close(){
+       instructions.close();
+    }
+
 
     public boolean loadInstructions(String relevant,String norelevant, String strictly, String reason){
         OntologyVO o = (OntologyVO) request.getSession().getAttribute("ontology");

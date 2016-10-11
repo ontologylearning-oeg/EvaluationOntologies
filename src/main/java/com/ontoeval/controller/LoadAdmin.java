@@ -24,6 +24,7 @@ public class LoadAdmin extends HttpServlet {
                 flag=helper.loadAdmin(name);
             else
                 flag= helper.removeOntology(name);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadOntology "+e.getMessage());
         }

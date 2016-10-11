@@ -19,10 +19,11 @@ import java.sql.SQLException;
 public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements MeasureDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<MeasureVO, Integer> measureDAO;
-
+    private ConnectionSource connectionSource;
 
     public MeasureImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, MeasureVO.class);
+        this.connectionSource=connectionSource;
         measureDAO = DaoManager.createDao(connectionSource, MeasureVO.class);
         TableUtils.createTableIfNotExists(connectionSource, MeasureVO.class);
     }
@@ -52,6 +53,14 @@ public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements Meas
         }catch (SQLException e){
             System.out.println("Error en MeasureImpl/getMeasure "+e.getMessage());
             return null;
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 }

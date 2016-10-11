@@ -27,7 +27,11 @@ public class ResultsHelper {
         measure = new MeasureImpl(MeasureImpl.CrearConexion());
     }
 
-        public void setTerms(ArrayList<TermVO> terms) {
+    public void close(){
+        measure.close();
+    }
+
+    public void setTerms(ArrayList<TermVO> terms) {
         this.terms = terms;
     }
 

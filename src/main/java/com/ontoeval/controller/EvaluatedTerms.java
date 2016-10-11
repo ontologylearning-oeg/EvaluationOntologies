@@ -20,6 +20,7 @@ public class EvaluatedTerms extends HttpServlet {
         try{
             LexicalHelper helper = new LexicalHelper(request);
             page = helper.saveTerms(text);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en EvaluatedTerms "+e.getMessage());
         }
@@ -28,6 +29,7 @@ public class EvaluatedTerms extends HttpServlet {
             try{
                 OntologyHelper o = new OntologyHelper(request);
                 o.loadOntologies(null);
+                o.close();
             }catch (SQLException e){
                 System.out.println("Error en EvaluatedTerms "+e.getMessage());
             }

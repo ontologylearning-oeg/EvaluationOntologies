@@ -22,9 +22,11 @@ import java.util.Map;
 public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> implements TermEvaluationDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<TermEvaluationVO, Integer> termEvalDAO;
+    private ConnectionSource connectionSource;
 
     public TermEvaluationImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, TermEvaluationVO.class);
+        this.connectionSource=connectionSource;
         termEvalDAO = DaoManager.createDao(connectionSource, TermEvaluationVO.class);
         TableUtils.createTableIfNotExists(connectionSource, TermEvaluationVO.class);
     }
@@ -77,6 +79,14 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
             termEvalDAO.executeRawNoArgs("delete from LexicalEvaluation where User='"+user+"';");
         }catch (SQLException e){
             System.out.println("Error en updateTerms/TermImpl "+e.getMessage());
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 

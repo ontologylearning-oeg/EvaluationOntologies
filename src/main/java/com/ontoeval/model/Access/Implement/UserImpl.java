@@ -21,10 +21,12 @@ import java.util.HashMap;
 public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<UserVO, Integer> userDAO;
+    private ConnectionSource connectionSource;
 
 
     public UserImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, UserVO.class);
+        this.connectionSource=connectionSource;
         userDAO = DaoManager.createDao(connectionSource, UserVO.class);
         TableUtils.createTableIfNotExists(connectionSource, UserVO.class);
     }
@@ -64,6 +66,14 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
         }
         else{
             return true;
+        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
         }
     }
 

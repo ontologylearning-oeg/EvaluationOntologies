@@ -19,6 +19,7 @@ public class EvaluatedRelations extends HttpServlet {
         try{
             TaxonomicHelper helper = new TaxonomicHelper(request);
             page = helper.saveRelations(text);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en EvaluatedTerms "+e.getMessage());
         }

@@ -22,6 +22,7 @@ public class LoadInstructions extends HttpServlet {
         try{
             InstructionsHelper helper = new InstructionsHelper(request);
             flag=helper.loadInstructions(relevant,norelevant,stricly,reason);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadInstructions "+e.getMessage());
         }

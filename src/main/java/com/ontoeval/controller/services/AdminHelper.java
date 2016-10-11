@@ -35,6 +35,13 @@ public class AdminHelper {
         admin = new AdminVO();
     }
 
+    public void close(){
+       terms.close();
+       evalTerms.close();
+       ontos.close();
+      userEval.close();
+    }
+
 
     public boolean loadAdmin(String ontology){
         OntologyVO o = ontos.recuperarOntologias(ontology);

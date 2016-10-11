@@ -19,6 +19,7 @@ public class LoadFeatures extends HttpServlet {
         try{
            OntologyHelper helper = new OntologyHelper(request);
            page=helper.loadFeatures(name);
+           helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadFeatures "+e.getMessage());
         }

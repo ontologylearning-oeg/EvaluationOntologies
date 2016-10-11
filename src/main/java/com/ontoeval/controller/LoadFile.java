@@ -19,6 +19,7 @@ public class LoadFile extends javax.servlet.http.HttpServlet {
         try{
             OntologyHelper helper = new OntologyHelper(request);
             flag=helper.insertOntology(texto,name);
+            helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadFile "+e.getMessage());
         }

@@ -19,10 +19,11 @@ import java.util.ArrayList;
 public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements OntologyDAO {
     private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<OntologyVO, Integer> ontoDAO;
-
+    private ConnectionSource connectionSource;
 
     public OntologyImpl(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, OntologyVO.class);
+        this.connectionSource=connectionSource;
         ontoDAO = DaoManager.createDao(connectionSource, OntologyVO.class);
         TableUtils.createTableIfNotExists(connectionSource, OntologyVO.class);
     }
@@ -99,6 +100,14 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
            System.out.println("Error en OntologyImpl, removeOntology "+ e.getMessage());
            return false;
        }
+    }
+
+    public void close(){
+        try {
+            connectionSource.close();
+        } catch (SQLException e) {
+            System.out.println("Error en close "+e.getMessage());
+        }
     }
 
 }

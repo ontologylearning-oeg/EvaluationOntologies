@@ -10,4 +10,5 @@ public interface InstructionsDAO {
 
     boolean insertIntruccion(InstructionsVO v);
     InstructionsVO getMeasure(OntologyVO o);
+    void close();
 }

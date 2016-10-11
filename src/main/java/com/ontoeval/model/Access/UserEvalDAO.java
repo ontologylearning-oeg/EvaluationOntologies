@@ -10,4 +10,5 @@ public interface UserEvalDAO {
     boolean insert(UserEvalVO u);
     UserEvalVO check(String name, String ontology);
     Integer nUsers(String ontology);
+    void close();
 }

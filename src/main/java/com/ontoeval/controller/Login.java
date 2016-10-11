@@ -25,6 +25,7 @@ public class Login extends HttpServlet {
             try {
                 UserHelper helper = new UserHelper(request);
                 flag=helper.insertUser(email,pass,signup);
+                helper.close();
             }catch (SQLException e){
                 System.out.println("Error en Servlet Login"+e.getMessage());
             }

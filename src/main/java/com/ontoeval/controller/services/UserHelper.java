@@ -18,6 +18,11 @@ public class UserHelper {
     public UserHelper (HttpServletRequest request) throws SQLException, IOException{
         this.request = request;
         users = new UserImpl(UserImpl.CrearConexion());
+
+    }
+
+    public void close(){
+        users.close();
     }
 
     public boolean insertUser(String email, String pass, String signup){
