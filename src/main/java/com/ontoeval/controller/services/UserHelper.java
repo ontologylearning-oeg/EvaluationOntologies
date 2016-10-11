@@ -1,5 +1,6 @@
 package com.ontoeval.controller.services;
 
+import com.ontoeval.model.Access.Implement.EncryptConnection;
 import com.ontoeval.model.Access.UserDAO;
 import com.ontoeval.model.Access.Implement.UserImpl;
 import com.ontoeval.model.UserVO;
@@ -17,8 +18,7 @@ public class UserHelper {
 
     public UserHelper (HttpServletRequest request) throws SQLException, IOException{
         this.request = request;
-        users = new UserImpl(UserImpl.CrearConexion());
-
+        users = new UserImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){

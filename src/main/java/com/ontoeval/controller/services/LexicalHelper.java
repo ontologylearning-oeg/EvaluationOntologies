@@ -2,10 +2,7 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
-import com.ontoeval.model.Access.Implement.OntologyImpl;
-import com.ontoeval.model.Access.Implement.TermEvaluationImpl;
-import com.ontoeval.model.Access.Implement.TermImpl;
-import com.ontoeval.model.Access.Implement.UserEvalImpl;
+import com.ontoeval.model.Access.Implement.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,10 +23,10 @@ public class LexicalHelper {
 
     public LexicalHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
-        terms = new TermImpl(TermImpl.CrearConexion());
-        evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
-        userEval = new UserEvalImpl(UserEvalImpl.CrearConexion());
-        ont = new OntologyImpl(OntologyImpl.CrearConexion());
+        terms = new TermImpl(EncryptConnection.CrearConexion());
+        evalTerms = new TermEvaluationImpl(EncryptConnection.CrearConexion());
+        userEval = new UserEvalImpl(EncryptConnection.CrearConexion());
+        ont = new OntologyImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){

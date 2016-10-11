@@ -8,11 +8,15 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.UserEvalDAO;
 import com.ontoeval.model.UserEvalVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 27/09/16.
@@ -28,11 +32,6 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
         this.connectionSource=connectionSource;
         userEvalDAO = DaoManager.createDao(connectionSource, UserEvalVO.class);
         TableUtils.createTableIfNotExists(connectionSource, UserEvalVO.class);
-    }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
     }
 
     public boolean insert(UserEvalVO u){

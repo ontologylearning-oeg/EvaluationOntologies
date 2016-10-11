@@ -2,6 +2,7 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
+import com.ontoeval.model.Access.Implement.EncryptConnection;
 import com.ontoeval.model.Access.Implement.OntologyImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class OntologyHelper {
         taxonomic = new TaxonomicHelper(request);
         results = new ResultsHelper(request);
         instructions = new InstructionsHelper(request);
-        ontology = new OntologyImpl(OntologyImpl.CrearConexion());
+        ontology = new OntologyImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){

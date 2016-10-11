@@ -8,19 +8,22 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.TermEvaluationDAO;
 import com.ontoeval.model.TermEvaluationVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 2/09/16.
  */
 public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> implements TermEvaluationDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<TermEvaluationVO, Integer> termEvalDAO;
     private ConnectionSource connectionSource;
 
@@ -30,12 +33,6 @@ public class TermEvaluationImpl extends BaseDaoImpl<TermEvaluationVO, Integer> i
         termEvalDAO = DaoManager.createDao(connectionSource, TermEvaluationVO.class);
         TableUtils.createTableIfNotExists(connectionSource, TermEvaluationVO.class);
     }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
-    }
-
 
     public ArrayList<TermEvaluationVO> evaluatedTermsUser(String ontology, String user){
         HashMap<String, Object> m = new HashMap<>();

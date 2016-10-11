@@ -9,15 +9,18 @@ import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.InstructionsDAO;
 import com.ontoeval.model.InstructionsVO;
 import com.ontoeval.model.OntologyVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by dchaves on 4/10/16.
  */
 public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> implements InstructionsDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<InstructionsVO, Integer> instructionDAO;
     private ConnectionSource connectionSource;
 
@@ -26,11 +29,6 @@ public class InstructionsImpl extends BaseDaoImpl<InstructionsVO, Integer> imple
         this.connectionSource=connectionSource;
         instructionDAO = DaoManager.createDao(connectionSource, InstructionsVO.class);
         TableUtils.createTableIfNotExists(connectionSource, InstructionsVO.class);
-    }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
     }
 
     @Override

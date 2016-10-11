@@ -1,10 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.Access.*;
-import com.ontoeval.model.Access.Implement.OntologyImpl;
-import com.ontoeval.model.Access.Implement.TermEvaluationImpl;
-import com.ontoeval.model.Access.Implement.TermImpl;
-import com.ontoeval.model.Access.Implement.UserEvalImpl;
+import com.ontoeval.model.Access.Implement.*;
 import com.ontoeval.model.AdminVO;
 import com.ontoeval.model.OntologyVO;
 import com.ontoeval.model.TermEvaluationVO;
@@ -28,10 +25,10 @@ public class AdminHelper {
 
     public AdminHelper(HttpServletRequest request) throws SQLException, IOException {
         this.request=request;
-        terms = new TermImpl(TermImpl.CrearConexion());
-        ontos = new OntologyImpl(OntologyImpl.CrearConexion());
-        evalTerms = new TermEvaluationImpl(TermEvaluationImpl.CrearConexion());
-        userEval=new UserEvalImpl(UserEvalImpl.CrearConexion());
+        terms = new TermImpl(EncryptConnection.CrearConexion());
+        ontos = new OntologyImpl(EncryptConnection.CrearConexion());
+        evalTerms = new TermEvaluationImpl(EncryptConnection.CrearConexion());
+        userEval=new UserEvalImpl(EncryptConnection.CrearConexion());
         admin = new AdminVO();
     }
 
@@ -39,7 +36,7 @@ public class AdminHelper {
        terms.close();
        evalTerms.close();
        ontos.close();
-      userEval.close();
+       userEval.close();
     }
 
 

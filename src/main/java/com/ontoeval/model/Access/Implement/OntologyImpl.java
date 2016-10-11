@@ -8,16 +8,19 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.OntologyDAO;
 import com.ontoeval.model.OntologyVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 1/09/16.
  */
 public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements OntologyDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<OntologyVO, Integer> ontoDAO;
     private ConnectionSource connectionSource;
 
@@ -27,12 +30,6 @@ public class OntologyImpl extends BaseDaoImpl<OntologyVO, Integer> implements On
         ontoDAO = DaoManager.createDao(connectionSource, OntologyVO.class);
         TableUtils.createTableIfNotExists(connectionSource, OntologyVO.class);
     }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
-    }
-
 
     public boolean insertOntology(OntologyVO ontology){
         try{

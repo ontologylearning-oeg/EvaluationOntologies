@@ -9,17 +9,20 @@ import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.UserDAO;
 import com.ontoeval.model.UserVO;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 1/09/16.
  */
 public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<UserVO, Integer> userDAO;
     private ConnectionSource connectionSource;
 
@@ -29,11 +32,6 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
         this.connectionSource=connectionSource;
         userDAO = DaoManager.createDao(connectionSource, UserVO.class);
         TableUtils.createTableIfNotExists(connectionSource, UserVO.class);
-    }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
     }
 
     public boolean insertUser(UserVO u){

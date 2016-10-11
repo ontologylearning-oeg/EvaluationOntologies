@@ -8,17 +8,20 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.TermDAO;
 import com.ontoeval.model.TermVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Created by dachafra on 30/06/16.
  */
 public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<TermVO, Integer> termDAO;
     private ConnectionSource connectionSource;
 
@@ -28,12 +31,6 @@ public class TermImpl extends BaseDaoImpl<TermVO, Integer> implements TermDAO {
         termDAO = DaoManager.createDao(connectionSource, TermVO.class);
         TableUtils.createTableIfNotExists(connectionSource, TermVO.class);
     }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
-    }
-
 
     public boolean InsertTerm(TermVO t){
         try{

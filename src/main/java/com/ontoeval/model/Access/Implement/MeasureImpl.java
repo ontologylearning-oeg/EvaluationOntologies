@@ -9,15 +9,18 @@ import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.MeasureDAO;
 import com.ontoeval.model.MeasureVO;
 import com.ontoeval.model.OntologyVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 5/09/16.
  */
 public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements MeasureDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<MeasureVO, Integer> measureDAO;
     private ConnectionSource connectionSource;
 
@@ -27,12 +30,6 @@ public class MeasureImpl extends BaseDaoImpl<MeasureVO, Integer> implements Meas
         measureDAO = DaoManager.createDao(connectionSource, MeasureVO.class);
         TableUtils.createTableIfNotExists(connectionSource, MeasureVO.class);
     }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
-    }
-
 
     @Override
     public boolean insertMeasure(MeasureVO v) {

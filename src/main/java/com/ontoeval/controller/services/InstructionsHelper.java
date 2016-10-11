@@ -1,5 +1,6 @@
 package com.ontoeval.controller.services;
 
+import com.ontoeval.model.Access.Implement.EncryptConnection;
 import com.ontoeval.model.Access.Implement.InstructionsImpl;
 import com.ontoeval.model.Access.Implement.OntologyImpl;
 import com.ontoeval.model.Access.InstructionsDAO;
@@ -20,7 +21,7 @@ public class InstructionsHelper {
 
     public InstructionsHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
-        instructions = new InstructionsImpl(InstructionsImpl.CrearConexion());
+        instructions = new InstructionsImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){

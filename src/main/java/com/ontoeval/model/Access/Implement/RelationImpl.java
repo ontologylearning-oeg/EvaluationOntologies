@@ -8,17 +8,20 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.ontoeval.model.Access.RelationDAO;
 import com.ontoeval.model.RelationVO;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.properties.EncryptableProperties;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Created by dchavesf on 1/09/16.
  */
 public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements RelationDAO {
-    private static final String url = "jdbc:mysql://localhost/DrOntoEval?useSSL=false";
     private final Dao<RelationVO, Integer> relationDAO;
     private ConnectionSource connectionSource;
 
@@ -27,11 +30,6 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         this.connectionSource=connectionSource;
         relationDAO = DaoManager.createDao(connectionSource, RelationVO.class);
         TableUtils.createTableIfNotExists(connectionSource, RelationVO.class);
-    }
-
-    public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,"root","root");
-        return connectionSource;
     }
 
     public boolean insertRelation(RelationVO r){

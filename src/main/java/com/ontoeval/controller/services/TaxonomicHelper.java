@@ -1,6 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
+import com.ontoeval.model.Access.Implement.EncryptConnection;
 import com.ontoeval.model.Access.RelationDAO;
 import com.ontoeval.model.Access.RelationEvaluationDAO;
 import com.ontoeval.model.Access.Implement.RelationEvaluationImpl;
@@ -24,8 +25,8 @@ public class TaxonomicHelper {
 
     public TaxonomicHelper (HttpServletRequest request) throws SQLException, IOException {
         this.request = request;
-        relations = new RelationImpl(RelationImpl.CrearConexion());
-        evalRelations=new RelationEvaluationImpl(RelationEvaluationImpl.CrearConexion());
+        relations = new RelationImpl(EncryptConnection.CrearConexion());
+        evalRelations=new RelationEvaluationImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){

@@ -1,6 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
+import com.ontoeval.model.Access.Implement.EncryptConnection;
 import com.ontoeval.model.Access.MeasureDAO;
 import com.ontoeval.model.Access.Implement.MeasureImpl;
 
@@ -24,7 +25,7 @@ public class ResultsHelper {
         this.request=request;
         terms= null;
         relations=null;
-        measure = new MeasureImpl(MeasureImpl.CrearConexion());
+        measure = new MeasureImpl(EncryptConnection.CrearConexion());
     }
 
     public void close(){
