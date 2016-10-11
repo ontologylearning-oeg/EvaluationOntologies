@@ -1,10 +1,8 @@
 package com.ontoeval.controller.services;
 
-import com.ontoeval.model.Access.Implement.EncryptConnection;
+import com.ontoeval.model.Access.EncryptConnection;
 import com.ontoeval.model.Access.Implement.InstructionsImpl;
-import com.ontoeval.model.Access.Implement.OntologyImpl;
 import com.ontoeval.model.Access.InstructionsDAO;
-import com.ontoeval.model.Access.OntologyDAO;
 import com.ontoeval.model.InstructionsVO;
 import com.ontoeval.model.OntologyVO;
 

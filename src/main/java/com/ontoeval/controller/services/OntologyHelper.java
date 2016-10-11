@@ -2,7 +2,7 @@ package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
 import com.ontoeval.model.Access.*;
-import com.ontoeval.model.Access.Implement.EncryptConnection;
+import com.ontoeval.model.Access.EncryptConnection;
 import com.ontoeval.model.Access.Implement.OntologyImpl;
 
 import javax.servlet.http.HttpServletRequest;

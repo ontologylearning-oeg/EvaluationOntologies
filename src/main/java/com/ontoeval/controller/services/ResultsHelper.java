@@ -1,7 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
-import com.ontoeval.model.Access.Implement.EncryptConnection;
+import com.ontoeval.model.Access.EncryptConnection;
 import com.ontoeval.model.Access.MeasureDAO;
 import com.ontoeval.model.Access.Implement.MeasureImpl;
 

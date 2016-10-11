@@ -1,7 +1,7 @@
 package com.ontoeval.controller.services;
 
 import com.ontoeval.model.*;
-import com.ontoeval.model.Access.Implement.EncryptConnection;
+import com.ontoeval.model.Access.EncryptConnection;
 import com.ontoeval.model.Access.RelationDAO;
 import com.ontoeval.model.Access.RelationEvaluationDAO;
 import com.ontoeval.model.Access.Implement.RelationEvaluationImpl;
