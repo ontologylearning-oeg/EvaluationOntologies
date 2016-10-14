@@ -31,9 +31,11 @@ public class MeasureVO{
         this.recall = 0.0;
         this.precision = 0.0;
         this.fmeasure = 0.0;
+        this.fkappa=0.0;
         this.trecall = 0.0;
         this.tprecision = 0.0;
         this.tfmeasure = 0.0;
+        this.tfkappa=0.0;
     }
 
     public double getRecall() {

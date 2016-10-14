@@ -48,13 +48,13 @@ public class TaxonomicHelper {
         tokenizer.nextToken();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
-            RelationVO relation = new RelationVO(o,tokenizer1.nextToken(),tokenizer1.nextToken(),false);
+            RelationVO relation = new RelationVO(o,tokenizer1.nextToken(),tokenizer1.nextToken(),tokenizer1.nextToken(),false);
             relationsaux.add(relation);
         }
         return relations.insertRelations(relationsaux);
     }
 
-    public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology, String user){
+    public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology){
         ArrayList<RelationVO> flag = relations.getRandomRelations(ontology.getName());
         if(flag.size()==0) {
             ArrayList<RelationVO> randomRelations = new ArrayList<>();
@@ -63,8 +63,8 @@ public class TaxonomicHelper {
                     TermVO t = relevant.get(j);
                     TermVO aux = relevant.get(i);
                     if(t.getWord()!=aux.getWord()){
-                        RelationVO r = new RelationVO(ontology, t.getWord(), aux.getWord(), true);
-                        RelationVO r2 = new RelationVO(ontology, aux.getWord(), t.getWord(), true);
+                        RelationVO r = new RelationVO(ontology, t.getWord(),"is a", aux.getWord(), true);
+                        RelationVO r2 = new RelationVO(ontology, aux.getWord(),"is a",t.getWord(), true);
                         randomRelations.add(r);randomRelations.add(r2);
                     }
                 }

@@ -1,3 +1,4 @@
+Name;prueba;
 Domain;Computer Graphics;
 Lexical;Control;isRelevant
 bootle;yes;no
@@ -10,7 +11,6 @@ bike;yes;no
 car;yes;no
 water;yes;no
 alcohol;yes;no
-Taxonomic;;
 graphics;no;yes
 results;no;yes
 images;no;yes
@@ -115,7 +115,8 @@ normals;no;yes
 variations;no;yes
 levels;no;yes
 sets;no;yes
-sublcass;class;
-graphics;images;
-points;graphics;
-angles;graphics
+Taxonomic;;
+sublcass;relation;class
+graphics;is a;images
+points;is a;graphics
+angles;is a;graphics

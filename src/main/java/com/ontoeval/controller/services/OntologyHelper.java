@@ -73,12 +73,16 @@ public class OntologyHelper {
         if(o.getState().equals("Eval lexical layer"))
             page=lexical.comprobarLexical(o,user);
         if(o.getState().equals("Eval Taxonomic Layer")) {
-            if(lexical.checkUser(o,user)){
-                taxonomic.createGSRelations(lexical.recuperarGS(o), o,user.getEmail());
-                page = taxonomic.comprobarTaxonomic(o, user);
+            if(taxonomic.recuperar(o.getName()).size()>0) {
+                if (lexical.checkUser(o, user)) {
+                    taxonomic.createGSRelations(lexical.recuperarGS(o), o);
+                    page = taxonomic.comprobarTaxonomic(o, user);
+                } else {
+                    page = "notUser";
+                }
             }
-            else {
-                page = "notUser";
+            else{
+                o.setState("Results");
             }
         }
         if(o.getState().equals("Results")) {
@@ -100,8 +104,9 @@ public class OntologyHelper {
 
     }
 
-    public boolean insertOntology(String text, String filename){
-        String domain = loadDomain(text);
+    public boolean insertOntology(String text){
+        String filename=loadFileName(text);
+        String domain=loadDomain(text);
         UserVO u = (UserVO)request.getSession().getAttribute("user");
         OntologyVO o = new OntologyVO(filename, domain,u);
         if(!ontology.insertOntology(o) ||
@@ -117,11 +122,18 @@ public class OntologyHelper {
 
     private String loadDomain(String text){
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        tokenizer = new StringTokenizer(tokenizer.nextToken(),";");
         tokenizer.nextToken();
-        return tokenizer.nextToken();
+        StringTokenizer tokenizer2 = new StringTokenizer(tokenizer.nextToken(),";");
+        tokenizer2.nextToken();
+        return tokenizer2.nextToken();
     }
 
+    private String loadFileName(String text){
+        StringTokenizer tokenizer = new StringTokenizer(text,"\n");
+        StringTokenizer tokenizer2 = new StringTokenizer(tokenizer.nextToken(),";");
+        tokenizer2.nextToken();
+        return tokenizer2.nextToken();
+    }
 
 
 }

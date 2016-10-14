@@ -75,7 +75,7 @@ function sendInstructions() {
 }
 
 
-function sendToServer(text, filename){
+function sendToServer(text){
     $.ajax({
         beforeSend: function(){
             $.blockUI({ message: null });
@@ -83,7 +83,7 @@ function sendToServer(text, filename){
         type: "POST",
         timeout: 50000,
         url: "/LoadFile",
-        data: {"texto":text,"nombre":filename},
+        data: {"texto":text},
         cache: false,
         success: function (data) {
             $('#modal1').openModal();

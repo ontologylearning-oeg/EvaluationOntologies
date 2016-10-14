@@ -20,7 +20,7 @@ public class EncryptConnection {
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword("drinventor");
         Properties props = new EncryptableProperties(encryptor);
-        props.load(new FileInputStream("file"));
+        props.load(new FileInputStream("/home/dchaves/OEG/Software/configuration.properties"));
         String datasourceUsername = props.getProperty("datasource.username");
         String datasourcePassword = props.getProperty("datasource.password");
         String url = props.getProperty("datasource.url");

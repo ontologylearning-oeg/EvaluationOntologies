@@ -215,7 +215,7 @@ public class LexicalHelper {
     public boolean loadTerms(String text, OntologyVO o){
         ArrayList<TermVO> termsaux = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(text,"\n");
-        tokenizer.nextToken();tokenizer.nextToken();
+        tokenizer.nextToken();tokenizer.nextToken();tokenizer.nextToken();
         String term = tokenizer.nextToken();
         while(!term.equals("Taxonomic;;")){
             StringTokenizer tokenizer1 = new StringTokenizer(term,";");
@@ -223,7 +223,10 @@ public class LexicalHelper {
             termsaux.add(aux);
             term = tokenizer.nextToken();
         }
-        return terms.InsertTerms(termsaux);
+        if(termsaux.size()>0)
+            return terms.InsertTerms(termsaux);
+        else
+            return false;
     }
 
     private Integer countForRelavant(ArrayList<TermEvaluationVO> t){

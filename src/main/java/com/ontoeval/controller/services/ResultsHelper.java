@@ -46,6 +46,9 @@ public class ResultsHelper {
         calculoTaxonomico(measure);
         measure.setFkappa(FleissKappa(true));
         measure.setTfkappa(FleissKappa(false));
+        if(relations.size()==0){
+            measure.setTfkappa(0.0);
+        }
         this.measure.insertMeasure(measure);
         return "./eval/results.jsp";
     }
@@ -107,18 +110,19 @@ public class ResultsHelper {
                 learned.add(r);
             }
         }
-        ArrayList<String> termsgold=constructHierachy(goldstandard,gshiterms);
-        ArrayList<String> termsl=constructHierachy(learned,lhiterms);
-        Double tp = taxonomicPrecision(termsgold, termsl, gshiterms, lhiterms);
-        m.setTprecision(tp);
-        Double tr = taxonomicPrecision(termsl,termsgold, lhiterms, gshiterms);
-        m.setTrecall(tr);
-        if(tp!=0 && tr!=0){
-            Double tf = (2*tp*tr)/(tp+tr);
-            m.setTfmeasure((2*m.getRecall()*tf)/(tf+m.getRecall()));
+        if(goldstandard.size()>0 && learned.size()>0) {
+            ArrayList<String> termsgold = constructHierachy(goldstandard, gshiterms);
+            ArrayList<String> termsl = constructHierachy(learned, lhiterms);
+            Double tp = taxonomicPrecision(termsgold, termsl, gshiterms, lhiterms);
+            m.setTprecision(tp);
+            Double tr = taxonomicPrecision(termsl, termsgold, lhiterms, gshiterms);
+            m.setTrecall(tr);
+            if (tp != 0 && tr != 0) {
+                Double tf = (2 * tp * tr) / (tp + tr);
+                m.setTfmeasure((2 * m.getRecall() * tf) / (tf + m.getRecall()));
+            } else
+                m.setTfmeasure(0);
         }
-        else
-            m.setTfmeasure(0);
     }
 
     private ArrayList<String> constructHierachy(ArrayList<RelationVO> relation, HashMap<String, ArrayList<String>> terms){

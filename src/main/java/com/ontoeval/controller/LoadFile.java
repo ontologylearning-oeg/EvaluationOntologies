@@ -14,11 +14,10 @@ public class LoadFile extends javax.servlet.http.HttpServlet {
     @Override
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         String texto = request.getParameter("texto");
-        String name = request.getParameter("nombre");
         boolean flag=true;
         try{
             OntologyHelper helper = new OntologyHelper(request);
-            flag=helper.insertOntology(texto,name);
+            flag=helper.insertOntology(texto);
             helper.close();
         }catch (SQLException e){
             System.out.println("Error en LoadFile "+e.getMessage());
