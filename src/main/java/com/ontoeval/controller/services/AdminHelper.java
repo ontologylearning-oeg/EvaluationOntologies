@@ -69,7 +69,7 @@ public class AdminHelper {
         if(teval.size()>0){
             users.add(teval.get(0).getUser().getEmail());
             for(TermEvaluationVO t: teval){
-                if(!users.contains(t.getUser())){
+                if(!users.contains(t.getUser().getEmail())){
                     users.add(t.getUser().getEmail());
                 }
             }

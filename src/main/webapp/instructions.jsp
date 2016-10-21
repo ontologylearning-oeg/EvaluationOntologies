@@ -33,7 +33,7 @@
                 <li class="liI">All of the terms and relations are going to be evaluated for <strong>five different</strong> experts</li>
                 <li class="liI">You can not do the taxonomic evaluation if the lexical evaluation has not finished yet </li>
                 <li class="liI">You can not see the results if the taxonomic evaluation has not finished yet </li>
-                <li class="liI">You can <strong>read our research</strong> about this topic <a href="https://www.dropbox.com/s/hj656db5wcfxazp/ChavesFragaDavid_TFM.pdf?dl=0">at this link</a> (Spanish) or <a href="">at this one</a> (English)</li>
+                <li class="liI">You can <strong>read our research</strong> about this topic <a href="https://www.researchgate.net/publication/308749599_Methods_and_techniques_for_the_Evaluation_of_Ontology_Learning">at this link</a> (Spanish) or <a href="https://www.dropbox.com/s/a4izlwp0tob9fg2/ontoLearnEval.pdf?dl=0">at this one</a> (English)</li>
             </ol>
 
     </div>

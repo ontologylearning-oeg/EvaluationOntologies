@@ -71,7 +71,7 @@ public class UserEvalImpl extends BaseDaoImpl<UserEvalVO, Integer> implements Us
         map.put("Ontology",ontology);
         map.put("Valid", false);
         try {
-            return userEvalDAO.queryForFieldValues(map).size();
+            return (userEvalDAO.queryForFieldValues(map)).size();
         }catch (SQLException e){
             System.out.println("Error en nUsers/UserEvalImpl "+e.getMessage());
             return 0;
