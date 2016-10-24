@@ -54,7 +54,7 @@ function sendInstructions() {
             },
             type: "POST",
             timeout: 50000,
-            url: "/LoadInstructions",
+            url: "LoadInstructions",
             data: {"relevant": relevant, "norelevant": norelevant, "strictly":strictly,"reason":reason},
             cache: false,
             success: function (data) {
@@ -82,7 +82,7 @@ function sendToServer(text){
         },
         type: "POST",
         timeout: 50000,
-        url: "/LoadFile",
+        url: "LoadFile",
         data: {"texto":text},
         cache: false,
         success: function (data) {

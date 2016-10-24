@@ -60,7 +60,7 @@
     </div>
     <div class="row">
         <div id="boton" class="col s3 offset-s4">
-            <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedTerms')" type="button" value="Send Terms">
+            <input  class="waves-effect waves-light btn" onClick="sendAnswers('EvaluatedTerms')" type="button" value="Send Terms">
         </div>
         <div class="col s3" style="margin-top: 20px;margin-left: -50px;">
             <a class="waves-effect waves-light btn modal-trigger" id="modal" href="#modal1">How should I answer?</a>
