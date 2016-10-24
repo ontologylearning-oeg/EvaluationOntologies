@@ -33,7 +33,7 @@ function login(signup) {
         },
         type: "POST",
         timeout: 50000,
-        url: "/Login",
+        url: "Login",
         data: {"email":email,"pass":pass,"signup":signup},
         cache: false,
         success: function (data) {

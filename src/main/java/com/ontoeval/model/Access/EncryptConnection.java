@@ -17,15 +17,14 @@ public class EncryptConnection {
 
 
     public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword("drinventor");
-        Properties props = new EncryptableProperties(encryptor);
-        props.load(new FileInputStream("/home/dchaves/OEG/Software/configuration.properties"));
-        String datasourceUsername = props.getProperty("datasource.username");
-        String datasourcePassword = props.getProperty("datasource.password");
-        String url = props.getProperty("datasource.url");
+        String envUser = System.getenv("EVAL_USER");
+        String envPwd = System.getenv("EVAL_PWD");
+        String envHost = System.getenv("EVAL_DB");
 
-        ConnectionSource connectionSource = new JdbcConnectionSource(url,datasourceUsername,datasourcePassword);
+        //mysql://localhost/DrOntoEval?useSSL=false
+        String jdbcUrl = "mysql://"+envHost+"/DrOntoEval?useSSL=false";
+
+        ConnectionSource connectionSource = new JdbcConnectionSource(jdbcUrl,envUser,envPwd);
         return connectionSource;
     }
 }

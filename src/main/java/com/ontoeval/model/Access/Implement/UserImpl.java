@@ -11,6 +11,8 @@ import com.ontoeval.model.UserVO;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.properties.EncryptableProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +25,9 @@ import java.util.Properties;
  * Created by dchavesf on 1/09/16.
  */
 public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserImpl.class);
+
     private final Dao<UserVO, Integer> userDAO;
     private ConnectionSource connectionSource;
 
@@ -35,6 +40,7 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
     }
 
     public boolean insertUser(UserVO u){
+        LOG.info("trying to insert user: " + u);
         UserVO v = new UserVO(u.getEmail(),DigestUtils.md5Hex(u.getPassword()));
         try{
             if(userDAO.create(v)==0){
@@ -42,6 +48,7 @@ public class UserImpl extends BaseDaoImpl<UserVO, Integer> implements UserDAO {
             }
         } catch (SQLException ex) {
             System.out.println("Error en insertUser/UserImpl "+ex.getMessage());
+            LOG.error("Error en insertUser/UserImpl ",ex);
             return false;
         }
         return true;
