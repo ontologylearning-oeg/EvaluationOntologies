@@ -1,5 +1,5 @@
 FROM tomcat:8-jre8
-#MAINTAINER David
+MAINTAINER David <dchaves@fi.upm.es>
 
 WORKDIR /usr/local/tomcat
 

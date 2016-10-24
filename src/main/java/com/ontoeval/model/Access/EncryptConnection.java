@@ -1,5 +1,7 @@
 package com.ontoeval.model.Access;
 
+import com.j256.ormlite.db.DatabaseType;
+import com.j256.ormlite.db.DatabaseTypeUtils;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
@@ -22,7 +24,7 @@ public class EncryptConnection {
         String envHost = System.getenv("EVAL_DB");
 
         //mysql://localhost/DrOntoEval?useSSL=false
-        String jdbcUrl = "mysql://"+envHost+"/DrOntoEval?useSSL=false";
+        String jdbcUrl = "jdbc:mysql://"+envHost+"/DrOntoEval?useSSL=false";
 
         ConnectionSource connectionSource = new JdbcConnectionSource(jdbcUrl,envUser,envPwd);
         return connectionSource;

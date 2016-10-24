@@ -1,0 +1,14 @@
+version: "2"
+services:
+ mysql:
+   container_name: eval-mysql
+   image: mysql:5
+   restart: always
+   env_file: ./environment.properties
+   expose: ["3306"]
+ drontoeval:
+   container_name: onto-eval
+   image: dchaves/onto-eval:latest
+   restart: always
+   env_file: ./environment.properties
+   ports: ["8888:8080"]
