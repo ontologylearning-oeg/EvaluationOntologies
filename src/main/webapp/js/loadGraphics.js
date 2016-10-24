@@ -154,7 +154,7 @@ function changeRelevantTerms(){
         type: "POST",
         timeout: 50000,
         data: {"value": val},
-        url: "/ChangeRelevance",
+        url: "ChangeRelevance",
         cache: false,
         success: function (data) {
             changePage("./eval/results.jsp")

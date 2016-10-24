@@ -35,7 +35,7 @@
             </div>
         </form>
         <div id="boton" class="col s2 center-align">
-            <input  class="waves-effect waves-light btn" onClick="sendAnswers('/EvaluatedRelations')" type="button" value="Send Relations">
+            <input  class="waves-effect waves-light btn" onClick="sendAnswers('EvaluatedRelations')" type="button" value="Send Relations">
         </div>
     </div>
 </div>

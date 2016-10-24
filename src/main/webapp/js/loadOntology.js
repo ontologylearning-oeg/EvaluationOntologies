@@ -12,7 +12,7 @@ function loadOntology(name) {
         },
         type: "POST",
         timeout: 50000,
-        url: "/LoadFeatures",
+        url: "LoadFeatures",
         data: {"name":name},
         cache: false,
         success: function (data) {
@@ -49,7 +49,7 @@ function loadAdmin(a){
         type: "POST",
         timeout: 50000,
         data:{"name":a},
-        url: "/LoadAdmin",
+        url: "LoadAdmin",
         cache: false,
         success: function (data) {
             $("#contenido").load("./eval/ontoAdmin.jsp");
@@ -73,7 +73,7 @@ function removeOntology(a){
         type: "POST",
         timeout: 50000,
         data:{"name":a,"remove":true},
-        url: "/LoadAdmin",
+        url: "LoadAdmin",
         cache: false,
         success: function (data) {
             $("#contenido").load("./instructions.jsp");

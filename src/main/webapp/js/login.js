@@ -33,7 +33,7 @@ function login(signup) {
         },
         type: "POST",
         timeout: 50000,
-        url: "/Login",
+        url: "Login",
         data: {"email":email,"pass":pass,"signup":signup},
         cache: false,
         success: function (data) {
@@ -59,7 +59,7 @@ function loadOntos(a) {
         type: "POST",
         timeout: 50000,
         data: {"user": a},
-        url: "/LoadOntology",
+        url: "LoadOntology",
         cache: false,
         success: function (data) {
             changePage(data)
@@ -100,7 +100,7 @@ function  changeToLogin(flag) {
              },
             type: "POST",
             timeout: 50000,
-            url: "/Login",
+            url: "Login",
             cache: false,
              success: function (data) {
                 $("#logout").remove();
