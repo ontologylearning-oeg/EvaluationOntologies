@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /**
@@ -65,6 +66,7 @@ public class LexicalHelper {
                 }
             }
         }
+        this.sumAnswersOfEvalTerms(terms,t);
         if(termsForEval(t))
             return "./eval/lexical.jsp";
         else{
@@ -96,6 +98,7 @@ public class LexicalHelper {
                         }
                     }
                 }
+                this.sumAnswersOfEvalTerms(teval,t);
                 termsForEval(t);
                 return "./eval/lexical.jsp";
             }
@@ -237,6 +240,32 @@ public class LexicalHelper {
             }
         }
         return rel;
+    }
+
+    private void sumAnswersOfEvalTerms(ArrayList<TermEvaluationVO> t, ArrayList<TermVO> terms){
+        ArrayList<String> evalTerms = new ArrayList<>();
+        for(int i=0; i<t.size();i++){
+            int j=i+1; int count=0;
+            while(j<t.size()){
+                if(t.get(i).getTerm().equals(t.get(j).getTerm())){
+                    count++;
+                }
+                j++;
+            }
+            if(count==4){
+                evalTerms.add(t.get(i).getTerm());
+            }
+        }
+
+        for(int i=0; i<terms.size();i++){
+            for(String s: evalTerms){
+                if(s.equals(terms.get(i).getWord())){
+                    terms.remove(i);
+                    i--;
+                    break;
+                }
+            }
+        }
     }
 
 

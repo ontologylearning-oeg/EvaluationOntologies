@@ -109,9 +109,10 @@ public class OntologyHelper {
         String domain=loadDomain(text);
         UserVO u = (UserVO)request.getSession().getAttribute("user");
         OntologyVO o = new OntologyVO(filename, domain,u);
-        if(!ontology.insertOntology(o) ||
+        if(!taxonomic.loadRelations(text,o) ||
                 !lexical.loadTerms(text,o) ||
-                    !taxonomic.loadRelations(text,o)){
+                    !ontology.insertOntology(o)){
+            ontology.removeOntology(filename);
             return false;
         }
         else{
