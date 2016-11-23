@@ -66,6 +66,7 @@ public class LexicalHelper {
                 }
             }
         }
+        request.getSession().setAttribute("flag","false");
         this.sumAnswersOfEvalTerms(terms,t);
         if(termsForEval(t))
             return "./eval/lexical.jsp";
@@ -99,6 +100,7 @@ public class LexicalHelper {
                     }
                 }
                 this.sumAnswersOfEvalTerms(teval,t);
+                request.getSession().setAttribute("flag","yes");
                 termsForEval(t);
                 return "./eval/lexical.jsp";
             }

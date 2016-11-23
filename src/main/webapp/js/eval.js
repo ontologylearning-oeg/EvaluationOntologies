@@ -7,7 +7,10 @@ $(document).ajaxStop($.unblockUI);
 
 $(document).ready(function(){
     $("#modal").leanModal();
-    //  $('#modal1').openModal();
+    var flag=document.getElementById("flag").getAttribute("data-value");
+    if(flag=="yes")
+        $('#modal1').openModal();
+
 });
 
 var terms=[];
