@@ -86,7 +86,7 @@
         </tbody>
     </table>
 
-    <div class="col s2 offset-s5 center-align" style="margin-top: 50px">
+    <div class="col s2 offset-s5 center-align" style="margin-top: 50px; visibility: hidden">
         <a class="waves-effect waves-light btn" onclick="removeOntology('<c:out value="${sessionScope.admin.ontology}"/>')">Remove ontology</a>
     </div>
 

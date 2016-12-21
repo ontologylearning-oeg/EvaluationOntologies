@@ -28,7 +28,7 @@
             </ul>
         </div>
     </div>
-
+    <div hidden id="flag"><c:out value="${sessionScope.resultsFlag}"/></div>
     <div class="col s12 offset-s1 card-panel teal z-depth-1-half" style="background-color: rgba(248, 187, 134, 0.2)!important">
         <div class="col s12 center-align">
             <h3>Results for <c:out value="${sessionScope.ontology.name}"/> Ontology</h3>

@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="input-field col s5">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" type="email" class="validate">
-                    <label for="icon_prefix">Email</label>
+                    <input id="icon_prefix" type="text" class="validate">
+                    <label for="icon_prefix">User</label>
                 </div>
                 <div class="input-field col s5">
                     <i class="material-icons prefix">person_pin</i>

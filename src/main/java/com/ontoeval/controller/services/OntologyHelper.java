@@ -93,6 +93,7 @@ public class OntologyHelper {
 
         }
         if(o.getState().equals("See Results")){
+            results.setRelations(taxonomic.recuperar(o.getName()));
             results.insertMeasures(o,null);
             session.setAttribute("sterms",lexical.recuperar(o.getName()).size());
             session.setAttribute("value",lexical.recuperar(o.getName()).size());

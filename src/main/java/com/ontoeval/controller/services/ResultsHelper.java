@@ -76,6 +76,14 @@ public class ResultsHelper {
         measures.add(aux);
         aux = new SingleMeasure("TFK",m.getTfkappa());
         measures.add(aux);
+        Boolean flag= (Boolean)request.getSession().getAttribute("resultsFlag");
+        if(flag==null) {
+            if (relations.isEmpty()) {
+                request.getSession().setAttribute("resultsFlag", false);
+            } else {
+                request.getSession().setAttribute("resultsFlag", true);
+            }
+        }
         request.getSession().setAttribute("measure",measures);
     }
 
