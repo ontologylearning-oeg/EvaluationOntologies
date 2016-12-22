@@ -20,7 +20,7 @@
     <div class="row">
     <div class="col s5 offset-s4 card-panel teal z-depth-1" style="margin-top:30px;margin-bottom:40px;background-color: rgba(248, 187, 134, 0.2)!important">
         <div class="center-align col s10 offset-s1" style="margin-top: 20px;margin-bottom: 20px;">
-            <h5>${fn:length(sessionScope.terms)} terms remain</h5>
+            <h5>${fn:length(sessionScope.terms)} terms left</h5>
         </div>
     </div>
     </div>
