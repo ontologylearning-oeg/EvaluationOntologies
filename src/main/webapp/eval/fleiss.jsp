@@ -14,6 +14,7 @@
 <div id="contenido" class="container section">
 
 
+    <div hidden data-value="${sessionScope.resultsFlag}" id="flag"></div>
     <div class="row">
         <div class="col s12">
             <ul class="tabs z-depth-1" style="background-color: rgba(248, 187, 134, 0.2)!important;">

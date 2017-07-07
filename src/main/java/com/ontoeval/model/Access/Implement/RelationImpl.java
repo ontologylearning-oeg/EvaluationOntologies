@@ -47,7 +47,7 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
     @Override
     public boolean insertRandomRelation(RelationVO r) {
         try {
-            relationDAO.executeRawNoArgs("delete from Relations where Ontology='" + r.getOntology().getName() + "' and term1='" + r.getTerm1() + "' and term2='" + r.getTerm2() + "' and isRandom=1;");
+            relationDAO.executeRawNoArgs("delete from Relations where Ontology='" + r.getOntology().getName() + "' and term1='" + r.getTerm1() + "' and term2='" + r.getTerm2()+"';");
             if(relationDAO.create(r)==0)
                 return false;
         }catch (SQLException e){
@@ -66,17 +66,6 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
         return true;
     }
 
-    public ArrayList<RelationVO> getRandomRelations(String ontology) {
-        HashMap<String, Object> m = new HashMap<>();
-        m.put("Ontology",ontology);
-        m.put("isRandom", true);
-        try{
-            return (ArrayList<RelationVO>)relationDAO.queryForFieldValuesArgs(m);
-        }catch (SQLException e){
-            System.out.println("Error en getRandomrelations/RelationImpl "+e.getMessage());
-            return new ArrayList<>();
-        }
-    }
 
     public ArrayList<RelationVO> getRelations(String ontology) {
         HashMap<String, Object> m = new HashMap<>();
@@ -91,10 +80,8 @@ public class RelationImpl extends BaseDaoImpl<RelationVO, Integer> implements Re
 
     public boolean updateRelations(ArrayList<RelationVO> r) {
         boolean flag=true;
-        for(RelationVO relation : r){
-            if(relation.isRandom())
+        for(RelationVO relation : r)
                 flag=this.insertRandomRelation(relation);
-            }
         return flag;
     }
 

@@ -88,11 +88,22 @@ public class MeasureVO{
 
     public double getFkappa() { return fkappa; }
 
-    public void setFkappa(double fkappa) { this.fkappa = fkappa; }
+    public void setFkappa(double fkappa) {
+       if(Double.isNaN(fkappa)){
+           this.fkappa=1.0;
+       }
+       else
+           this.fkappa = fkappa;
+   }
 
     public double getTfkappa() { return tfkappa; }
 
-    public void setTfkappa(double tfkappa) { this.tfkappa = tfkappa; }
+    public void setTfkappa(double tfkappa) {
+       if(Double.isNaN(tfkappa))
+           this.tfkappa=1.0;
+       else
+           this.tfkappa = tfkappa;
+   }
 
     public OntologyVO getOntology() {
         return ontology;

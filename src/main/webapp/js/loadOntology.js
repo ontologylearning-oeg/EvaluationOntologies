@@ -19,7 +19,7 @@ function loadOntology(name) {
             if(data=="notUser"){
                 swal({
                     title: "Oops...",
-                    text: "You have to learn more about Knowledge Representation for answer this questions",
+                    text: "You have to learn more about Knowledge Representation for answer these questions",
                     type: "error",
                     confirmButtonColor: "#2bbbad",
                     confirmButtonText: "OK" });

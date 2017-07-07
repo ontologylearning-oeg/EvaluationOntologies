@@ -16,8 +16,6 @@ public class RelationVO{
     private String relation;
     @DatabaseField(columnName="isGS")
     private boolean isGS;
-    @DatabaseField(columnName="isRandom")
-    private boolean isRandom;
     @DatabaseField(columnName = "yes")
     private Integer yes;
     @DatabaseField(columnName = "no")
@@ -26,13 +24,12 @@ public class RelationVO{
     private OntologyVO ontology;
 
 
-    public RelationVO(OntologyVO o, String term1,String relation, String term2,  boolean isRandom) {
+    public RelationVO(OntologyVO o, String term1,String relation, String term2) {
         this.ontology = o;
         this.term1 = term1;
         this.term2 = term2;
         this.relation=relation;
         this.isGS = false;
-        this.isRandom= isRandom;
         yes=0;
         no=0;
     }
@@ -42,7 +39,6 @@ public class RelationVO{
         this.term2 = "example2";
         this.relation="relation";
         this.isGS = false;
-        this.isRandom = false;
         yes=0;
         no=0;
     }
@@ -68,10 +64,6 @@ public class RelationVO{
     public void setGS(boolean GS) {
         isGS = GS;
     }
-
-    public boolean isRandom() { return isRandom; }
-
-    public void setRandom(boolean random) { isRandom = random; }
 
     public Integer getYes() { return yes; }
 

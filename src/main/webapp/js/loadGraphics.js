@@ -5,7 +5,7 @@ var mes=[];
 var names=[];
 
 $( document ).ready(function() {
-    var flag = $("#flag").val();
+    var flag=document.getElementById("flag").getAttribute("data-value");
     names=['Recall','Precision','F-Measure','FK','Taxonomic Precision','Taxonomic Recall','Taxonomic F-Measure', 'TFK'];
     for(var i=0; i<8;i++){
         mes[i] = parseFloat(document.getElementById(names[i]).getAttribute("data-value"))*100;

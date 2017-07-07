@@ -114,9 +114,8 @@ public class ResultsHelper {
             if(r.isGS()) {
                 goldstandard.add(r);
             }
-            if(!r.isRandom()){
-                learned.add(r);
-            }
+            learned.add(r);
+
         }
         if(goldstandard.size()>0 && learned.size()>0) {
             ArrayList<String> termsgold = constructHierachy(goldstandard, gshiterms);
@@ -225,7 +224,7 @@ public class ResultsHelper {
 
     private Double FleissKappa(boolean flag){
         Double pi = 0.0;
-        Double pjYes =0.0, pjNo=0.0; Integer nrandomRel=0;
+        Double pjYes =0.0, pjNo=0.0;
         if(flag){
             for(TermVO t : terms){
                 pi += ((Math.pow(t.getYes(),2)+Math.pow(t.getNo(),2)-this.evaluators)/(this.evaluators*(this.evaluators-1)));
@@ -238,16 +237,14 @@ public class ResultsHelper {
         }
         else{
             for(RelationVO t : relations){
-                if(t.isRandom()){
-                    nrandomRel++;
                     pi += ((Math.pow(t.getYes(),2)+Math.pow(t.getNo(),2)-this.evaluators)/(this.evaluators*(this.evaluators-1)));
                     pjNo +=t.getNo();
                     pjYes +=t.getYes();
-                }
+
             }
-            pjYes = pjYes / (this.evaluators*nrandomRel);
-            pjNo = pjNo / (this.evaluators*nrandomRel);
-            pi = pi / nrandomRel;
+            pjYes = pjYes / (this.evaluators*relations.size());
+            pjNo = pjNo / (this.evaluators*relations.size());
+            pi = pi / relations.size();
         }
 
         Double pj = Math.pow(pjNo,2)+Math.pow(pjYes,2);

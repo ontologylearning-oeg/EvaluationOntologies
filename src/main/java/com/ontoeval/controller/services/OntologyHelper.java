@@ -75,7 +75,6 @@ public class OntologyHelper {
         if(o.getState().equals("Eval Taxonomic Layer")) {
             if(taxonomic.recuperar(o.getName()).size()>0) {
                 if (lexical.checkUser(o, user)) {
-                    taxonomic.createGSRelations(lexical.recuperarGS(o), o);
                     page = taxonomic.comprobarTaxonomic(o, user);
                 } else {
                     page = "notUser";

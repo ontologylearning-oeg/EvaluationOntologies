@@ -15,6 +15,7 @@
     <div class="col s12 center-align">
         <h1>Which of these relations belong to the <c:out value="${sessionScope.ontology.domain}"/> domain?</h1>
     </div>
+    <div data-value="false" id="flag"></div>
     <div class="col s12" style="margin-left: -20px">
         <form action="#">
             <div class="row center-align" style="margin-left: 70px">

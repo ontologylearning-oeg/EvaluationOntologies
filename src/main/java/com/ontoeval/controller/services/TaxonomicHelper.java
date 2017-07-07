@@ -48,49 +48,29 @@ public class TaxonomicHelper {
         tokenizer.nextToken();
         while(tokenizer.hasMoreTokens()){
             StringTokenizer tokenizer1 = new StringTokenizer(tokenizer.nextToken(),";");
-            RelationVO relation = new RelationVO(o,tokenizer1.nextToken(),tokenizer1.nextToken(),tokenizer1.nextToken(),false);
+            RelationVO relation = new RelationVO(o,tokenizer1.nextToken(),tokenizer1.nextToken(),tokenizer1.nextToken());
             relationsaux.add(relation);
         }
         return relations.insertRelations(relationsaux);
     }
 
-    public boolean createGSRelations(ArrayList<TermVO> relevant, OntologyVO ontology){
-        ArrayList<RelationVO> flag = relations.getRandomRelations(ontology.getName());
-        if(flag.size()==0) {
-            ArrayList<RelationVO> randomRelations = new ArrayList<>();
-            for(int j=0; j<relevant.size(); j++) {
-                for (int i=(j+1); i<relevant.size();i++) {
-                    TermVO t = relevant.get(j);
-                    TermVO aux = relevant.get(i);
-                    if(t.getWord()!=aux.getWord()){
-                        RelationVO r = new RelationVO(ontology, t.getWord(),"is a", aux.getWord(), true);
-                        RelationVO r2 = new RelationVO(ontology, aux.getWord(),"is a",t.getWord(), true);
-                        randomRelations.add(r);randomRelations.add(r2);
-                    }
-                }
-            }
-            return relations.insertRelations(randomRelations);
-        }
-        else
-            return true;
-    }
 
     public String comprobarTaxonomic(OntologyVO ontology,UserVO user){
-        ArrayList<RelationVO> randomRel = relations.getRandomRelations(ontology.getName());
+        ArrayList<RelationVO> rel = relations.getRelations(ontology.getName());
         ArrayList<RelationEvaluationVO> randomEvalUser = evalRelations.getEvaluatedRelations(ontology.getName(),user.getEmail());
         ArrayList<RelationEvaluationVO> randomEval = evalRelations.getEvaluatedRelations(ontology.getName());
 
-        if(randomEval.size()!=(randomRel.size()*5)){//no ha terminado
-            if(randomRel.size()!=randomEvalUser.size()){ //no ha terminado el usuario
-                for(int i=0; i<randomRel.size();i++){
+        if(randomEval.size()!=(rel.size()*5)){//no ha terminado
+            if(rel.size()!=randomEvalUser.size()){ //no ha terminado el usuario
+                for(int i=0; i<rel.size();i++){
                     for(RelationEvaluationVO aux: randomEvalUser){
-                        if(randomRel.get(i).getTerm1()==aux.getTerm1() && randomRel.get(i).getTerm2()==aux.getTerm2()){
-                            randomRel.remove(i);
+                        if(rel.get(i).getTerm1()==aux.getTerm1() && rel.get(i).getTerm2()==aux.getTerm2()){
+                            rel.remove(i);
                             i--;
                         }
                     }
                 }
-                if(relationsForEval(randomRel))
+                if(relationsForEval(rel))
                     return "./eval/taxonomic.jsp";
                 else
                     return null;
@@ -172,7 +152,7 @@ public class TaxonomicHelper {
             random.remove(0);
             Integer rel = countForRelevant(aux);
             for(RelationVO r: normal){
-                if(aux.get(0).getTerm1().equals(r.getTerm1()) && aux.get(0).getTerm2().equals(r.getTerm2()) && r.isRandom()){
+                if(aux.get(0).getTerm1().equals(r.getTerm1()) && aux.get(0).getTerm2().equals(r.getTerm2())){
                     r.setYes(rel);
                     r.setNo(5-rel);
                     if(rel>2)
