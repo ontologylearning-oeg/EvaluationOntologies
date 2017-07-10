@@ -15,6 +15,7 @@ public class AdminVO {
     private Double complete;
     private Integer tevaluators;
     private ArrayList<TermVO> terms;
+    private ArrayList<RelationVO> relations;
 
     public AdminVO(Integer nevaluators, Integer nterms, Integer ncontrol, Integer nevaluations, Double complete, ArrayList<TermVO> terms) {
         this.nevaluators = nevaluators;
@@ -93,5 +94,13 @@ public class AdminVO {
 
     public void setTevaluators(Integer tevaluators) {
         this.tevaluators = tevaluators;
+    }
+
+    public ArrayList<RelationVO> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(ArrayList<RelationVO> relations) {
+        this.relations = relations;
     }
 }

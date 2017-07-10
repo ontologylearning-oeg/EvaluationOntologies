@@ -64,11 +64,11 @@
     <table class="centered striped" style="margin-top: 50px">
         <thead>
         <tr>
-            <th data-field="id">Term</th>
-            <th data-field="name">Relevant (Learned)</th>
-            <th data-field="price">Control Term</th>
-            <th data-field="price">Positive Answers</th>
-            <th data-field="price">Negative Answers</th>
+            <th>Term</th>
+            <th>Relevant (Learned)</th>
+            <th>Control Term</th>
+            <th>Yes</th>
+            <th>No</th>
         </tr>
         </thead>
 
@@ -80,6 +80,36 @@
                 <td>${term.control}</td>
                 <td>${term.yes}</td>
                 <td>${term.no}</td>
+            </tr>
+
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <div class="row" style="margin-top: 50px; margin-bottom: -20px;" >
+        <div class="col s12 center-align">
+            <h3>The relations of your ontology</h3>
+        </div>
+    </div>
+    <table class="centered striped" style="margin-top: 50px">
+        <thead>
+        <tr>
+            <th>Term 1</th>
+            <th>Relation</th>
+            <th>Term 2</th>
+            <th>Yes</th>
+            <th>No</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <c:forEach var="relation" items="${sessionScope.admin.relations}">
+            <tr>
+                <td>${relation.term1}</td>
+                <td>${relation.relation}</td>
+                <td>${relation.term2}</td>
+                <td>${relation.yes}</td>
+                <td>${relation.no}</td>
             </tr>
 
         </c:forEach>

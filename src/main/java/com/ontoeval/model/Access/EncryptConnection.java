@@ -12,13 +12,10 @@ public class EncryptConnection {
 
 
     public static ConnectionSource CrearConexion() throws SQLException, IOException {
-        /*String envUser = System.getenv("EVAL_USER");
+        String envUser = System.getenv("EVAL_USER");
         String envPwd = System.getenv("EVAL_PWD");
         String envHost = System.getenv("EVAL_DB");
-*/
-        String envUser = "root";
-        String envPwd = "david";
-        String envHost = "localhost:3306";
+
         //mysql://localhost/DrOntoEval?useSSL=false
         String jdbcUrl = "jdbc:mysql://"+envHost+"/DrOntoEval?useSSL=false";
 
